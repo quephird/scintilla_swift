@@ -24,6 +24,10 @@ struct Color {
         Color(r: self.r*scalar, g: self.g*scalar, b: self.b*scalar)
     }
 
+    func hadamard(_ other: Self) -> Self {
+        Color(r: self.r*other.r, g: self.g*other.g, b: self.b*other.b)
+    }
+
     func isAlmostEqual(_ to: Self) -> Bool {
         self.r.isAlmostEqual(to.r) &&
             self.g.isAlmostEqual(to.g) &&

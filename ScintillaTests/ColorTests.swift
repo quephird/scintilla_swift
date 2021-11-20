@@ -26,4 +26,11 @@ class ColorTests: XCTestCase {
         let c = Color(r: 0.2, g: 0.3, b: 0.4)
         XCTAssert(c.multiply_scalar(2).isAlmostEqual(Color(r: 0.4, g: 0.6, b: 0.8)))
     }
+
+    func testHadamard() throws {
+        let c1 = Color(r: 1.0, g: 0.2, b: 0.4)
+        let c2 = Color(r: 0.9, g: 1.0, b: 0.1)
+        let expectedValue = Color(r: 0.9, g: 0.2, b: 0.04)
+        XCTAssert(c1.hadamard(c2).isAlmostEqual(expectedValue))
+    }
 }
