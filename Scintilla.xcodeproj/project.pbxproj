@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		870DF2352748CF8D00787095 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870DF2342748CF8D00787095 /* Double.swift */; };
 		870DF2362748D21C00787095 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870DF2342748CF8D00787095 /* Double.swift */; };
+		870DF2382748D80300787095 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870DF2372748D80300787095 /* Color.swift */; };
+		870DF2392748D80500787095 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870DF2372748D80300787095 /* Color.swift */; };
+		870DF23B2748D9B300787095 /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870DF23A2748D9B300787095 /* ColorTests.swift */; };
 		875B39802748B94C00666443 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B397F2748B94C00666443 /* main.swift */; };
 		875B398D2748B97200666443 /* TupleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B398C2748B97200666443 /* TupleTests.swift */; };
 		875B39932748BA4700666443 /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B39922748BA4700666443 /* Tuple.swift */; };
@@ -29,6 +32,8 @@
 
 /* Begin PBXFileReference section */
 		870DF2342748CF8D00787095 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		870DF2372748D80300787095 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		870DF23A2748D9B300787095 /* ColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTests.swift; sourceTree = "<group>"; };
 		875B397C2748B94C00666443 /* Scintilla */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Scintilla; sourceTree = BUILT_PRODUCTS_DIR; };
 		875B397F2748B94C00666443 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		875B398A2748B97200666443 /* ScintillaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScintillaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +84,7 @@
 				875B397F2748B94C00666443 /* main.swift */,
 				875B39922748BA4700666443 /* Tuple.swift */,
 				870DF2342748CF8D00787095 /* Double.swift */,
+				870DF2372748D80300787095 /* Color.swift */,
 			);
 			path = Scintilla;
 			sourceTree = "<group>";
@@ -86,6 +92,7 @@
 		875B398B2748B97200666443 /* ScintillaTests */ = {
 			isa = PBXGroup;
 			children = (
+				870DF23A2748D9B300787095 /* ColorTests.swift */,
 				875B398C2748B97200666443 /* TupleTests.swift */,
 				875B398E2748B97200666443 /* Info.plist */,
 			);
@@ -181,6 +188,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				875B39932748BA4700666443 /* Tuple.swift in Sources */,
+				870DF2382748D80300787095 /* Color.swift in Sources */,
 				870DF2352748CF8D00787095 /* Double.swift in Sources */,
 				875B39802748B94C00666443 /* main.swift in Sources */,
 			);
@@ -191,6 +199,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				875B39942748BA8400666443 /* Tuple.swift in Sources */,
+				870DF2392748D80500787095 /* Color.swift in Sources */,
+				870DF23B2748D9B300787095 /* ColorTests.swift in Sources */,
 				870DF2362748D21C00787095 /* Double.swift in Sources */,
 				875B398D2748B97200666443 /* TupleTests.swift in Sources */,
 			);
