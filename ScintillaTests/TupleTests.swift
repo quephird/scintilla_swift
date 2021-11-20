@@ -1,6 +1,6 @@
 //
-//  ScintillaTests.swift
-//  ScintillaTests
+//  TupleTests.swift
+//  TupleTests
 //
 //  Created by Danielle Kefford on 11/19/21.
 //
@@ -37,13 +37,46 @@ class TupleTests: XCTestCase {
         XCTAssertEqual(t.negate(), [-1.0, 2.0, -3.0, 4.0])
     }
 
-    func testMultipleScalar() throws {
+    func testMultiplyScalar() throws {
         let t = [1.0, -2.0, 3.0, -4.0]
         XCTAssertEqual(t.multiply_scalar(3.5), [3.5, -7.0, 10.5, -14.0])
     }
 
-    func testMultipleScalarFraction() throws {
+    func testMultiplyScalarFraction() throws {
         let t = [1.0, -2.0, 3.0, -4.0]
         XCTAssertEqual(t.multiply_scalar(0.5), [0.5, -1.0, 1.5, -2.0])
+    }
+
+    func testDivideScalar() throws {
+        let t = [1.0, -2.0, 3.0, -4.0]
+        XCTAssertEqual(t.divide_scalar(2), [0.5, -1.0, 1.5, -2.0])
+    }
+
+    func testMagnitude() throws {
+        let v = vector(1, 2, 3)
+        XCTAssertEqual(v.magnitude(), 14.0.squareRoot())
+    }
+
+    func testNormalize() throws {
+        let v1 = vector(4, 0, 0)
+        XCTAssertEqual(v1.normalize(), vector(1, 0, 0))
+
+        let v2 = vector(1, 2, 3)
+        let normalizedV2 = v2.normalize()
+        XCTAssert(normalizedV2.isAlmostEqual(vector(0.26726, 0.53452, 0.80178)))
+        XCTAssert(normalizedV2.magnitude().isAlmostEqual(1.0))
+    }
+
+    func testDot() throws {
+        let v1 = vector(1, 2, 3)
+        let v2 = vector(2, 3, 4)
+        XCTAssertEqual(v1.dot(v2), 20.0)
+    }
+
+    func testCross() throws {
+        let v1 = vector(1, 2, 3)
+        let v2 = vector(2, 3, 4)
+        XCTAssertEqual(v1.cross(v2), vector(-1, 2, -1))
+        XCTAssertEqual(v2.cross(v1), vector(1, -2, 1))
     }
 }
