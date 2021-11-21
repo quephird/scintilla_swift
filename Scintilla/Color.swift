@@ -12,20 +12,26 @@ struct Color {
     var g: Double
     var b: Double
 
+    init(_ r: Double, _ g: Double, _ b: Double) {
+        self.r = r
+        self.g = g
+        self.b = b
+    }
+
     func add(_ other: Self) -> Self {
-        Color(r: self.r+other.r, g: self.g+other.g, b: self.b+other.b)
+        Color(self.r+other.r, self.g+other.g, self.b+other.b)
     }
 
     func subtract(_ other: Self) -> Self {
-        Color(r: self.r-other.r, g: self.g-other.g, b: self.b-other.b)
+        Color(self.r-other.r, self.g-other.g, self.b-other.b)
     }
 
     func multiply_scalar(_ scalar: Double) -> Self {
-        Color(r: self.r*scalar, g: self.g*scalar, b: self.b*scalar)
+        Color(self.r*scalar, self.g*scalar, self.b*scalar)
     }
 
     func hadamard(_ other: Self) -> Self {
-        Color(r: self.r*other.r, g: self.g*other.g, b: self.b*other.b)
+        Color(self.r*other.r, self.g*other.g, self.b*other.b)
     }
 
     func isAlmostEqual(_ to: Self) -> Bool {
