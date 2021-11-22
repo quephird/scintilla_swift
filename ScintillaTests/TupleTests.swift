@@ -7,7 +7,7 @@
 
 import XCTest
 
-class TupleTests: XCTestCase {
+class Tuple4Tests: XCTestCase {
     func testAdd() throws {
         let t1 = Tuple4(3.0, -2.0, 5.0, 1.0)
         let t2 = Tuple4(-2.0, 3.0, 1.0, 0.0)

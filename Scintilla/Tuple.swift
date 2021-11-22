@@ -7,6 +7,33 @@
 
 import Foundation
 
+struct Tuple2 {
+    var xy: [Double]
+
+    init(_ x: Double, _ y: Double) {
+        self.xy = [x, y]
+    }
+
+    func isAlmostEqual(_ to: Self) -> Bool {
+        self.xy[0].isAlmostEqual(to.xy[0]) &&
+            self.xy[1].isAlmostEqual(to.xy[1])
+    }
+}
+
+struct Tuple3 {
+    var xyz: [Double]
+
+    init(_ x: Double, _ y: Double, _ z: Double) {
+        self.xyz = [x, y, z]
+    }
+
+    func isAlmostEqual(_ to: Self) -> Bool {
+        self.xyz[0].isAlmostEqual(to.xyz[0]) &&
+            self.xyz[1].isAlmostEqual(to.xyz[1]) &&
+            self.xyz[2].isAlmostEqual(to.xyz[2])
+    }
+}
+
 struct Tuple4 {
     var xyzw: [Double]
 
