@@ -30,4 +30,129 @@ class TransformTests: XCTestCase {
         let actualValue = transform.multiplyTuple(v)
         XCTAssert(actualValue.isAlmostEqual(v))
     }
+
+    func testScalingPoint() throws {
+        let transform = scaling(2, 3, 4)
+        let p = point(-4, 6, 8)
+        let actualValue = transform.multiplyTuple(p)
+        let expectedValue = point(-8, 18, 32)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testScalingVector() throws {
+        let transform = scaling(2, 3, 4)
+        let v = vector(-4, 6, 8)
+        let actualValue = transform.multiplyTuple(v)
+        let expectedValue = vector(-8, 18, 32)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testScalingInverse() throws {
+        let transform = scaling(2, 3, 4).inverse()
+        let v = vector(-4, 6, 8)
+        let actualValue = transform.multiplyTuple(v)
+        let expectedValue = vector(-2, 2, 2)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testRotationX() throws {
+        let p = point(0, 1, 0)
+        let halfQuarter = rotationX(PI/4)
+        let fullQuarter = rotationX(PI/2)
+
+        var actualValue = halfQuarter.multiplyTuple(p)
+        var expectedValue = point(0, sqrt(2)/2, sqrt(2)/2)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+
+        actualValue = fullQuarter.multiplyTuple(p)
+        expectedValue = point(0, 0, 1)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testRotationY() throws {
+        let p = point(0, 0, 1)
+        let halfQuarter = rotationY(PI/4)
+        let fullQuarter = rotationY(PI/2)
+
+        var actualValue = halfQuarter.multiplyTuple(p)
+        var expectedValue = point(sqrt(2)/2, 0, sqrt(2)/2)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+
+        actualValue = fullQuarter.multiplyTuple(p)
+        expectedValue = point(1, 0, 0)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testRotationZ() throws {
+        let p = point(0, 1, 0)
+        let halfQuarter = rotationZ(PI/4)
+        let fullQuarter = rotationZ(PI/2)
+
+        var actualValue = halfQuarter.multiplyTuple(p)
+        var expectedValue = point(-sqrt(2)/2, sqrt(2)/2, 0)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+
+        actualValue = fullQuarter.multiplyTuple(p)
+        expectedValue = point(-1, 0, 0)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testShearingXy() throws {
+        let transform = shearing(1, 0, 0, 0, 0, 0)
+        let p = point(2, 3, 4)
+        let actualValue = transform.multiplyTuple(p)
+        let expectedValue = point(5, 3, 4)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testShearingXz() throws {
+        let transform = shearing(0, 1, 0, 0, 0, 0)
+        let p = point(2, 3, 4)
+        let actualValue = transform.multiplyTuple(p)
+        let expectedValue = point(6, 3, 4)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testShearingYx() throws {
+        let transform = shearing(0, 0, 1, 0, 0, 0)
+        let p = point(2, 3, 4)
+        let actualValue = transform.multiplyTuple(p)
+        let expectedValue = point(2, 5, 4)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testShearingYz() throws {
+        let transform = shearing(0, 0, 0, 1, 0, 0)
+        let p = point(2, 3, 4)
+        let actualValue = transform.multiplyTuple(p)
+        let expectedValue = point(2, 7, 4)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testShearingZx() throws {
+        let transform = shearing(0, 0, 0, 0, 1, 0)
+        let p = point(2, 3, 4)
+        let actualValue = transform.multiplyTuple(p)
+        let expectedValue = point(2, 3, 6)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testShearingZy() throws {
+        let transform = shearing(0, 0, 0, 0, 0, 1)
+        let p = point(2, 3, 4)
+        let actualValue = transform.multiplyTuple(p)
+        let expectedValue = point(2, 3, 7)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testChainingTransformations() throws {
+        let p = point(1, 0, 1)
+        let rx = rotationX(PI/2)
+        let s = scaling(5, 5, 5)
+        let t = translation(10, 5, 7)
+        let fullTransform = t.multiplyMatrix(s).multiplyMatrix(rx)
+        let actualValue = fullTransform.multiplyTuple(p)
+        let expectedValue = point(15, 0, 7)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
 }

@@ -120,9 +120,9 @@
 				870DF23A2748D9B300787095 /* ColorTests.swift */,
 				60DE383E788BD47B15D60716 /* MatrixTests.swift */,
 				870DF243274977C700787095 /* PpmTests.swift */,
+				87A21FC2274B7C8F0047AE41 /* TransformTests.swift */,
 				875B398C2748B97200666443 /* TupleTests.swift */,
 				875B398E2748B97200666443 /* Info.plist */,
-				87A21FC2274B7C8F0047AE41 /* TransformTests.swift */,
 			);
 			path = ScintillaTests;
 			sourceTree = "<group>";
