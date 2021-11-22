@@ -25,6 +25,9 @@
 		875B39942748BA8400666443 /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B39922748BA4700666443 /* Tuple.swift */; };
 		87A21FBE274B373B0047AE41 /* MatrixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE383E788BD47B15D60716 /* MatrixTests.swift */; };
 		87A21FBF274B375B0047AE41 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE3537E1C9EC4C417010E9 /* Matrix.swift */; };
+		87A21FC1274B7AF90047AE41 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FC0274B7AF90047AE41 /* Transform.swift */; };
+		87A21FC3274B7C8F0047AE41 /* TransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FC2274B7C8F0047AE41 /* TransformTests.swift */; };
+		87A21FC4274B7CCC0047AE41 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FC0274B7AF90047AE41 /* Transform.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -55,6 +58,8 @@
 		875B398C2748B97200666443 /* TupleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupleTests.swift; sourceTree = "<group>"; };
 		875B398E2748B97200666443 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		875B39922748BA4700666443 /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
+		87A21FC0274B7AF90047AE41 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
+		87A21FC2274B7C8F0047AE41 /* TransformTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +107,7 @@
 				870DF2342748CF8D00787095 /* Double.swift */,
 				60DE3537E1C9EC4C417010E9 /* Matrix.swift */,
 				870DF241274975B900787095 /* Ppm.swift */,
+				87A21FC0274B7AF90047AE41 /* Transform.swift */,
 				875B39922748BA4700666443 /* Tuple.swift */,
 			);
 			path = Scintilla;
@@ -116,6 +122,7 @@
 				870DF243274977C700787095 /* PpmTests.swift */,
 				875B398C2748B97200666443 /* TupleTests.swift */,
 				875B398E2748B97200666443 /* Info.plist */,
+				87A21FC2274B7C8F0047AE41 /* TransformTests.swift */,
 			);
 			path = ScintillaTests;
 			sourceTree = "<group>";
@@ -214,6 +221,7 @@
 				870DF242274975B900787095 /* Ppm.swift in Sources */,
 				870DF23D27496AF100787095 /* Canvas.swift in Sources */,
 				875B39802748B94C00666443 /* main.swift in Sources */,
+				87A21FC1274B7AF90047AE41 /* Transform.swift in Sources */,
 				60DE365BAF950F74D35DF9EA /* Matrix.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -226,8 +234,10 @@
 				870DF24027496D3B00787095 /* Canvas.swift in Sources */,
 				870DF244274977C700787095 /* PpmTests.swift in Sources */,
 				875B39942748BA8400666443 /* Tuple.swift in Sources */,
+				87A21FC4274B7CCC0047AE41 /* Transform.swift in Sources */,
 				870DF2452749782C00787095 /* Ppm.swift in Sources */,
 				87A21FBF274B375B0047AE41 /* Matrix.swift in Sources */,
+				87A21FC3274B7C8F0047AE41 /* TransformTests.swift in Sources */,
 				870DF2392748D80500787095 /* Color.swift in Sources */,
 				870DF23B2748D9B300787095 /* ColorTests.swift in Sources */,
 				870DF2362748D21C00787095 /* Double.swift in Sources */,
