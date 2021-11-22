@@ -9,47 +9,47 @@ import XCTest
 
 class TupleTests: XCTestCase {
     func testAdd() throws {
-        let t1 = [3.0, -2.0, 5.0, 1.0]
-        let t2 = [-2.0, 3.0, 1.0, 0.0]
-        XCTAssertEqual(t1.add(t2), [1.0, 1.0, 6.0, 1.0])
+        let t1 = Tuple4(3.0, -2.0, 5.0, 1.0)
+        let t2 = Tuple4(-2.0, 3.0, 1.0, 0.0)
+        XCTAssert(t1.add(t2).isAlmostEqual(Tuple4(1.0, 1.0, 6.0, 1.0)))
     }
 
     func testSubtractTwoPoints() throws {
         let p1 = point(3.0, 2.0, 1.0)
         let p2 = point(5.0, 6.0, 7.0)
-        XCTAssertEqual(p1.subtract(p2), vector(-2.0, -4.0, -6.0))
+        XCTAssert(p1.subtract(p2).isAlmostEqual(vector(-2.0, -4.0, -6.0)))
     }
 
     func testSubtractVectorFromPoint() throws {
         let p = point(3, 2, 1)
         let v = vector(5, 6, 7)
-        XCTAssertEqual(p.subtract(v), point(-2, -4, -6))
+        XCTAssert(p.subtract(v).isAlmostEqual(point(-2, -4, -6)))
     }
 
     func testSubtractTwoVectors() throws {
         let v1 = vector(3, 2, 1)
         let v2 = vector(5, 6, 7)
-        XCTAssertEqual(v1.subtract(v2), vector(-2, -4, -6))
+        XCTAssert(v1.subtract(v2).isAlmostEqual(vector(-2, -4, -6)))
     }
 
     func testNegate() throws {
-        let t = [1.0, -2.0, 3.0, -4.0]
-        XCTAssertEqual(t.negate(), [-1.0, 2.0, -3.0, 4.0])
+        let t = Tuple4(1.0, -2.0, 3.0, -4.0)
+        XCTAssert(t.negate().isAlmostEqual(Tuple4(-1.0, 2.0, -3.0, 4.0)))
     }
 
     func testMultiplyScalar() throws {
-        let t = [1.0, -2.0, 3.0, -4.0]
-        XCTAssertEqual(t.multiply_scalar(3.5), [3.5, -7.0, 10.5, -14.0])
+        let t = Tuple4(1.0, -2.0, 3.0, -4.0)
+        XCTAssert(t.multiplyScalar(3.5).isAlmostEqual(Tuple4(3.5, -7.0, 10.5, -14.0)))
     }
 
     func testMultiplyScalarFraction() throws {
-        let t = [1.0, -2.0, 3.0, -4.0]
-        XCTAssertEqual(t.multiply_scalar(0.5), [0.5, -1.0, 1.5, -2.0])
+        let t = Tuple4(1.0, -2.0, 3.0, -4.0)
+        XCTAssert(t.multiplyScalar(0.5).isAlmostEqual(Tuple4(0.5, -1.0, 1.5, -2.0)))
     }
 
     func testDivideScalar() throws {
-        let t = [1.0, -2.0, 3.0, -4.0]
-        XCTAssertEqual(t.divide_scalar(2), [0.5, -1.0, 1.5, -2.0])
+        let t = Tuple4(1.0, -2.0, 3.0, -4.0)
+        XCTAssert(t.divideScalar(2).isAlmostEqual(Tuple4(0.5, -1.0, 1.5, -2.0)))
     }
 
     func testMagnitude() throws {
@@ -59,7 +59,7 @@ class TupleTests: XCTestCase {
 
     func testNormalize() throws {
         let v1 = vector(4, 0, 0)
-        XCTAssertEqual(v1.normalize(), vector(1, 0, 0))
+        XCTAssert(v1.normalize().isAlmostEqual(vector(1, 0, 0)))
 
         let v2 = vector(1, 2, 3)
         let normalizedV2 = v2.normalize()
@@ -76,7 +76,7 @@ class TupleTests: XCTestCase {
     func testCross() throws {
         let v1 = vector(1, 2, 3)
         let v2 = vector(2, 3, 4)
-        XCTAssertEqual(v1.cross(v2), vector(-1, 2, -1))
-        XCTAssertEqual(v2.cross(v1), vector(1, -2, 1))
+        XCTAssert(v1.cross(v2).isAlmostEqual(vector(-1, 2, -1)))
+        XCTAssert(v2.cross(v1).isAlmostEqual(vector(1, -2, 1)))
     }
 }
