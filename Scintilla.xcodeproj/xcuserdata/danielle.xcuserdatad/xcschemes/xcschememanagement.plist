@@ -14,26 +14,40 @@
 			<key>orderHint</key>
 			<integer>1</integer>
 		</dict>
-		<key>PpmTests.testPpmForTinyCanvas.xcscheme</key>
+		<key>PpmTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
-		<key>PpmTests.xcscheme</key>
+		<key>TupleTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>PpmTests.testPpmForWideCanvas.xcscheme</key>
+		<key>TupleTests.testAdd.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>4</integer>
+		</dict>
+		<key>TupleTests.testSubtractTwoPoints.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>5</integer>
+		</dict>
+		<key>MatrixTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>6</integer>
 		</dict>
 	</dict>
 </dict>
