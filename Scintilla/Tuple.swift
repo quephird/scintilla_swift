@@ -10,40 +10,44 @@ import Foundation
 typealias Tuple = Array<Double>
 
 struct Tuple4 {
-    var x: Double
-    var y: Double
-    var z: Double
-    var w: Double
+    var xyzw: (Double, Double, Double, Double)
 
     init(_ x: Double, _ y: Double, _ z: Double, _ w: Double) {
-        self.x = x
-        self.y = y
-        self.z = z
-        self.w = w
+        self.xyzw = (x, y, z, w)
     }
 
     func add(_ other: Self) -> Self {
-        Tuple4(self.x+other.x, self.y+other.y, self.z+other.z, self.w+other.w)
+        Tuple4(
+            self.xyzw.0+other.xyzw.0,
+            self.xyzw.1+other.xyzw.1,
+            self.xyzw.2+other.xyzw.2,
+            self.xyzw.3+other.xyzw.3
+        )
     }
 
     func subtract(_ other: Self) -> Self {
-        Tuple4(self.x-other.x, self.y-other.y, self.z-other.z, self.w-other.w)
+        Tuple4(
+            self.xyzw.0-other.xyzw.0,
+            self.xyzw.1-other.xyzw.1,
+            self.xyzw.2-other.xyzw.2,
+            self.xyzw.3-other.xyzw.3
+        )
     }
 
     func negate() -> Self {
-        Tuple4(-self.x, -self.y, -self.z, -self.z)
+        Tuple4(-self.xyzw.0, -self.xyzw.1, -self.xyzw.2, -self.xyzw.3)
     }
 
     func multiplyScalar(_ scalar: Double) -> Self {
-        Tuple4(scalar*self.x, scalar*self.y, scalar*self.z, scalar*self.w)
+        Tuple4(scalar*self.xyzw.0, scalar*self.xyzw.1, scalar*self.xyzw.2, scalar*self.xyzw.3)
     }
 
     func divideScalar(_ scalar: Double) -> Self {
-        Tuple4(self.x/scalar, self.y/scalar, self.z/scalar, self.w/scalar)
+        Tuple4(self.xyzw.0/scalar, self.xyzw.1/scalar, self.xyzw.2/scalar, self.xyzw.3/scalar)
     }
 
     func magnitude() -> Double {
-        (self.x*self.x + self.y*self.y + self.z*self.z + self.w*self.w).squareRoot()
+        (self.xyzw.0*self.xyzw.0 + self.xyzw.1*self.xyzw.1 + self.xyzw.2*self.xyzw.2 + self.xyzw.3*self.xyzw.3).squareRoot()
     }
 
     func normalize() -> Self {
@@ -51,22 +55,22 @@ struct Tuple4 {
     }
 
     func dot(_ other: Self) -> Double {
-        self.x*other.x + self.y*other.y + self.z*other.z + self.w*other.w
+        self.xyzw.0*other.xyzw.0 + self.xyzw.1*other.xyzw.1 + self.xyzw.2*other.xyzw.2 + self.xyzw.3*other.xyzw.3
     }
 
     func cross(_ other: Self) -> Self {
         vector(
-            self.y * other.z - self.z * other.y,
-            self.z * other.x - self.x * other.z,
-            self.x * other.y - self.y * other.x
+            self.xyzw.1 * other.xyzw.2 - self.xyzw.2 * other.xyzw.1,
+            self.xyzw.2 * other.xyzw.0 - self.xyzw.0 * other.xyzw.2,
+            self.xyzw.0 * other.xyzw.1 - self.xyzw.1 * other.xyzw.0
         )
     }
 
     func isAlmostEqual(_ to: Self) -> Bool {
-        self.x.isAlmostEqual(to.x) &&
-            self.y.isAlmostEqual(to.y) &&
-            self.z.isAlmostEqual(to.z) &&
-            self.w.isAlmostEqual(to.w)
+        self.xyzw.0.isAlmostEqual(to.xyzw.0) &&
+            self.xyzw.1.isAlmostEqual(to.xyzw.1) &&
+            self.xyzw.2.isAlmostEqual(to.xyzw.2) &&
+            self.xyzw.3.isAlmostEqual(to.xyzw.3)
     }
 }
 
