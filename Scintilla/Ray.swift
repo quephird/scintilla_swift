@@ -1,0 +1,22 @@
+//
+//  Ray.swift
+//  Scintilla
+//
+//  Created by Danielle Kefford on 11/22/21.
+//
+
+import Foundation
+
+struct Ray {
+    var origin: Tuple4
+    var direction: Tuple4
+
+    init(_ origin: Tuple4, _ direction: Tuple4) {
+        self.origin = origin
+        self.direction = direction
+    }
+
+    func position(_ t: Double) -> Tuple4 {
+        self.origin.add(self.direction.multiplyScalar(t))
+    }
+}

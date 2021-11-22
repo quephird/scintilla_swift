@@ -7,5 +7,8 @@
 
 import Foundation
 
-print("Hello, World!")
-
+let transform = IDENTITY4
+let s = Sphere(transform)
+print(s.id)
+let s2 = Sphere(transform)
+print(s2.id)

@@ -4,6 +4,14 @@
 
 import Foundation
 
+let IDENTITY4 = Matrix4(
+    1, 0, 0, 0,
+    0, 1, 0, 0,
+    0, 0, 1, 0,
+    0, 0, 0, 1
+)
+
+
 struct Matrix2 {
     var rows: [Tuple2]
 
