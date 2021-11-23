@@ -98,4 +98,21 @@ class SphereTests: XCTestCase {
         let expectedValue = vector(sqrt(3)/3, sqrt(3)/3, sqrt(3)/3)
         XCTAssert(actualValue.isAlmostEqual(expectedValue))
     }
+
+    func testNormalTranslatedSphere() throws {
+        let transform = translation(0, 1, 0)
+        let s = Sphere(transform)
+        let actualValue = s.normal(point(0, 1.70711, -0.70711))
+        let expectedValue = vector(0, 0.70711, -0.70711)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testNormalTransformedSphere() throws {
+        let transform = scaling(1, 0.5, 1).multiplyMatrix(rotationZ(PI/5))
+        let s = Sphere(transform)
+        let actualValue = s.normal(point(0, sqrt(2)/2, -sqrt(2)/2))
+        let expectedValue = vector(0, 0.97014, -0.24254)
+        print(actualValue)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
 }

@@ -79,4 +79,20 @@ class Tuple4Tests: XCTestCase {
         XCTAssert(v1.cross(v2).isAlmostEqual(vector(-1, 2, -1)))
         XCTAssert(v2.cross(v1).isAlmostEqual(vector(1, -2, 1)))
     }
+
+    func testReflectFortyFiveDegrees() throws {
+        let v = vector(1, -1, 0)
+        let n = vector(0, 1, 0)
+        let actualValue = v.reflect(n)
+        let expectedValue = vector(1, 1, 0)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testReflectSlantedSurface() throws {
+        let v = vector(1, -1, 0)
+        let n = vector(sqrt(2)/2, sqrt(2)/2, 0)
+        let actualValue = v.reflect(n)
+        let expectedValue = vector(1, 0, 0)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
 }

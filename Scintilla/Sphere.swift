@@ -32,7 +32,11 @@ class Sphere: Shape, Traceable {
         }
     }
 
-    func normal(_ p: Tuple4) -> Tuple4 {
-        return p.subtract(point(0, 0, 0)).normalize()
+    func normal(_ worldPoint: Tuple4) -> Tuple4 {
+        let localPoint = self.inverseTransform.multiplyTuple(worldPoint)
+        let localNormal = localPoint.subtract(point(0, 0, 0))
+        var worldNormal = self.inverseTransform.transpose().multiplyTuple(localNormal)
+        worldNormal.xyzw[3] = 0.0;
+        return worldNormal.normalize()
     }
 }

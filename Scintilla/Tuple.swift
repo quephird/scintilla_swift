@@ -107,6 +107,10 @@ struct Tuple4 {
         )
     }
 
+    func reflect(_ normal: Tuple4) -> Tuple4 {
+        return self.subtract(normal.multiplyScalar(2 * self.dot(normal)))
+    }
+
     func isAlmostEqual(_ to: Self) -> Bool {
         self.xyzw[0].isAlmostEqual(to.xyzw[0]) &&
             self.xyzw[1].isAlmostEqual(to.xyzw[1]) &&
