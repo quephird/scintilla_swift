@@ -31,4 +31,8 @@ class Sphere: Shape, Traceable {
             ]
         }
     }
+
+    func normal(_ p: Tuple4) -> Tuple4 {
+        return p.subtract(point(0, 0, 0)).normalize()
+    }
 }

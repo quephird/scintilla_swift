@@ -62,4 +62,40 @@ class SphereTests: XCTestCase {
         let intersections = s.intersect(worldRay)
         XCTAssertEqual(intersections.count, 0)
     }
+
+    func testNormalPointOnXAxis() throws {
+        let p = point(1, 0, 0)
+        let transform = IDENTITY4
+        let s = Sphere(transform)
+        let actualValue = s.normal(p)
+        let expectedValue = vector(1, 0, 0)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testNormalPointOnYAxis() throws {
+        let p = point(0, 1, 0)
+        let transform = IDENTITY4
+        let s = Sphere(transform)
+        let actualValue = s.normal(p)
+        let expectedValue = vector(0, 1, 0)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testNormalPointOnZAxis() throws {
+        let p = point(0, 0, 1)
+        let transform = IDENTITY4
+        let s = Sphere(transform)
+        let actualValue = s.normal(p)
+        let expectedValue = vector(0, 0, 1)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testNormalNonaxialPoint() throws {
+        let p = point(sqrt(3)/3, sqrt(3)/3, sqrt(3)/3)
+        let transform = IDENTITY4
+        let s = Sphere(transform)
+        let actualValue = s.normal(p)
+        let expectedValue = vector(sqrt(3)/3, sqrt(3)/3, sqrt(3)/3)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
 }
