@@ -19,4 +19,11 @@ struct Ray {
     func position(_ t: Double) -> Tuple4 {
         self.origin.add(self.direction.multiplyScalar(t))
     }
+
+    func transform(_ m: Matrix4) -> Ray {
+        Ray(
+            m.multiplyTuple(self.origin),
+            m.multiplyTuple(self.direction)
+        )
+    }
 }

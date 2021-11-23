@@ -51,6 +51,8 @@ extension Canvas {
             if x != self.width-1 && characterCount < 69 {
                 line.append(" ")
                 characterCount += 1
+            } else {
+                line.append("\n")
             }
         }
 
@@ -74,6 +76,7 @@ extension Canvas {
         ppm.append(self.ppmHeader())
         ppm.append("\n")
         ppm.append(self.body())
+        ppm.append("\n")
         return ppm
     }
 }
