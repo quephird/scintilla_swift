@@ -39,4 +39,8 @@ class Sphere: Shape, Traceable {
         worldNormal.xyzw[3] = 0.0;
         return worldNormal.normalize()
     }
+
+    func getMaterial() -> Material {
+        self.material
+    }
 }

@@ -24,7 +24,7 @@ class ColorTests: XCTestCase {
 
     func testMultipleScalar() throws {
         let c = Color(0.2, 0.3, 0.4)
-        XCTAssert(c.multiply_scalar(2).isAlmostEqual(Color(0.4, 0.6, 0.8)))
+        XCTAssert(c.multiplyScalar(2).isAlmostEqual(Color(0.4, 0.6, 0.8)))
     }
 
     func testHadamard() throws {

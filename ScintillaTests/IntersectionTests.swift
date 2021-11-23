@@ -10,7 +10,8 @@ import XCTest
 class IntersectionTests: XCTestCase {
     func testHitIntersectionsWithAllPositiveTs() throws {
         let transform = IDENTITY4
-        let s = Sphere(transform)
+        let material = DEFAULT_MATERIAL
+        let s = Sphere(transform, material)
         let i1 = Intersection(1, s)
         let i2 = Intersection(2, s)
         var intersections = [i2, i1]
@@ -20,7 +21,8 @@ class IntersectionTests: XCTestCase {
 
     func testHitIntersectionsWithSomeNegativeTs() throws {
         let transform = IDENTITY4
-        let s = Sphere(transform)
+        let material = DEFAULT_MATERIAL
+        let s = Sphere(transform, material)
         let i1 = Intersection(-1, s)
         let i2 = Intersection(1, s)
         var intersections = [i2, i1]
@@ -30,7 +32,8 @@ class IntersectionTests: XCTestCase {
 
     func testHitIntersectionsWithAllNegativeTs() throws {
         let transform = IDENTITY4
-        let s = Sphere(transform)
+        let material = DEFAULT_MATERIAL
+        let s = Sphere(transform, material)
         let i1 = Intersection(-2, s)
         let i2 = Intersection(-1, s)
         var intersections = [i2, i1]
@@ -40,7 +43,8 @@ class IntersectionTests: XCTestCase {
 
     func testHitReturnsLowestNonnegativeIntersection() throws {
         let transform = IDENTITY4
-        let s = Sphere(transform)
+        let material = DEFAULT_MATERIAL
+        let s = Sphere(transform, material)
         let i1 = Intersection(5, s)
         let i2 = Intersection(7, s)
         let i3 = Intersection(-3, s)

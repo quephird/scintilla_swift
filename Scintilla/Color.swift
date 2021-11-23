@@ -26,7 +26,7 @@ struct Color {
         Color(self.r-other.r, self.g-other.g, self.b-other.b)
     }
 
-    func multiply_scalar(_ scalar: Double) -> Self {
+    func multiplyScalar(_ scalar: Double) -> Self {
         Color(self.r*scalar, self.g*scalar, self.b*scalar)
     }
 
@@ -40,3 +40,6 @@ struct Color {
             self.b.isAlmostEqual(to.b)
     }
 }
+
+let WHITE = Color(1.0, 1.0, 1.0)
+let BLACK = Color(0.0, 0.0, 0.0)
