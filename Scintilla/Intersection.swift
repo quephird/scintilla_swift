@@ -19,13 +19,22 @@ struct Intersection {
     func prepareComputations(_ ray: Ray) -> Computations {
         let point = ray.position(self.t)
         let eye = ray.direction.negate()
-        let normal = self.shape.normal(point)
+        var normal = self.shape.normal(point)
+        var isInside: Bool
+        if normal.dot(eye) < 0 {
+            isInside = true
+            normal = normal.negate()
+        } else {
+            isInside = false
+        }
+
         return Computations(
             t: self.t,
             object: self.shape,
             point: point,
             eye: eye,
-            normal: normal
+            normal: normal,
+            isInside: isInside
         )
     }
 }

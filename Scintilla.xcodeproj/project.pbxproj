@@ -138,6 +138,7 @@
 				875B397F2748B94C00666443 /* main.swift */,
 				870DF23C27496AF100787095 /* Canvas.swift */,
 				870DF2372748D80300787095 /* Color.swift */,
+				87A21FE7274DDB3C0047AE41 /* Computations.swift */,
 				870DF2342748CF8D00787095 /* Double.swift */,
 				87A21FD5274C5B340047AE41 /* Intersection.swift */,
 				87A21FDA274CAB6C0047AE41 /* Light.swift */,
@@ -150,7 +151,6 @@
 				87A21FC0274B7AF90047AE41 /* Transform.swift */,
 				875B39922748BA4700666443 /* Tuple.swift */,
 				87A21FE2274DCF2D0047AE41 /* World.swift */,
-				87A21FE7274DDB3C0047AE41 /* Computations.swift */,
 			);
 			path = Scintilla;
 			sourceTree = "<group>";

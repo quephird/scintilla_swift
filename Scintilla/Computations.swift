@@ -13,4 +13,5 @@ struct Computations {
     var point: Tuple4
     var eye: Tuple4
     var normal: Tuple4
+    var isInside: Bool
 }

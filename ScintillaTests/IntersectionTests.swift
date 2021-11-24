@@ -54,7 +54,7 @@ class IntersectionTests: XCTestCase {
         XCTAssert(h.t.isAlmostEqual(i4.t))
     }
 
-    func testPrepareComputations() throws {
+    func testPrepareComputationsOutside() throws {
         let ray = Ray(point(0, 0, -5), vector(0, 0, 1))
         let shape = Sphere(IDENTITY4, DEFAULT_MATERIAL)
         let intersection = Intersection(4, shape)
@@ -64,5 +64,19 @@ class IntersectionTests: XCTestCase {
         XCTAssert(computations.point.isAlmostEqual(point(0, 0, -1)))
         XCTAssert(computations.eye.isAlmostEqual(vector(0, 0, -1)))
         XCTAssert(computations.normal.isAlmostEqual(vector(0, 0, -1)))
+        XCTAssertEqual(computations.isInside, false)
+    }
+
+    func testPrepareComputationsInside() throws {
+        let ray = Ray(point(0, 0, 0), vector(0, 0, 1))
+        let shape = Sphere(IDENTITY4, DEFAULT_MATERIAL)
+        let intersection = Intersection(1, shape)
+        let computations = intersection.prepareComputations(ray)
+        XCTAssertEqual(computations.t, intersection.t)
+        XCTAssertEqual(computations.object.id, shape.id)
+        XCTAssert(computations.point.isAlmostEqual(point(0, 0, 1)))
+        XCTAssert(computations.eye.isAlmostEqual(vector(0, 0, -1)))
+        XCTAssert(computations.normal.isAlmostEqual(vector(0, 0, -1)))
+        XCTAssertEqual(computations.isInside, true)
     }
 }
