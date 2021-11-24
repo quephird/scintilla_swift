@@ -60,3 +60,18 @@ func shearing(_ xy: Double, _ xz: Double, _ yx: Double, _ yz: Double, _ zx: Doub
         0,  0,  0,  1
     )
 }
+
+func view(_ from: Tuple4, _ to: Tuple4, _ up: Tuple4) -> Matrix4 {
+    let forward = to.subtract(from).normalize()
+    let upNormalized = up.normalize()
+    let left = forward.cross(upNormalized)
+    let upTrue = left.cross(forward)
+    let orientation = Matrix4(
+        left.xyzw[0],     left.xyzw[1],     left.xyzw[2],     0,
+        upTrue.xyzw[0],   upTrue.xyzw[1],   upTrue.xyzw[2],   0,
+        -forward.xyzw[0], -forward.xyzw[1], -forward.xyzw[2], 0,
+        0,                0,                0,                1
+    )
+    let transform = translation(-from.xyzw[0], -from.xyzw[1], -from.xyzw[2])
+    return orientation.multiplyMatrix(transform)
+}

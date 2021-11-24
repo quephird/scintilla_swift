@@ -155,4 +155,45 @@ class TransformTests: XCTestCase {
         let expectedValue = point(15, 0, 7)
         XCTAssert(actualValue.isAlmostEqual(expectedValue))
     }
+
+    func testViewWithDefaultOrientation() throws {
+        let from = point(0, 0, 0)
+        let to = point(0, 0, -1)
+        let up = vector(0, 1, 0)
+        let actualValue = view(from, to, up)
+        let expectedValue = IDENTITY4
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testViewLookingInPostiveZDirection() throws {
+        let from = point(0, 0, 0)
+        let to = point(0, 0, 1)
+        let up = vector(0, 1, 0)
+        let actualValue = view(from, to, up)
+        let expectedValue = scaling(-1, 1, -1)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testViewMovesWorld() throws {
+        let from = point(0, 0, 8)
+        let to = point(0, 0, 1)
+        let up = vector(0, 1, 0)
+        let actualValue = view(from, to, up)
+        let expectedValue = translation(0, 0, 8)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testViewArbitraryTransformation() throws {
+        let from = point(1, 3, 2)
+        let to = point(4, -2, 8)
+        let up = vector(1, 1, 0)
+        let actualValue = view(from, to, up)
+        let expectedValue = Matrix4(
+            -0.50709, 0.50709, 0.67612,  -2.36643,
+            0.76772,  0.60609, 0.12122,  -2.82843,
+            -0.35857, 0.59761, -0.71714, 0.00000,
+            0.00000,  0.00000, 0.00000,  1.00000
+        )
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
 }
