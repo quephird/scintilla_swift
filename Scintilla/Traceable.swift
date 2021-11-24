@@ -11,4 +11,5 @@ protocol Traceable {
     func intersect(_ ray: Ray) -> [Intersection]
     func normal(_ point: Tuple4) -> Tuple4
     func getMaterial() -> Material
+    func getId() -> Int
 }

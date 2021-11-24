@@ -46,6 +46,11 @@
 		87A21FDE274CAC160047AE41 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FDD274CAC160047AE41 /* Material.swift */; };
 		87A21FDF274CAC160047AE41 /* Material.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FDD274CAC160047AE41 /* Material.swift */; };
 		87A21FE1274D9DE30047AE41 /* MaterialTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FE0274D9DE30047AE41 /* MaterialTests.swift */; };
+		87A21FE3274DCF2D0047AE41 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FE2274DCF2D0047AE41 /* World.swift */; };
+		87A21FE5274DD8CB0047AE41 /* WorldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FE4274DD8CB0047AE41 /* WorldTests.swift */; };
+		87A21FE6274DD8F00047AE41 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FE2274DCF2D0047AE41 /* World.swift */; };
+		87A21FE8274DDB3C0047AE41 /* Computations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FE7274DDB3C0047AE41 /* Computations.swift */; };
+		87A21FE9274DDB3C0047AE41 /* Computations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FE7274DDB3C0047AE41 /* Computations.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -89,6 +94,9 @@
 		87A21FDA274CAB6C0047AE41 /* Light.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Light.swift; sourceTree = "<group>"; };
 		87A21FDD274CAC160047AE41 /* Material.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Material.swift; sourceTree = "<group>"; };
 		87A21FE0274D9DE30047AE41 /* MaterialTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialTests.swift; sourceTree = "<group>"; };
+		87A21FE2274DCF2D0047AE41 /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
+		87A21FE4274DD8CB0047AE41 /* WorldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTests.swift; sourceTree = "<group>"; };
+		87A21FE7274DDB3C0047AE41 /* Computations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Computations.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +153,8 @@
 				87A21FCF274C53D60047AE41 /* Traceable.swift */,
 				87A21FC0274B7AF90047AE41 /* Transform.swift */,
 				875B39922748BA4700666443 /* Tuple.swift */,
+				87A21FE2274DCF2D0047AE41 /* World.swift */,
+				87A21FE7274DDB3C0047AE41 /* Computations.swift */,
 			);
 			path = Scintilla;
 			sourceTree = "<group>";
@@ -162,6 +172,7 @@
 				87A21FD1274C57930047AE41 /* SphereTests.swift */,
 				87A21FC2274B7C8F0047AE41 /* TransformTests.swift */,
 				875B398C2748B97200666443 /* TupleTests.swift */,
+				87A21FE4274DD8CB0047AE41 /* WorldTests.swift */,
 				875B398E2748B97200666443 /* Info.plist */,
 			);
 			path = ScintillaTests;
@@ -260,6 +271,7 @@
 				875B39932748BA4700666443 /* Tuple.swift in Sources */,
 				870DF2382748D80300787095 /* Color.swift in Sources */,
 				870DF2352748CF8D00787095 /* Double.swift in Sources */,
+				87A21FE8274DDB3C0047AE41 /* Computations.swift in Sources */,
 				870DF242274975B900787095 /* Ppm.swift in Sources */,
 				870DF23D27496AF100787095 /* Canvas.swift in Sources */,
 				87A21FCD274C32200047AE41 /* Shape.swift in Sources */,
@@ -269,6 +281,7 @@
 				60DE365BAF950F74D35DF9EA /* Matrix.swift in Sources */,
 				87A21FD6274C5B340047AE41 /* Intersection.swift in Sources */,
 				87A21FDB274CAB6C0047AE41 /* Light.swift in Sources */,
+				87A21FE3274DCF2D0047AE41 /* World.swift in Sources */,
 				87A21FC6274C2D8A0047AE41 /* Ray.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -291,6 +304,7 @@
 				87A21FBF274B375B0047AE41 /* Matrix.swift in Sources */,
 				87A21FC3274B7C8F0047AE41 /* TransformTests.swift in Sources */,
 				870DF2392748D80500787095 /* Color.swift in Sources */,
+				87A21FE6274DD8F00047AE41 /* World.swift in Sources */,
 				87A21FD2274C57930047AE41 /* SphereTests.swift in Sources */,
 				87A21FDC274CAB6C0047AE41 /* Light.swift in Sources */,
 				87A21FE1274D9DE30047AE41 /* MaterialTests.swift in Sources */,
@@ -299,8 +313,10 @@
 				870DF2362748D21C00787095 /* Double.swift in Sources */,
 				875B398D2748B97200666443 /* TupleTests.swift in Sources */,
 				870DF23F27496D1F00787095 /* CanvasTests.swift in Sources */,
+				87A21FE5274DD8CB0047AE41 /* WorldTests.swift in Sources */,
 				87A21FC9274C2F3A0047AE41 /* Ray.swift in Sources */,
 				87A21FD4274C59360047AE41 /* Traceable.swift in Sources */,
+				87A21FE9274DDB3C0047AE41 /* Computations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

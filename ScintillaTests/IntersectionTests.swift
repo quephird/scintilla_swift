@@ -53,4 +53,16 @@ class IntersectionTests: XCTestCase {
         let h = hit(&intersections)!
         XCTAssert(h.t.isAlmostEqual(i4.t))
     }
+
+    func testPrepareComputations() throws {
+        let ray = Ray(point(0, 0, -5), vector(0, 0, 1))
+        let shape = Sphere(IDENTITY4, DEFAULT_MATERIAL)
+        let intersection = Intersection(4, shape)
+        let computations = intersection.prepareComputations(ray)
+        XCTAssertEqual(computations.t, intersection.t)
+        XCTAssertEqual(computations.object.getId(), shape.id)
+        XCTAssert(computations.point.isAlmostEqual(point(0, 0, -1)))
+        XCTAssert(computations.eye.isAlmostEqual(vector(0, 0, -1)))
+        XCTAssert(computations.normal.isAlmostEqual(vector(0, 0, -1)))
+    }
 }

@@ -15,6 +15,19 @@ struct Intersection {
         self.t = t
         self.shape = shape
     }
+
+    func prepareComputations(_ ray: Ray) -> Computations {
+        let point = ray.position(self.t)
+        let eye = ray.direction.negate()
+        let normal = self.shape.normal(point)
+        return Computations(
+            t: self.t,
+            object: self.shape,
+            point: point,
+            eye: eye,
+            normal: normal
+        )
+    }
 }
 
 func hit(_ intersections: inout [Intersection]) -> Optional<Intersection> {

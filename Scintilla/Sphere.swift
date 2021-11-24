@@ -43,4 +43,8 @@ class Sphere: Shape, Traceable {
     func getMaterial() -> Material {
         self.material
     }
+
+    func getId() -> Int {
+        self.id
+    }
 }
