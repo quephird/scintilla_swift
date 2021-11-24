@@ -27,11 +27,13 @@ struct Intersection {
         } else {
             isInside = false
         }
+        let overPoint = point.add(normal.multiplyScalar(EPSILON))
 
         return Computations(
             t: self.t,
             object: self.shape,
             point: point,
+            overPoint: overPoint,
             eye: eye,
             normal: normal,
             isInside: isInside

@@ -22,7 +22,7 @@ struct Material {
         self.shininess = shininess
     }
 
-    func lighting(_ light: Light, _ point: Tuple4, _ eye: Tuple4, _ normal: Tuple4) -> Color {
+    func lighting(_ light: Light, _ point: Tuple4, _ eye: Tuple4, _ normal: Tuple4, _ isShadowed: Bool) -> Color {
         // Combine the surface color with the light's color/intensity
         let effectiveColor = self.color.hadamard(light.intensity)
 
@@ -39,7 +39,7 @@ struct Material {
 
         var diffuse: Color
         var specular: Color
-        if lightDotNormal < 0 {
+        if lightDotNormal < 0 || isShadowed == true {
             diffuse = BLACK
             specular = BLACK
         } else {

@@ -43,6 +43,20 @@ class WorldTests: XCTestCase {
         XCTAssert(actualValue.isAlmostEqual(expectedValue))
     }
 
+    func testShadeHitIntersectionInShadow() throws {
+        let light = Light(point(0, 0, -10), Color(1, 1, 1))
+        let s1 = Sphere(IDENTITY4, DEFAULT_MATERIAL)
+        let transform = translation(0, 0, 10)
+        let s2 = Sphere(transform, DEFAULT_MATERIAL)
+        let world = World(light, [s1, s2])
+        let ray = Ray(point(0, 0, 5), vector(0, 0, 1))
+        let intersection = Intersection(4, s2)
+        let computations = intersection.prepareComputations(ray)
+        let actualValue = world.shadeHit(computations)
+        let expectedValue = Color(0.1, 0.1, 0.1)
+        XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
     func testColorAtMiss() throws {
         let world = DEFAULT_WORLD
         let ray = Ray(point(0, 0, -5), vector(0, 1, 0))
@@ -69,5 +83,29 @@ class WorldTests: XCTestCase {
         let actualValue = world.colorAt(ray)
         let expectedValue = innerSphere.material.color
         XCTAssert(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testIsShadowedPointAndLightNotCollinear() throws {
+        let world = DEFAULT_WORLD
+        let point = point(0, 10, 0)
+        XCTAssertFalse(world.isShadowed(point))
+    }
+
+    func testIsShadowedObjectBetweenPointAndLight() throws {
+        let world = DEFAULT_WORLD
+        let point = point(10, -10, 10)
+        XCTAssertTrue(world.isShadowed(point))
+    }
+
+    func testIsShadowedObjectBehindLight() throws {
+        let world = DEFAULT_WORLD
+        let point = point(-20, 20, -20)
+        XCTAssertFalse(world.isShadowed(point))
+    }
+
+    func testIsShadowedObjectBehindPoint() throws {
+        let world = DEFAULT_WORLD
+        let point = point(-2, 2, -2)
+        XCTAssertFalse(world.isShadowed(point))
     }
 }

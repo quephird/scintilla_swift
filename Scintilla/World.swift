@@ -27,11 +27,14 @@ struct World {
 
     func shadeHit(_ computations: Computations) -> Color {
         let material = computations.object.material
+        let isShadowed = self.isShadowed(computations.overPoint)
+
         return material.lighting(
             self.light,
             computations.point,
             computations.eye,
-            computations.normal
+            computations.normal,
+            isShadowed
         )
     }
 
@@ -44,6 +47,21 @@ struct World {
         case .some(let intersection):
             let computations = intersection.prepareComputations(ray)
             return self.shadeHit(computations)
+        }
+    }
+
+    func isShadowed(_ point: Tuple4) -> Bool {
+        let lightVector = self.light.position.subtract(point)
+        let lightDistance = lightVector.magnitude()
+        let lightDirection = lightVector.normalize()
+        let lightRay = Ray(point, lightDirection)
+        var intersections = self.intersect(lightRay)
+        let hit = hit(&intersections)
+
+        if hit != nil && hit!.t < lightDistance {
+            return true
+        } else {
+            return false
         }
     }
 }
