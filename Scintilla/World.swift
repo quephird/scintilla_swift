@@ -24,6 +24,28 @@ struct World {
             })
         return intersections
     }
+
+    func shadeHit(_ computations: Computations) -> Color {
+        let material = computations.object.material
+        return material.lighting(
+            self.light,
+            computations.point,
+            computations.eye,
+            computations.normal
+        )
+    }
+
+    func colorAt(_ ray: Ray) -> Color {
+        var intersections = self.intersect(ray)
+        let hit = hit(&intersections)
+        switch hit {
+        case .none:
+            return BLACK
+        case .some(let intersection):
+            let computations = intersection.prepareComputations(ray)
+            return self.shadeHit(computations)
+        }
+    }
 }
 
 let DEFAULT_WORLD = World(
