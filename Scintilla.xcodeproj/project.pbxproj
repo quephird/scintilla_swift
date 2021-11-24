@@ -49,6 +49,11 @@
 		87A21FE6274DD8F00047AE41 /* World.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FE2274DCF2D0047AE41 /* World.swift */; };
 		87A21FE8274DDB3C0047AE41 /* Computations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FE7274DDB3C0047AE41 /* Computations.swift */; };
 		87A21FE9274DDB3C0047AE41 /* Computations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FE7274DDB3C0047AE41 /* Computations.swift */; };
+		87A21FEB274E1A520047AE41 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FEA274E1A520047AE41 /* Camera.swift */; };
+		87A21FEC274E1A520047AE41 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FEA274E1A520047AE41 /* Camera.swift */; };
+		87A21FEE274E1FE50047AE41 /* CameraTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FED274E1FE50047AE41 /* CameraTests.swift */; };
+		87A21FF0274E29B50047AE41 /* Examples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FEF274E29B50047AE41 /* Examples.swift */; };
+		87A21FF1274E29B50047AE41 /* Examples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FEF274E29B50047AE41 /* Examples.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -94,6 +99,9 @@
 		87A21FE2274DCF2D0047AE41 /* World.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = World.swift; sourceTree = "<group>"; };
 		87A21FE4274DD8CB0047AE41 /* WorldTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldTests.swift; sourceTree = "<group>"; };
 		87A21FE7274DDB3C0047AE41 /* Computations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Computations.swift; sourceTree = "<group>"; };
+		87A21FEA274E1A520047AE41 /* Camera.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		87A21FED274E1FE50047AE41 /* CameraTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraTests.swift; sourceTree = "<group>"; };
+		87A21FEF274E29B50047AE41 /* Examples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Examples.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,6 +159,8 @@
 				87A21FC0274B7AF90047AE41 /* Transform.swift */,
 				875B39922748BA4700666443 /* Tuple.swift */,
 				87A21FE2274DCF2D0047AE41 /* World.swift */,
+				87A21FEA274E1A520047AE41 /* Camera.swift */,
+				87A21FEF274E29B50047AE41 /* Examples.swift */,
 			);
 			path = Scintilla;
 			sourceTree = "<group>";
@@ -170,6 +180,7 @@
 				875B398C2748B97200666443 /* TupleTests.swift */,
 				87A21FE4274DD8CB0047AE41 /* WorldTests.swift */,
 				875B398E2748B97200666443 /* Info.plist */,
+				87A21FED274E1FE50047AE41 /* CameraTests.swift */,
 			);
 			path = ScintillaTests;
 			sourceTree = "<group>";
@@ -264,6 +275,7 @@
 			files = (
 				87A21FCB274C30190047AE41 /* Sphere.swift in Sources */,
 				875B39932748BA4700666443 /* Tuple.swift in Sources */,
+				87A21FEB274E1A520047AE41 /* Camera.swift in Sources */,
 				870DF2382748D80300787095 /* Color.swift in Sources */,
 				870DF2352748CF8D00787095 /* Double.swift in Sources */,
 				87A21FE8274DDB3C0047AE41 /* Computations.swift in Sources */,
@@ -277,6 +289,7 @@
 				87A21FD6274C5B340047AE41 /* Intersection.swift in Sources */,
 				87A21FDB274CAB6C0047AE41 /* Light.swift in Sources */,
 				87A21FE3274DCF2D0047AE41 /* World.swift in Sources */,
+				87A21FF0274E29B50047AE41 /* Examples.swift in Sources */,
 				87A21FC6274C2D8A0047AE41 /* Ray.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87A21FEE274E1FE50047AE41 /* CameraTests.swift in Sources */,
 				87A21FBE274B373B0047AE41 /* MatrixTests.swift in Sources */,
 				870DF24027496D3B00787095 /* Canvas.swift in Sources */,
 				87A21FD3274C59180047AE41 /* Sphere.swift in Sources */,
@@ -299,9 +313,11 @@
 				87A21FBF274B375B0047AE41 /* Matrix.swift in Sources */,
 				87A21FC3274B7C8F0047AE41 /* TransformTests.swift in Sources */,
 				870DF2392748D80500787095 /* Color.swift in Sources */,
+				87A21FF1274E29B50047AE41 /* Examples.swift in Sources */,
 				87A21FE6274DD8F00047AE41 /* World.swift in Sources */,
 				87A21FD2274C57930047AE41 /* SphereTests.swift in Sources */,
 				87A21FDC274CAB6C0047AE41 /* Light.swift in Sources */,
+				87A21FEC274E1A520047AE41 /* Camera.swift in Sources */,
 				87A21FE1274D9DE30047AE41 /* MaterialTests.swift in Sources */,
 				870DF23B2748D9B300787095 /* ColorTests.swift in Sources */,
 				87A21FD9274C5FCA0047AE41 /* IntersectionTests.swift in Sources */,
