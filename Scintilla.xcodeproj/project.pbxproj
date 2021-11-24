@@ -34,10 +34,8 @@
 		87A21FCB274C30190047AE41 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FCA274C30190047AE41 /* Sphere.swift */; };
 		87A21FCD274C32200047AE41 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FCC274C32200047AE41 /* Shape.swift */; };
 		87A21FCE274C32630047AE41 /* Shape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FCC274C32200047AE41 /* Shape.swift */; };
-		87A21FD0274C53D60047AE41 /* Traceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FCF274C53D60047AE41 /* Traceable.swift */; };
 		87A21FD2274C57930047AE41 /* SphereTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FD1274C57930047AE41 /* SphereTests.swift */; };
 		87A21FD3274C59180047AE41 /* Sphere.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FCA274C30190047AE41 /* Sphere.swift */; };
-		87A21FD4274C59360047AE41 /* Traceable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FCF274C53D60047AE41 /* Traceable.swift */; };
 		87A21FD6274C5B340047AE41 /* Intersection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FD5274C5B340047AE41 /* Intersection.swift */; };
 		87A21FD7274C5C5B0047AE41 /* Intersection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FD5274C5B340047AE41 /* Intersection.swift */; };
 		87A21FD9274C5FCA0047AE41 /* IntersectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FD8274C5FCA0047AE41 /* IntersectionTests.swift */; };
@@ -87,7 +85,6 @@
 		87A21FC7274C2EB30047AE41 /* RayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RayTests.swift; sourceTree = "<group>"; };
 		87A21FCA274C30190047AE41 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
 		87A21FCC274C32200047AE41 /* Shape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shape.swift; sourceTree = "<group>"; };
-		87A21FCF274C53D60047AE41 /* Traceable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Traceable.swift; sourceTree = "<group>"; };
 		87A21FD1274C57930047AE41 /* SphereTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SphereTests.swift; sourceTree = "<group>"; };
 		87A21FD5274C5B340047AE41 /* Intersection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Intersection.swift; sourceTree = "<group>"; };
 		87A21FD8274C5FCA0047AE41 /* IntersectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntersectionTests.swift; sourceTree = "<group>"; };
@@ -150,7 +147,6 @@
 				87A21FC5274C2D8A0047AE41 /* Ray.swift */,
 				87A21FCC274C32200047AE41 /* Shape.swift */,
 				87A21FCA274C30190047AE41 /* Sphere.swift */,
-				87A21FCF274C53D60047AE41 /* Traceable.swift */,
 				87A21FC0274B7AF90047AE41 /* Transform.swift */,
 				875B39922748BA4700666443 /* Tuple.swift */,
 				87A21FE2274DCF2D0047AE41 /* World.swift */,
@@ -267,7 +263,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				87A21FCB274C30190047AE41 /* Sphere.swift in Sources */,
-				87A21FD0274C53D60047AE41 /* Traceable.swift in Sources */,
 				875B39932748BA4700666443 /* Tuple.swift in Sources */,
 				870DF2382748D80300787095 /* Color.swift in Sources */,
 				870DF2352748CF8D00787095 /* Double.swift in Sources */,
@@ -315,7 +310,6 @@
 				870DF23F27496D1F00787095 /* CanvasTests.swift in Sources */,
 				87A21FE5274DD8CB0047AE41 /* WorldTests.swift in Sources */,
 				87A21FC9274C2F3A0047AE41 /* Ray.swift in Sources */,
-				87A21FD4274C59360047AE41 /* Traceable.swift in Sources */,
 				87A21FE9274DDB3C0047AE41 /* Computations.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

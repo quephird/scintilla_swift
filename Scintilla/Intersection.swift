@@ -9,9 +9,9 @@ import Foundation
 
 struct Intersection {
     var t: Double
-    var shape: Traceable
+    var shape: Shape
 
-    init(_ t: Double, _ shape: Traceable) {
+    init(_ t: Double, _ shape: Shape) {
         self.t = t
         self.shape = shape
     }

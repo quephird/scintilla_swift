@@ -21,4 +21,12 @@ class Shape {
         self.inverseTransform = transform.inverse()
         Self.latestId += 1
     }
+
+    func intersect(_ ray: Ray) -> [Intersection] {
+        fatalError("Subclasses must override this method!")
+    }
+
+    func normal(_ point: Tuple4) -> Tuple4 {
+        fatalError("Subclasses must override this method!")
+    }
 }

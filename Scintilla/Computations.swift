@@ -9,7 +9,7 @@ import Foundation
 
 struct Computations {
     var t: Double
-    var object: Traceable
+    var object: Shape
     var point: Tuple4
     var eye: Tuple4
     var normal: Tuple4

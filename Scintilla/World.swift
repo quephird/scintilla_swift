@@ -9,9 +9,9 @@ import Foundation
 
 struct World {
     var light: Light
-    var objects: [Traceable]
+    var objects: [Shape]
 
-    init(_ light: Light, _ objects: [Traceable]) {
+    init(_ light: Light, _ objects: [Shape]) {
         self.light = light
         self.objects = objects
     }

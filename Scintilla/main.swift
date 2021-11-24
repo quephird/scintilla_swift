@@ -48,7 +48,7 @@ for y in 0...canvasPixels-1 {
             let point = worldRay.position(hit.t)
             let normal = hit.shape.normal(point)
             let eye = worldRay.direction.negate()
-            let objectMaterial = hit.shape.getMaterial()
+            let objectMaterial = hit.shape.material
             let color = objectMaterial.lighting(light, point, eye, normal)
 
             canvas.setPixel(x, y, color)

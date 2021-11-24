@@ -60,7 +60,7 @@ class IntersectionTests: XCTestCase {
         let intersection = Intersection(4, shape)
         let computations = intersection.prepareComputations(ray)
         XCTAssertEqual(computations.t, intersection.t)
-        XCTAssertEqual(computations.object.getId(), shape.id)
+        XCTAssertEqual(computations.object.id, shape.id)
         XCTAssert(computations.point.isAlmostEqual(point(0, 0, -1)))
         XCTAssert(computations.eye.isAlmostEqual(vector(0, 0, -1)))
         XCTAssert(computations.normal.isAlmostEqual(vector(0, 0, -1)))

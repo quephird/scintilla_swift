@@ -7,8 +7,8 @@
 
 import Foundation
 
-class Sphere: Shape, Traceable {
-    func intersect(_ worldRay: Ray) -> [Intersection] {
+class Sphere: Shape {
+    override func intersect(_ worldRay: Ray) -> [Intersection] {
         let localRay = worldRay.transform(self.inverseTransform)
 
         // The vector from the sphere's center, to the ray origin
@@ -32,19 +32,11 @@ class Sphere: Shape, Traceable {
         }
     }
 
-    func normal(_ worldPoint: Tuple4) -> Tuple4 {
+    override func normal(_ worldPoint: Tuple4) -> Tuple4 {
         let localPoint = self.inverseTransform.multiplyTuple(worldPoint)
         let localNormal = localPoint.subtract(point(0, 0, 0))
         var worldNormal = self.inverseTransform.transpose().multiplyTuple(localNormal)
         worldNormal.xyzw[3] = 0.0;
         return worldNormal.normalize()
-    }
-
-    func getMaterial() -> Material {
-        self.material
-    }
-
-    func getId() -> Int {
-        self.id
     }
 }
