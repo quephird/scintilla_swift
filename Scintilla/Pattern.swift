@@ -7,23 +7,38 @@
 
 import Foundation
 
-protocol Pattern {
-    func colorAt(_ point: Tuple4) -> Color
+class Pattern {
+    var transform: Matrix4
+    var inverseTransform: Matrix4
+
+    init(_ transform: Matrix4) {
+        self.transform = transform
+        self.inverseTransform = transform.inverse()
+    }
+
+    func colorAt( _ object: Shape, _ worldPoint: Tuple4) -> Color {
+        let objectPoint = object.inverseTransform.multiplyTuple(worldPoint)
+        let patternPoint = self.inverseTransform.multiplyTuple(objectPoint)
+        return self.colorAt(patternPoint)
+    }
+
+    func colorAt(_ point: Tuple4) -> Color {
+        fatalError("Subclasses must override this method!")
+    }
 }
 
-struct Striped: Pattern {
+class Striped: Pattern {
     var firstColor: Color
     var secondColor: Color
-    var transform: Matrix4
 
     init(_ firstColor: Color, _ secondColor: Color, _ transform: Matrix4) {
         self.firstColor = firstColor
         self.secondColor = secondColor
-        self.transform = transform
+        super.init(transform)
     }
 
-    func colorAt(_ point: Tuple4) -> Color {
-        if Int(floor(point.xyzw[0])) % 2 == 0 {
+    override func colorAt(_ patternPoint: Tuple4) -> Color {
+        if Int(floor(patternPoint.xyzw[0])) % 2 == 0 {
             return firstColor
         } else {
             return secondColor
@@ -31,19 +46,37 @@ struct Striped: Pattern {
     }
 }
 
-struct Checkered3D: Pattern {
+class Checkered2D: Pattern {
     var firstColor: Color
     var secondColor: Color
-    var transform: Matrix4
 
     init(_ firstColor: Color, _ secondColor: Color, _ transform: Matrix4) {
         self.firstColor = firstColor
         self.secondColor = secondColor
-        self.transform = transform
+        super.init(transform)
     }
 
-    func colorAt(_ point: Tuple4) -> Color {
-        if Int(floor(point.xyzw[0]) + floor(point.xyzw[1]) + floor(point.xyzw[2])) % 2 == 0 {
+    override func colorAt(_ patternPoint: Tuple4) -> Color {
+        if Int(floor(patternPoint.xyzw[0]) + floor(patternPoint.xyzw[2])) % 2 == 0 {
+            return firstColor
+        } else {
+            return secondColor
+        }
+    }
+}
+
+class Checkered3D: Pattern {
+    var firstColor: Color
+    var secondColor: Color
+
+    init(_ firstColor: Color, _ secondColor: Color, _ transform: Matrix4) {
+        self.firstColor = firstColor
+        self.secondColor = secondColor
+        super.init(transform)
+    }
+
+    override func colorAt(_ patternPoint: Tuple4) -> Color {
+        if Int(floor(patternPoint.xyzw[0]) + floor(patternPoint.xyzw[1]) + floor(patternPoint.xyzw[2])) % 2 == 0 {
             return firstColor
         } else {
             return secondColor

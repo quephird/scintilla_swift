@@ -22,14 +22,14 @@ struct Material {
         self.shininess = shininess
     }
 
-    func lighting(_ light: Light, _ point: Tuple4, _ eye: Tuple4, _ normal: Tuple4, _ isShadowed: Bool) -> Color {
+    func lighting(_ light: Light, _ object: Shape, _ point: Tuple4, _ eye: Tuple4, _ normal: Tuple4, _ isShadowed: Bool) -> Color {
         // Combine the surface color with the light's color/intensity
         var effectiveColor: Color
         switch self.colorStrategy {
         case .solidColor(let color):
             effectiveColor = color.hadamard(light.intensity)
         case .pattern(let pattern):
-            effectiveColor = pattern.colorAt(point)
+            effectiveColor = pattern.colorAt(object, point)
         }
 
         // Find the direction to the light source

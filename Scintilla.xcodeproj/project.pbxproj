@@ -27,6 +27,7 @@
 		878C690D274F380400EB945E /* ColorStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690B274F373300EB945E /* ColorStrategy.swift */; };
 		878C690F274F3D5700EB945E /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690E274F3D5700EB945E /* Pattern.swift */; };
 		878C6910274F3DF700EB945E /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690E274F3D5700EB945E /* Pattern.swift */; };
+		878C6912274F5B7200EB945E /* PatternTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C6911274F5B7200EB945E /* PatternTests.swift */; };
 		87A21FBE274B373B0047AE41 /* MatrixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE383E788BD47B15D60716 /* MatrixTests.swift */; };
 		87A21FBF274B375B0047AE41 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE3537E1C9EC4C417010E9 /* Matrix.swift */; };
 		87A21FC1274B7AF90047AE41 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FC0274B7AF90047AE41 /* Transform.swift */; };
@@ -93,6 +94,7 @@
 		875B39922748BA4700666443 /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
 		878C690B274F373300EB945E /* ColorStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStrategy.swift; sourceTree = "<group>"; };
 		878C690E274F3D5700EB945E /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
+		878C6911274F5B7200EB945E /* PatternTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternTests.swift; sourceTree = "<group>"; };
 		87A21FC0274B7AF90047AE41 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		87A21FC2274B7C8F0047AE41 /* TransformTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformTests.swift; sourceTree = "<group>"; };
 		87A21FC5274C2D8A0047AE41 /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				87A21FEA274E1A520047AE41 /* Camera.swift */,
 				870DF23C27496AF100787095 /* Canvas.swift */,
 				870DF2372748D80300787095 /* Color.swift */,
+				878C690B274F373300EB945E /* ColorStrategy.swift */,
 				87A21FE7274DDB3C0047AE41 /* Computations.swift */,
 				870DF2342748CF8D00787095 /* Double.swift */,
 				87A21FEF274E29B50047AE41 /* Examples.swift */,
@@ -165,6 +168,7 @@
 				87A21FDA274CAB6C0047AE41 /* Light.swift */,
 				87A21FDD274CAC160047AE41 /* Material.swift */,
 				60DE3537E1C9EC4C417010E9 /* Matrix.swift */,
+				878C690E274F3D5700EB945E /* Pattern.swift */,
 				87A21FF2274F03FF0047AE41 /* Plane.swift */,
 				870DF241274975B900787095 /* Ppm.swift */,
 				87A21FC5274C2D8A0047AE41 /* Ray.swift */,
@@ -173,8 +177,6 @@
 				87A21FC0274B7AF90047AE41 /* Transform.swift */,
 				875B39922748BA4700666443 /* Tuple.swift */,
 				87A21FE2274DCF2D0047AE41 /* World.swift */,
-				878C690B274F373300EB945E /* ColorStrategy.swift */,
-				878C690E274F3D5700EB945E /* Pattern.swift */,
 			);
 			path = Scintilla;
 			sourceTree = "<group>";
@@ -188,6 +190,7 @@
 				87A21FD8274C5FCA0047AE41 /* IntersectionTests.swift */,
 				87A21FE0274D9DE30047AE41 /* MaterialTests.swift */,
 				60DE383E788BD47B15D60716 /* MatrixTests.swift */,
+				878C6911274F5B7200EB945E /* PatternTests.swift */,
 				87A21FF4274F05A80047AE41 /* PlaneTests.swift */,
 				870DF243274977C700787095 /* PpmTests.swift */,
 				87A21FC7274C2EB30047AE41 /* RayTests.swift */,
@@ -326,6 +329,7 @@
 				875B39942748BA8400666443 /* Tuple.swift in Sources */,
 				87A21FC4274B7CCC0047AE41 /* Transform.swift in Sources */,
 				870DF2452749782C00787095 /* Ppm.swift in Sources */,
+				878C6912274F5B7200EB945E /* PatternTests.swift in Sources */,
 				87A21FC8274C2EB30047AE41 /* RayTests.swift in Sources */,
 				87A21FDF274CAC160047AE41 /* Material.swift in Sources */,
 				87A21FD7274C5C5B0047AE41 /* Intersection.swift in Sources */,

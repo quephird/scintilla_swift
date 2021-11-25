@@ -31,6 +31,7 @@ struct World {
 
         return material.lighting(
             self.light,
+            computations.object,
             computations.point,
             computations.eye,
             computations.normal,
