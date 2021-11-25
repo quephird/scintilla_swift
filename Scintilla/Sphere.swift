@@ -8,9 +8,7 @@
 import Foundation
 
 class Sphere: Shape {
-    override func intersect(_ worldRay: Ray) -> [Intersection] {
-        let localRay = worldRay.transform(self.inverseTransform)
-
+    override func localIntersect(_ localRay: Ray) -> [Intersection] {
         // The vector from the sphere's center, to the ray origin
         // remember: the sphere is centered at the world origin
         let sphereToRay = localRay.origin.subtract(point(0, 0, 0))
@@ -32,11 +30,7 @@ class Sphere: Shape {
         }
     }
 
-    override func normal(_ worldPoint: Tuple4) -> Tuple4 {
-        let localPoint = self.inverseTransform.multiplyTuple(worldPoint)
-        let localNormal = localPoint.subtract(point(0, 0, 0))
-        var worldNormal = self.inverseTransform.transpose().multiplyTuple(localNormal)
-        worldNormal.xyzw[3] = 0.0;
-        return worldNormal.normalize()
+    override func localNormal(_ localPoint: Tuple4) -> Tuple4 {
+        return localPoint.subtract(point(0, 0, 0))
     }
 }

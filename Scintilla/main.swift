@@ -7,7 +7,7 @@
 
 import Foundation
 
-let world = chapterSevenScene()
+let world = chapterNineScene()
 
 let from = point(0, 1.5, -5)
 let to = point(0, 1, 0)

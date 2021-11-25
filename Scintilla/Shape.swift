@@ -13,20 +13,35 @@ class Shape {
     var transform: Matrix4
     var material: Material
     var inverseTransform: Matrix4
+    var inverseTransposeTransform: Matrix4
 
     init(_ transform: Matrix4, _ material: Material) {
         self.id = Self.latestId
         self.transform = transform
         self.material = material
         self.inverseTransform = transform.inverse()
+        self.inverseTransposeTransform = transform.inverse().transpose()
         Self.latestId += 1
     }
 
-    func intersect(_ ray: Ray) -> [Intersection] {
+    func intersect(_ worldRay: Ray) -> [Intersection] {
+        let localRay = worldRay.transform(self.inverseTransform)
+        return self.localIntersect(localRay)
+    }
+
+    func localIntersect(_ localRay: Ray) -> [Intersection] {
         fatalError("Subclasses must override this method!")
     }
 
-    func normal(_ point: Tuple4) -> Tuple4 {
+    func normal(_ worldPoint: Tuple4) -> Tuple4 {
+        let localPoint = self.inverseTransform.multiplyTuple(worldPoint)
+        let localNormal = self.localNormal(localPoint)
+        var worldNormal = self.inverseTransposeTransform.multiplyTuple(localNormal)
+        worldNormal.xyzw[3] = 0.0;
+        return worldNormal.normalize()
+    }
+
+    func localNormal(_ point: Tuple4) -> Tuple4 {
         fatalError("Subclasses must override this method!")
     }
 }
