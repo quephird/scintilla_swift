@@ -25,6 +25,8 @@
 		875B39942748BA8400666443 /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B39922748BA4700666443 /* Tuple.swift */; };
 		878C690C274F373300EB945E /* ColorStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690B274F373300EB945E /* ColorStrategy.swift */; };
 		878C690D274F380400EB945E /* ColorStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690B274F373300EB945E /* ColorStrategy.swift */; };
+		878C690F274F3D5700EB945E /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690E274F3D5700EB945E /* Pattern.swift */; };
+		878C6910274F3DF700EB945E /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690E274F3D5700EB945E /* Pattern.swift */; };
 		87A21FBE274B373B0047AE41 /* MatrixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE383E788BD47B15D60716 /* MatrixTests.swift */; };
 		87A21FBF274B375B0047AE41 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE3537E1C9EC4C417010E9 /* Matrix.swift */; };
 		87A21FC1274B7AF90047AE41 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FC0274B7AF90047AE41 /* Transform.swift */; };
@@ -90,6 +92,7 @@
 		875B398E2748B97200666443 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		875B39922748BA4700666443 /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
 		878C690B274F373300EB945E /* ColorStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStrategy.swift; sourceTree = "<group>"; };
+		878C690E274F3D5700EB945E /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
 		87A21FC0274B7AF90047AE41 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		87A21FC2274B7C8F0047AE41 /* TransformTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformTests.swift; sourceTree = "<group>"; };
 		87A21FC5274C2D8A0047AE41 /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
@@ -171,6 +174,7 @@
 				875B39922748BA4700666443 /* Tuple.swift */,
 				87A21FE2274DCF2D0047AE41 /* World.swift */,
 				878C690B274F373300EB945E /* ColorStrategy.swift */,
+				878C690E274F3D5700EB945E /* Pattern.swift */,
 			);
 			path = Scintilla;
 			sourceTree = "<group>";
@@ -296,6 +300,7 @@
 				870DF23D27496AF100787095 /* Canvas.swift in Sources */,
 				87A21FCD274C32200047AE41 /* Shape.swift in Sources */,
 				875B39802748B94C00666443 /* main.swift in Sources */,
+				878C690F274F3D5700EB945E /* Pattern.swift in Sources */,
 				87A21FC1274B7AF90047AE41 /* Transform.swift in Sources */,
 				87A21FDE274CAC160047AE41 /* Material.swift in Sources */,
 				60DE365BAF950F74D35DF9EA /* Matrix.swift in Sources */,
@@ -329,6 +334,7 @@
 				87A21FC3274B7C8F0047AE41 /* TransformTests.swift in Sources */,
 				870DF2392748D80500787095 /* Color.swift in Sources */,
 				87A21FF1274E29B50047AE41 /* Examples.swift in Sources */,
+				878C6910274F3DF700EB945E /* Pattern.swift in Sources */,
 				87A21FE6274DD8F00047AE41 /* World.swift in Sources */,
 				87A21FD2274C57930047AE41 /* SphereTests.swift in Sources */,
 				87A21FF5274F05A80047AE41 /* PlaneTests.swift in Sources */,

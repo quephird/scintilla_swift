@@ -71,3 +71,30 @@ func chapterNineScene() -> World {
 
     return World(light, objects)
 }
+
+func chapterTenScene() -> World {
+    let floorMaterial = Material(.solidColor(Color(1, 0.9, 0.9)), 0.1, 0.9, 0.0, 200)
+    let floor = Plane(IDENTITY4, floorMaterial)
+
+    let leftBallTransform = translation(-1.5, 0.33, -0.75)
+        .multiplyMatrix(scaling(0.33, 0.33, 0.33))
+    let leftBallMaterial = Material(.solidColor(Color(1, 0.8, 0.1)), 0.1, 0.7, 0.3, 200)
+    let leftBall = Sphere(leftBallTransform, leftBallMaterial)
+
+
+    let middleBallTransform = translation(-0.5, 1, 0.5)
+    let middleBallPattern = Checkered3D(Color(0.2, 0.6, 0.4), Color(0.8, 0.1, 0.4), IDENTITY4)
+    let middleBallMaterial = Material(.pattern(middleBallPattern), 0.1, 0.7, 0.3, 200)
+    let middleBall = Sphere(middleBallTransform, middleBallMaterial)
+
+
+    let rightBallTransform = translation(1.5, 0.5, -0.5)
+        .multiplyMatrix(scaling(0.5, 0.5, 0.5))
+    let rightBallMaterial = Material(.solidColor(Color(0.5, 1, 0.1)), 0.1, 0.7, 0.3, 200)
+    let rightBall = Sphere(rightBallTransform, rightBallMaterial)
+
+    let light = Light(point(-10, 10, -10), Color(1, 1, 1))
+    let objects = [floor, leftBall, middleBall, rightBall]
+
+    return World(light, objects)
+}

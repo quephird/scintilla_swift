@@ -9,4 +9,5 @@ import Foundation
 
 enum ColorStrategy {
     case solidColor(Color)
+    case pattern(Pattern)
 }

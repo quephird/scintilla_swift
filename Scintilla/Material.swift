@@ -28,6 +28,8 @@ struct Material {
         switch self.colorStrategy {
         case .solidColor(let color):
             effectiveColor = color.hadamard(light.intensity)
+        case .pattern(let pattern):
+            effectiveColor = pattern.colorAt(point)
         }
 
         // Find the direction to the light source
