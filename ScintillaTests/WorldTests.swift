@@ -81,7 +81,7 @@ class WorldTests: XCTestCase {
         innerSphere.material.ambient = 1
         let ray = Ray(point(0, 0, 0.75), vector(0, 0, -1))
         let actualValue = world.colorAt(ray)
-        let expectedValue = innerSphere.material.color
+        let expectedValue = Color(0.8, 1.0, 0.6)
         XCTAssert(actualValue.isAlmostEqual(expectedValue))
     }
 

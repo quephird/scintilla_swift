@@ -23,6 +23,8 @@
 		875B398D2748B97200666443 /* TupleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B398C2748B97200666443 /* TupleTests.swift */; };
 		875B39932748BA4700666443 /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B39922748BA4700666443 /* Tuple.swift */; };
 		875B39942748BA8400666443 /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B39922748BA4700666443 /* Tuple.swift */; };
+		878C690C274F373300EB945E /* ColorStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690B274F373300EB945E /* ColorStrategy.swift */; };
+		878C690D274F380400EB945E /* ColorStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690B274F373300EB945E /* ColorStrategy.swift */; };
 		87A21FBE274B373B0047AE41 /* MatrixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE383E788BD47B15D60716 /* MatrixTests.swift */; };
 		87A21FBF274B375B0047AE41 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE3537E1C9EC4C417010E9 /* Matrix.swift */; };
 		87A21FC1274B7AF90047AE41 /* Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FC0274B7AF90047AE41 /* Transform.swift */; };
@@ -87,6 +89,7 @@
 		875B398C2748B97200666443 /* TupleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupleTests.swift; sourceTree = "<group>"; };
 		875B398E2748B97200666443 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		875B39922748BA4700666443 /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
+		878C690B274F373300EB945E /* ColorStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStrategy.swift; sourceTree = "<group>"; };
 		87A21FC0274B7AF90047AE41 /* Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transform.swift; sourceTree = "<group>"; };
 		87A21FC2274B7C8F0047AE41 /* TransformTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformTests.swift; sourceTree = "<group>"; };
 		87A21FC5274C2D8A0047AE41 /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
@@ -167,6 +170,7 @@
 				87A21FC0274B7AF90047AE41 /* Transform.swift */,
 				875B39922748BA4700666443 /* Tuple.swift */,
 				87A21FE2274DCF2D0047AE41 /* World.swift */,
+				878C690B274F373300EB945E /* ColorStrategy.swift */,
 			);
 			path = Scintilla;
 			sourceTree = "<group>";
@@ -288,6 +292,7 @@
 				87A21FF3274F03FF0047AE41 /* Plane.swift in Sources */,
 				87A21FE8274DDB3C0047AE41 /* Computations.swift in Sources */,
 				870DF242274975B900787095 /* Ppm.swift in Sources */,
+				878C690C274F373300EB945E /* ColorStrategy.swift in Sources */,
 				870DF23D27496AF100787095 /* Canvas.swift in Sources */,
 				87A21FCD274C32200047AE41 /* Shape.swift in Sources */,
 				875B39802748B94C00666443 /* main.swift in Sources */,
@@ -306,6 +311,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				878C690D274F380400EB945E /* ColorStrategy.swift in Sources */,
 				87A21FF6274F07530047AE41 /* Plane.swift in Sources */,
 				87A21FEE274E1FE50047AE41 /* CameraTests.swift in Sources */,
 				87A21FBE274B373B0047AE41 /* MatrixTests.swift in Sources */,

@@ -8,14 +8,14 @@
 import Foundation
 
 struct Material {
-    var color: Color
+    var colorStrategy: ColorStrategy
     var ambient: Double
     var diffuse: Double
     var specular: Double
     var shininess: Double
 
-    init(_ color: Color, _ ambient: Double, _ diffuse: Double, _ specular: Double, _ shininess: Double) {
-        self.color = color
+    init(_ colorStrategy: ColorStrategy, _ ambient: Double, _ diffuse: Double, _ specular: Double, _ shininess: Double) {
+        self.colorStrategy = colorStrategy
         self.ambient = ambient
         self.diffuse = diffuse
         self.specular = specular
@@ -24,7 +24,11 @@ struct Material {
 
     func lighting(_ light: Light, _ point: Tuple4, _ eye: Tuple4, _ normal: Tuple4, _ isShadowed: Bool) -> Color {
         // Combine the surface color with the light's color/intensity
-        let effectiveColor = self.color.hadamard(light.intensity)
+        var effectiveColor: Color
+        switch self.colorStrategy {
+        case .solidColor(let color):
+            effectiveColor = color.hadamard(light.intensity)
+        }
 
         // Find the direction to the light source
         let lightDirection = light.position.subtract(point).normalize()
@@ -65,4 +69,4 @@ struct Material {
     }
 }
 
-let DEFAULT_MATERIAL = Material(Color(1, 1, 1), 0.1, 0.9, 0.9, 200.0)
+let DEFAULT_MATERIAL = Material(ColorStrategy.solidColor(Color(1, 1, 1)), 0.1, 0.9, 0.9, 200.0)
