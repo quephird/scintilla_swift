@@ -31,4 +31,28 @@ class PatternTests: XCTestCase {
         XCTAssertTrue(pattern.colorAt(point(-1, 0, 0)).isAlmostEqual(BLACK))
         XCTAssertTrue(pattern.colorAt(point(-1.1, 0, 0)).isAlmostEqual(WHITE))
     }
+
+    func testStripePatternWithObjectTransformation() throws {
+        let shape = Sphere(scaling(2, 2, 2), DEFAULT_MATERIAL)
+        let pattern = Striped(WHITE, BLACK, IDENTITY4)
+        let actualValue = pattern.colorAt(shape, point(1.5, 0, 0))
+        let expectedValue = WHITE
+        XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testStripePatternWithPatternTransformation() throws {
+        let shape = Sphere(IDENTITY4, DEFAULT_MATERIAL)
+        let pattern = Striped(WHITE, BLACK, scaling(2, 2, 2))
+        let actualValue = pattern.colorAt(shape, point(1.5, 0, 0))
+        let expectedValue = WHITE
+        XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testStripePatternWithBothTransformations() throws {
+        let shape = Sphere(scaling(2, 2, 2), DEFAULT_MATERIAL)
+        let pattern = Striped(WHITE, BLACK, translation(0.5, 0, 0))
+        let actualValue = pattern.colorAt(shape, point(2.5, 0, 0))
+        let expectedValue = WHITE
+        XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
+    }
 }

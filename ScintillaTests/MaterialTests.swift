@@ -80,4 +80,17 @@ class MaterialTests: XCTestCase {
         let expectedValue = Color(0.1, 0.1, 0.1)
         XCTAssert(actualValue.isAlmostEqual(expectedValue))
     }
+
+    func testLightingWithPattern() throws {
+        let striped = Striped(Color(1, 1, 1), Color(0, 0, 0), IDENTITY4)
+        let material = Material(.pattern(striped), 1.0, 0.0, 0.0, 200)
+        let shape = Sphere(IDENTITY4, material)
+        let eye = vector(0, 0, -1)
+        let normal = vector(0, 0, -1)
+        let light = Light(point(0, 0, -10), Color(1, 1, 1))
+        let color1 = material.lighting(light, shape, point(0.9, 0, 0), eye, normal, false)
+        XCTAssertTrue(color1.isAlmostEqual(WHITE))
+        let color2 = material.lighting(light, shape, point(1.1, 0, 0), eye, normal, false)
+        XCTAssertTrue(color2.isAlmostEqual(BLACK))
+    }
 }
