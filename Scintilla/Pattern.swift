@@ -83,3 +83,18 @@ class Checkered3D: Pattern {
         }
     }
 }
+
+class Gradient: Pattern {
+    var firstColor: Color
+    var secondColor: Color
+
+    init(_ firstColor: Color, _ secondColor: Color, _ transform: Matrix4) {
+        self.firstColor = firstColor
+        self.secondColor = secondColor
+        super.init(transform)
+    }
+
+    override func colorAt(_ patternPoint: Tuple4) -> Color {
+        return firstColor.add(secondColor.subtract(firstColor).multiplyScalar(patternPoint.xyzw[0] - floor(patternPoint.xyzw[0])))
+    }
+}

@@ -55,4 +55,33 @@ class PatternTests: XCTestCase {
         let expectedValue = WHITE
         XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
     }
+
+    func testGradientPatternInterpolatesBetweenColors() throws {
+        let pattern = Gradient(WHITE, BLACK, IDENTITY4)
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(WHITE))
+        XCTAssertTrue(pattern.colorAt(point(0.25, 0, 0)).isAlmostEqual(Color(0.75, 0.75, 0.75)))
+        XCTAssertTrue(pattern.colorAt(point(0.5, 0, 0)).isAlmostEqual(Color(0.5, 0.5, 0.5)))
+        XCTAssertTrue(pattern.colorAt(point(0.75, 0, 0)).isAlmostEqual(Color(0.25, 0.25, 0.25)))
+    }
+
+    func testCheckered3DPatternShouldRepeatInX() throws {
+        let pattern = Checkered3D(WHITE, BLACK, IDENTITY4)
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(WHITE))
+        XCTAssertTrue(pattern.colorAt(point(0.99, 0, 0)).isAlmostEqual(WHITE))
+        XCTAssertTrue(pattern.colorAt(point(1.01, 0, 0)).isAlmostEqual(BLACK))
+    }
+
+    func testCheckered3DPatternShouldRepeatInY() throws {
+        let pattern = Checkered3D(WHITE, BLACK, IDENTITY4)
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(WHITE))
+        XCTAssertTrue(pattern.colorAt(point(0, 0.99, 0)).isAlmostEqual(WHITE))
+        XCTAssertTrue(pattern.colorAt(point(0, 1.01, 0)).isAlmostEqual(BLACK))
+    }
+
+    func testCheckered3DPatternShouldRepeatInZ() throws {
+        let pattern = Checkered3D(WHITE, BLACK, IDENTITY4)
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(WHITE))
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 0.99)).isAlmostEqual(WHITE))
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 1.01)).isAlmostEqual(BLACK))
+    }
 }

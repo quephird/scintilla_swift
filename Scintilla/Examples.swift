@@ -92,9 +92,11 @@ func chapterTenScene() -> World {
     let middleBall = Sphere(middleBallTransform, middleBallMaterial)
 
 
+    let gradientTransform = translation(-1, 0, 0).multiplyMatrix(scaling(2, 1, 1))
+    let gradient = Gradient(Color(0.5, 1, 0.1), Color(0.9, 0.2, 0.4), gradientTransform)
     let rightBallTransform = translation(1.5, 0.5, -0.5)
         .multiplyMatrix(scaling(0.5, 0.5, 0.5))
-    let rightBallMaterial = Material(.solidColor(Color(0.5, 1, 0.1)), 0.1, 0.7, 0.3, 200)
+    let rightBallMaterial = Material(.pattern(gradient), 0.1, 0.7, 0.3, 200)
     let rightBall = Sphere(rightBallTransform, rightBallMaterial)
 
     let light = Light(point(-10, 10, -10), Color(1, 1, 1))
