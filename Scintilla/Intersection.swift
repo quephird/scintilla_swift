@@ -28,6 +28,7 @@ struct Intersection {
             isInside = false
         }
         let overPoint = point.add(normal.multiplyScalar(EPSILON))
+        let reflected = ray.direction.reflect(normal)
 
         return Computations(
             t: self.t,
@@ -36,6 +37,7 @@ struct Intersection {
             overPoint: overPoint,
             eye: eye,
             normal: normal,
+            reflected: reflected,
             isInside: isInside
         )
     }

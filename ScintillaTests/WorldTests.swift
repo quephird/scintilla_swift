@@ -108,4 +108,17 @@ class WorldTests: XCTestCase {
         let point = point(-2, 2, -2)
         XCTAssertFalse(world.isShadowed(point))
     }
+
+    func testReflectedColorForNonreflectiveMaterial() {
+        let world = DEFAULT_WORLD
+        let secondShape = world.objects[1]
+        secondShape.material.ambient = 1
+
+        let ray = Ray(point(0, 0, 0), vector(0, 0, 1))
+        let intersection = Intersection(1, secondShape)
+        let computations = intersection.prepareComputations(ray)
+        let actualValue = world.reflectedColorAt(computations)
+        let expectedValue = Color(0, 0, 0)
+        XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
+    }
 }

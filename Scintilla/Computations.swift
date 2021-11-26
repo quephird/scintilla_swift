@@ -14,5 +14,6 @@ struct Computations {
     var overPoint: Tuple4
     var eye: Tuple4
     var normal: Tuple4
+    var reflected: Tuple4
     var isInside: Bool
 }

@@ -39,6 +39,15 @@ struct World {
         )
     }
 
+    func reflectedColorAt(_ computations: Computations) -> Color {
+        if computations.object.material.reflective == 0 {
+            return Color(0, 0, 0)
+        } else {
+            let reflected = Ray(computations.overPoint, computations.reflected)
+            return self.colorAt(reflected).multiplyScalar(computations.object.material.reflective)
+        }
+    }
+
     func colorAt(_ ray: Ray) -> Color {
         var intersections = self.intersect(ray)
         let hit = hit(&intersections)
@@ -72,7 +81,7 @@ let DEFAULT_WORLD = World(
     [
         Sphere(
             IDENTITY4,
-            Material(ColorStrategy.solidColor(Color(0.8, 1.0, 0.6)), 0.1, 0.7, 0.2, 200.0)
+            Material(ColorStrategy.solidColor(Color(0.8, 1.0, 0.6)), 0.1, 0.7, 0.2, 200.0, 0.0)
         ),
         Sphere(
             scaling(0.5, 0.5, 0.5),

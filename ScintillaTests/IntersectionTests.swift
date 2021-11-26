@@ -89,4 +89,12 @@ class IntersectionTests: XCTestCase {
         XCTAssertTrue(computations.overPoint.xyzw[2] < -EPSILON/2)
         XCTAssertTrue(computations.point.xyzw[2] > computations.overPoint.xyzw[2])
     }
+
+    func testPrepareComputationsReflected() throws {
+        let shape = Plane(IDENTITY4, DEFAULT_MATERIAL)
+        let ray = Ray(point(0, 1, -1), vector(0, -sqrt(2)/2, sqrt(2)/2))
+        let intersection = Intersection(sqrt(2), shape)
+        let computations = intersection.prepareComputations(ray)
+        XCTAssertTrue(computations.reflected.isAlmostEqual(vector(0, sqrt(2)/2, sqrt(2)/2)))
+    }
 }

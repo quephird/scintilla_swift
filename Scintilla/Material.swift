@@ -13,13 +13,15 @@ struct Material {
     var diffuse: Double
     var specular: Double
     var shininess: Double
+    var reflective: Double
 
-    init(_ colorStrategy: ColorStrategy, _ ambient: Double, _ diffuse: Double, _ specular: Double, _ shininess: Double) {
+    init(_ colorStrategy: ColorStrategy, _ ambient: Double, _ diffuse: Double, _ specular: Double, _ shininess: Double, _ reflective: Double) {
         self.colorStrategy = colorStrategy
         self.ambient = ambient
         self.diffuse = diffuse
         self.specular = specular
         self.shininess = shininess
+        self.reflective = reflective
     }
 
     func lighting(_ light: Light, _ object: Shape, _ point: Tuple4, _ eye: Tuple4, _ normal: Tuple4, _ isShadowed: Bool) -> Color {
@@ -71,4 +73,4 @@ struct Material {
     }
 }
 
-let DEFAULT_MATERIAL = Material(ColorStrategy.solidColor(Color(1, 1, 1)), 0.1, 0.9, 0.9, 200.0)
+let DEFAULT_MATERIAL = Material(ColorStrategy.solidColor(Color(1, 1, 1)), 0.1, 0.9, 0.9, 200.0, 0.0)
