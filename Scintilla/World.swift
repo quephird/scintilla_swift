@@ -48,10 +48,48 @@ struct World {
         if remainingCalls == 0 {
             return BLACK
         } else if computations.object.material.reflective == 0 {
-            return Color(0, 0, 0)
+            return BLACK
         } else {
             let reflected = Ray(computations.overPoint, computations.reflected)
             return self.colorAt(reflected, remainingCalls-1).multiplyScalar(computations.object.material.reflective)
+        }
+    }
+
+    func refractedColorAt(_ computations: Computations, _ remainingCalls: Int) -> Color {
+        if remainingCalls == 0 {
+            return BLACK
+        } else if computations.object.material.transparency == 0 {
+            return BLACK
+        } else {
+            // Find the ratio of first index of refraction to the second.
+            // (Yup, this is inverted from the definition of Snell's Law.)
+            let ratio = computations.n1 / computations.n2
+
+            // cos(theta_i) is the same as the dot product of the two vectors
+            let cosThetaI = computations.eye.dot(computations.normal)
+
+            // Find sin(theta_t)^2 via trigonometric identity
+            let sin2ThetaT = ratio*ratio * (1 - cosThetaI*cosThetaI)
+
+            if sin2ThetaT > 1 {
+                return BLACK
+            } else {
+                // Find cos(theta_t) via trigonometric identity
+                let cosThetaT = sqrt(1.0 - sin2ThetaT)
+
+                // Compute the direction of the refracted ray
+                let direction = computations.normal
+                    .multiplyScalar(ratio * cosThetaI - cosThetaT)
+                    .subtract(computations.eye.multiplyScalar(ratio))
+
+                // Create the refracted ray
+                let refracted = Ray(computations.underPoint, direction)
+
+                // Find the color of the refracted ray, making sure to multiply
+                // by the transparency value to account for any opacity
+                return self.colorAt(refracted, remainingCalls - 1)
+                    .multiplyScalar(computations.object.material.transparency)
+            }
         }
     }
 

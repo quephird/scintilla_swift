@@ -165,4 +165,92 @@ class WorldTests: XCTestCase {
         let expectedValue = BLACK
         XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
     }
+
+    func testRefractedColorWithOpaqueSurface() throws {
+        let world = DEFAULT_WORLD
+        let firstShape = world.objects[0]
+        let ray = Ray(point(0, 0, -5), vector(0, 0, 1))
+        let allIntersections = [
+            Intersection(4, firstShape),
+            Intersection(6, firstShape),
+        ]
+        let computations = allIntersections[0].prepareComputations(ray, allIntersections)
+        let actualValue = world.refractedColorAt(computations, MAX_RECURSIVE_CALLS)
+        let expectedValue = Color(0, 0, 0)
+        XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testRefractedColorAtMaximumRecursiveDepth() throws {
+        let world = DEFAULT_WORLD
+        let firstShape = world.objects[0]
+        var material = DEFAULT_MATERIAL
+        material.transparency = 1.0
+        material.refractive = 1.5
+        firstShape.material = material
+        let ray = Ray(point(0, 0, -5), vector(0, 0, 1))
+        let allIntersections = [
+            Intersection(4, firstShape),
+            Intersection(6, firstShape),
+        ]
+        let computations = allIntersections[0].prepareComputations(ray, allIntersections)
+        let actualValue = world.refractedColorAt(computations, 0)
+        let expectedValue = BLACK
+        XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testRefractedColorUnderTotalInternalReflection() throws {
+        let world = DEFAULT_WORLD
+        let firstShape = world.objects[0]
+        var material = DEFAULT_MATERIAL
+        material.transparency = 1.0
+        material.refractive = 1.5
+        firstShape.material = material
+        let ray = Ray(point(0, 0, sqrt(2)/2), vector(0, 1, 0))
+        let allIntersections = [
+            Intersection(-sqrt(2)/2, firstShape),
+            Intersection(sqrt(2)/2, firstShape),
+        ]
+        let computations = allIntersections[1].prepareComputations(ray, allIntersections)
+        let actualValue = world.refractedColorAt(computations, MAX_RECURSIVE_CALLS)
+        let expectedValue = BLACK
+        XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testRefractedColorWithRefractedRay() throws {
+        class Test: Pattern {
+            override init(_ transform: Matrix4) {
+                super.init(transform)
+            }
+
+            override func colorAt(_ patternPoint: Tuple4) -> Color {
+                return Color(patternPoint.xyzw[0], patternPoint.xyzw[1], patternPoint.xyzw[2])
+            }
+        }
+
+        let world = DEFAULT_WORLD
+
+        let shapeA = world.objects[0]
+        var materialA = DEFAULT_MATERIAL
+        materialA.colorStrategy = .pattern(Test(IDENTITY4))
+        materialA.ambient = 1.0
+        shapeA.material = materialA
+
+        let shapeB = world.objects[1]
+        var materialB = DEFAULT_MATERIAL
+        materialB.transparency = 1.0
+        materialB.refractive = 1.5
+        shapeB.material = materialB
+
+        let ray = Ray(point(0, 0, 0.1), vector(0, 1, 0))
+        let allIntersections = [
+            Intersection(-0.9899, shapeA),
+            Intersection(-0.4899, shapeB),
+            Intersection(0.4899, shapeB),
+            Intersection(0.9899, shapeA),
+        ]
+        let computations = allIntersections[2].prepareComputations(ray, allIntersections)
+        let actualValue = world.refractedColorAt(computations, MAX_RECURSIVE_CALLS)
+        let expectedValue = Color(0, 0.99888, 0.04722)
+        XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
+    }
 }
