@@ -12,6 +12,7 @@ struct Computations {
     var object: Shape
     var point: Tuple4
     var overPoint: Tuple4
+    var underPoint: Tuple4
     var eye: Tuple4
     var normal: Tuple4
     var reflected: Tuple4
