@@ -9,7 +9,7 @@ import Foundation
 
 func chapterSevenScene() -> World {
     let floorTransform = scaling(10, 0.01, 10)
-    let floorAndWallMaterial = Material(.solidColor(Color(1, 0.9, 0.9)), 0.1, 0.9, 0.0, 200, 0.0)
+    let floorAndWallMaterial = Material(.solidColor(Color(1, 0.9, 0.9)), 0.1, 0.9, 0.0, 200, 0.0, 0.0, 0.0)
     let floor = Sphere(floorTransform, floorAndWallMaterial)
 
     let leftWallTransform = translation(0, 0, 5)
@@ -26,18 +26,18 @@ func chapterSevenScene() -> World {
 
     let leftBallTransform = translation(-1.5, 0.33, -0.75)
         .multiplyMatrix(scaling(0.33, 0.33, 0.33))
-    let leftBallMaterial = Material(.solidColor(Color(1, 0.8, 0.1)), 0.1, 0.7, 0.3, 200, 0.0)
+    let leftBallMaterial = Material(.solidColor(Color(1, 0.8, 0.1)), 0.1, 0.7, 0.3, 200, 0.0, 0.0, 0.0)
     let leftBall = Sphere(leftBallTransform, leftBallMaterial)
 
 
     let middleBallTransform = translation(-0.5, 1, 0.5)
-    let middleBallMaterial = Material(.solidColor(Color(0.1, 1, 0.5)), 0.1, 0.7, 0.3, 200, 0.0)
+    let middleBallMaterial = Material(.solidColor(Color(0.1, 1, 0.5)), 0.1, 0.7, 0.3, 200, 0.0, 0.0, 0.0)
     let middleBall = Sphere(middleBallTransform, middleBallMaterial)
 
 
     let rightBallTransform = translation(1.5, 0.5, -0.5)
         .multiplyMatrix(scaling(0.5, 0.5, 0.5))
-    let rightBallMaterial = Material(.solidColor(Color(0.5, 1, 0.1)), 0.1, 0.7, 0.3, 200, 0.0)
+    let rightBallMaterial = Material(.solidColor(Color(0.5, 1, 0.1)), 0.1, 0.7, 0.3, 200, 0.0, 0.0, 0.0)
     let rightBall = Sphere(rightBallTransform, rightBallMaterial)
 
     let light = Light(point(-10, 10, -10), Color(1, 1, 1))
@@ -47,23 +47,23 @@ func chapterSevenScene() -> World {
 }
 
 func chapterNineScene() -> World {
-    let floorMaterial = Material(.solidColor(Color(1, 0.9, 0.9)), 0.1, 0.9, 0.0, 200, 0.0)
+    let floorMaterial = Material(.solidColor(Color(1, 0.9, 0.9)), 0.1, 0.9, 0.0, 200, 0.0, 0.0, 0.0)
     let floor = Plane(IDENTITY4, floorMaterial)
 
     let leftBallTransform = translation(-1.5, 0.33, -0.75)
         .multiplyMatrix(scaling(0.33, 0.33, 0.33))
-    let leftBallMaterial = Material(.solidColor(Color(1, 0.8, 0.1)), 0.1, 0.7, 0.3, 200, 0.0)
+    let leftBallMaterial = Material(.solidColor(Color(1, 0.8, 0.1)), 0.1, 0.7, 0.3, 200, 0.0, 0.0, 0.0)
     let leftBall = Sphere(leftBallTransform, leftBallMaterial)
 
 
     let middleBallTransform = translation(-0.5, 1, 0.5)
-    let middleBallMaterial = Material(.solidColor(Color(0.1, 1, 0.5)), 0.1, 0.7, 0.3, 200, 0.0)
+    let middleBallMaterial = Material(.solidColor(Color(0.1, 1, 0.5)), 0.1, 0.7, 0.3, 200, 0.0, 0.0, 0.0)
     let middleBall = Sphere(middleBallTransform, middleBallMaterial)
 
 
     let rightBallTransform = translation(1.5, 0.5, -0.5)
         .multiplyMatrix(scaling(0.5, 0.5, 0.5))
-    let rightBallMaterial = Material(.solidColor(Color(0.5, 1, 0.1)), 0.1, 0.7, 0.3, 200, 0.0)
+    let rightBallMaterial = Material(.solidColor(Color(0.5, 1, 0.1)), 0.1, 0.7, 0.3, 200, 0.0, 0.0, 0.0)
     let rightBall = Sphere(rightBallTransform, rightBallMaterial)
 
     let light = Light(point(-10, 10, -10), Color(1, 1, 1))
@@ -74,12 +74,12 @@ func chapterNineScene() -> World {
 
 func chapterTenScene() -> World {
     let floorPattern = Checkered2D(BLACK, WHITE, rotationY(PI/6))
-    let floorMaterial = Material(.pattern(floorPattern), 0.1, 0.9, 0.0, 200, 0.0)
+    let floorMaterial = Material(.pattern(floorPattern), 0.1, 0.9, 0.0, 200, 0.0, 0.0, 0.0)
     let floor = Plane(IDENTITY4, floorMaterial)
 
     let leftBallTransform = translation(-1.5, 0.33, -0.75)
         .multiplyMatrix(scaling(0.33, 0.33, 0.33))
-    let leftBallMaterial = Material(.solidColor(Color(1, 0.8, 0.1)), 0.1, 0.7, 0.3, 200, 0.0)
+    let leftBallMaterial = Material(.solidColor(Color(1, 0.8, 0.1)), 0.1, 0.7, 0.3, 200, 0.0, 0.0, 0.0)
     let leftBall = Sphere(leftBallTransform, leftBallMaterial)
 
 
@@ -88,7 +88,7 @@ func chapterTenScene() -> World {
         Color(0.2, 0.6, 0.4),
         Color(0.8, 0.1, 0.4),
         scaling(0.25, 0.25, 0.25).multiplyMatrix(rotationY(PI/6)))
-    let middleBallMaterial = Material(.pattern(middleBallPattern), 0.1, 0.7, 0.3, 200, 0.0)
+    let middleBallMaterial = Material(.pattern(middleBallPattern), 0.1, 0.7, 0.3, 200, 0.0, 0.0, 0.0)
     let middleBall = Sphere(middleBallTransform, middleBallMaterial)
 
 
@@ -96,7 +96,7 @@ func chapterTenScene() -> World {
     let gradient = Gradient(Color(0.5, 1, 0.1), Color(0.9, 0.2, 0.4), gradientTransform)
     let rightBallTransform = translation(1.5, 0.5, -0.5)
         .multiplyMatrix(scaling(0.5, 0.5, 0.5))
-    let rightBallMaterial = Material(.pattern(gradient), 0.1, 0.7, 0.3, 200, 0.0)
+    let rightBallMaterial = Material(.pattern(gradient), 0.1, 0.7, 0.3, 200, 0.0, 0.0, 0.0)
     let rightBall = Sphere(rightBallTransform, rightBallMaterial)
 
     let light = Light(point(-10, 10, -10), Color(1, 1, 1))

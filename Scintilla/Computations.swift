@@ -16,4 +16,6 @@ struct Computations {
     var normal: Tuple4
     var reflected: Tuple4
     var isInside: Bool
+    var n1: Double
+    var n2: Double
 }

@@ -16,7 +16,7 @@ struct Intersection {
         self.shape = shape
     }
 
-    func prepareComputations(_ ray: Ray) -> Computations {
+    func prepareComputations(_ ray: Ray, _ allIntersections: [Intersection]) -> Computations {
         let point = ray.position(self.t)
         let eye = ray.direction.negate()
         var normal = self.shape.normal(point)
@@ -30,6 +30,25 @@ struct Intersection {
         let overPoint = point.add(normal.multiplyScalar(EPSILON))
         let reflected = ray.direction.reflect(normal)
 
+        var n1 = 1.0
+        var n2 = 1.0
+//        var containers: [Shape]
+//        for i ← each intersection in xs if i = hit then
+//        if containers is empty comps.n1 ← 1.0
+//        else
+//        comps.n1 ← last(containers).material.refractive_index end if
+//        end if
+//        if containers includes i.object then remove i.object from containers
+//        else
+//            append i.object onto containers
+//        end if
+//            if i = hit then
+//            if containers is empty
+//            comps.n2 ← 1.0 else
+//            comps.n2 ← last(containers).material.refractive_index end if
+//                terminate loop
+//            end if end for
+
         return Computations(
             t: self.t,
             object: self.shape,
@@ -38,7 +57,9 @@ struct Intersection {
             eye: eye,
             normal: normal,
             reflected: reflected,
-            isInside: isInside
+            isInside: isInside,
+            n1: n1,
+            n2: n2
         )
     }
 }

@@ -58,7 +58,7 @@ class IntersectionTests: XCTestCase {
         let ray = Ray(point(0, 0, -5), vector(0, 0, 1))
         let shape = Sphere(IDENTITY4, DEFAULT_MATERIAL)
         let intersection = Intersection(4, shape)
-        let computations = intersection.prepareComputations(ray)
+        let computations = intersection.prepareComputations(ray, [intersection])
         XCTAssertEqual(computations.t, intersection.t)
         XCTAssertEqual(computations.object.id, shape.id)
         XCTAssert(computations.point.isAlmostEqual(point(0, 0, -1)))
@@ -71,7 +71,7 @@ class IntersectionTests: XCTestCase {
         let ray = Ray(point(0, 0, 0), vector(0, 0, 1))
         let shape = Sphere(IDENTITY4, DEFAULT_MATERIAL)
         let intersection = Intersection(1, shape)
-        let computations = intersection.prepareComputations(ray)
+        let computations = intersection.prepareComputations(ray, [intersection])
         XCTAssertEqual(computations.t, intersection.t)
         XCTAssertEqual(computations.object.id, shape.id)
         XCTAssert(computations.point.isAlmostEqual(point(0, 0, 1)))
@@ -85,7 +85,7 @@ class IntersectionTests: XCTestCase {
         let transform = translation(0, 0, 1)
         let shape = Sphere(transform, DEFAULT_MATERIAL)
         let intersection = Intersection(5, shape)
-        let computations = intersection.prepareComputations(ray)
+        let computations = intersection.prepareComputations(ray, [intersection])
         XCTAssertTrue(computations.overPoint.xyzw[2] < -EPSILON/2)
         XCTAssertTrue(computations.point.xyzw[2] > computations.overPoint.xyzw[2])
     }
@@ -94,7 +94,7 @@ class IntersectionTests: XCTestCase {
         let shape = Plane(IDENTITY4, DEFAULT_MATERIAL)
         let ray = Ray(point(0, 1, -1), vector(0, -sqrt(2)/2, sqrt(2)/2))
         let intersection = Intersection(sqrt(2), shape)
-        let computations = intersection.prepareComputations(ray)
+        let computations = intersection.prepareComputations(ray, [intersection])
         XCTAssertTrue(computations.reflected.isAlmostEqual(vector(0, sqrt(2)/2, sqrt(2)/2)))
     }
 }

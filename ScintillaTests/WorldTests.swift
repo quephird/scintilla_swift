@@ -24,7 +24,7 @@ class WorldTests: XCTestCase {
         let ray = Ray(point(0, 0, -5), vector(0, 0, 1))
         let shape = world.objects[0]
         let intersection = Intersection(4, shape)
-        let computations = intersection.prepareComputations(ray)
+        let computations = intersection.prepareComputations(ray, [intersection])
         let actualValue = world.shadeHit(computations, MAX_RECURSIVE_CALLS)
         let expectedValue = Color(0.38066, 0.47583, 0.2855)
         XCTAssert(actualValue.isAlmostEqual(expectedValue))
@@ -37,7 +37,7 @@ class WorldTests: XCTestCase {
         let ray = Ray(point(0, 0, 0), vector(0, 0, 1))
         let shape = world.objects[1]
         let intersection = Intersection(0.5, shape)
-        let computations = intersection.prepareComputations(ray)
+        let computations = intersection.prepareComputations(ray, [intersection])
         let actualValue = world.shadeHit(computations, MAX_RECURSIVE_CALLS)
         let expectedValue = Color(0.90498, 0.90498, 0.90498)
         XCTAssert(actualValue.isAlmostEqual(expectedValue))
@@ -51,7 +51,7 @@ class WorldTests: XCTestCase {
         let world = World(light, [s1, s2])
         let ray = Ray(point(0, 0, 5), vector(0, 0, 1))
         let intersection = Intersection(4, s2)
-        let computations = intersection.prepareComputations(ray)
+        let computations = intersection.prepareComputations(ray, [intersection])
         let actualValue = world.shadeHit(computations, MAX_RECURSIVE_CALLS)
         let expectedValue = Color(0.1, 0.1, 0.1)
         XCTAssert(actualValue.isAlmostEqual(expectedValue))
@@ -116,7 +116,7 @@ class WorldTests: XCTestCase {
 
         let ray = Ray(point(0, 0, 0), vector(0, 0, 1))
         let intersection = Intersection(1, secondShape)
-        let computations = intersection.prepareComputations(ray)
+        let computations = intersection.prepareComputations(ray, [intersection])
         let actualValue = world.reflectedColorAt(computations, MAX_RECURSIVE_CALLS)
         let expectedValue = Color(0, 0, 0)
         XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
@@ -131,7 +131,7 @@ class WorldTests: XCTestCase {
         world.objects.append(anotherShape)
         let ray = Ray(point(0, 0, -3), vector(0, -sqrt(2)/2, sqrt(2)/2))
         let intersection = Intersection(sqrt(2), anotherShape)
-        let computations = intersection.prepareComputations(ray)
+        let computations = intersection.prepareComputations(ray, [intersection])
         let actualValue = world.shadeHit(computations, MAX_RECURSIVE_CALLS)
         let expectedValue = Color(0.87676, 0.92434, 0.82917)
         XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
@@ -148,7 +148,7 @@ class WorldTests: XCTestCase {
         let world = World(light, [lowerPlane, upperPlane])
         let ray = Ray(point(0, 0, 0), vector(0, 1, 0))
         // The following call should terminate; no need to test return value
-        let color = world.colorAt(ray, MAX_RECURSIVE_CALLS)
+        let _ = world.colorAt(ray, MAX_RECURSIVE_CALLS)
     }
 
     func testColorAtMaxRecursiveDepth() throws {
@@ -160,7 +160,7 @@ class WorldTests: XCTestCase {
         world.objects.append(additionalShape)
         let ray = Ray(point(0, 0, -3), vector(0, -sqrt(2)/2, sqrt(2)/2))
         let intersection = Intersection(sqrt(2), additionalShape)
-        let computations = intersection.prepareComputations(ray)
+        let computations = intersection.prepareComputations(ray, [intersection])
         let actualValue = world.reflectedColorAt(computations, 0)
         let expectedValue = BLACK
         XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))

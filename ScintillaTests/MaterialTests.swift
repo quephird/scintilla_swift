@@ -83,7 +83,7 @@ class MaterialTests: XCTestCase {
 
     func testLightingWithPattern() throws {
         let striped = Striped(Color(1, 1, 1), Color(0, 0, 0), IDENTITY4)
-        let material = Material(.pattern(striped), 1.0, 0.0, 0.0, 200, 0.0)
+        let material = Material(.pattern(striped), 1.0, 0.0, 0.0, 200, 0.0, 0.0, 0.0)
         let shape = Sphere(IDENTITY4, material)
         let eye = vector(0, 0, -1)
         let normal = vector(0, 0, -1)

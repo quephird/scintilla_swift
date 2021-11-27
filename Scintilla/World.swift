@@ -56,13 +56,13 @@ struct World {
     }
 
     func colorAt(_ ray: Ray, _ remainingCalls: Int) -> Color {
-        var intersections = self.intersect(ray)
-        let hit = hit(&intersections)
+        var allIntersections = self.intersect(ray)
+        let hit = hit(&allIntersections)
         switch hit {
         case .none:
             return BLACK
         case .some(let intersection):
-            let computations = intersection.prepareComputations(ray)
+            let computations = intersection.prepareComputations(ray, allIntersections)
             return self.shadeHit(computations, remainingCalls)
         }
     }
@@ -88,7 +88,7 @@ let DEFAULT_WORLD = World(
     [
         Sphere(
             IDENTITY4,
-            Material(ColorStrategy.solidColor(Color(0.8, 1.0, 0.6)), 0.1, 0.7, 0.2, 200.0, 0.0)
+            Material(ColorStrategy.solidColor(Color(0.8, 1.0, 0.6)), 0.1, 0.7, 0.2, 200.0, 0.0, 0.0, 0.0)
         ),
         Sphere(
             scaling(0.5, 0.5, 0.5),
