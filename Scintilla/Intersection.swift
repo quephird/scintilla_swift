@@ -16,6 +16,39 @@ struct Intersection {
         self.shape = shape
     }
 
+    func computeRefractiveIndices(_ allIntersections: [Intersection]) -> (Double, Double) {
+        var n1 = 1.0
+        var n2 = 1.0
+        var containers: [Shape] = []
+        for intersection in allIntersections {
+            if intersection.t == self.t {
+                if let lastContainer = containers.last {
+                    n1 = lastContainer.material.refractive
+                } else {
+                    n1 = 1.0
+                }
+            }
+
+            if let index = containers.firstIndex(where: { shape in
+                shape.id == intersection.shape.id
+            }) {
+                containers.remove(at: index)
+            } else {
+                containers.append(intersection.shape)
+            }
+
+            if intersection.t == self.t {
+                if let lastContainer = containers.last {
+                    n2 = lastContainer.material.refractive
+                } else {
+                    n2 = 1.0
+                }
+            }
+        }
+
+        return (n1, n2)
+    }
+
     func prepareComputations(_ ray: Ray, _ allIntersections: [Intersection]) -> Computations {
         let point = ray.position(self.t)
         let eye = ray.direction.negate()
@@ -29,25 +62,7 @@ struct Intersection {
         }
         let overPoint = point.add(normal.multiplyScalar(EPSILON))
         let reflected = ray.direction.reflect(normal)
-
-        var n1 = 1.0
-        var n2 = 1.0
-//        var containers: [Shape]
-//        for i ← each intersection in xs if i = hit then
-//        if containers is empty comps.n1 ← 1.0
-//        else
-//        comps.n1 ← last(containers).material.refractive_index end if
-//        end if
-//        if containers includes i.object then remove i.object from containers
-//        else
-//            append i.object onto containers
-//        end if
-//            if i = hit then
-//            if containers is empty
-//            comps.n2 ← 1.0 else
-//            comps.n2 ← last(containers).material.refractive_index end if
-//                terminate loop
-//            end if end for
+        let (n1, n2) = self.computeRefractiveIndices(allIntersections)
 
         return Computations(
             t: self.t,

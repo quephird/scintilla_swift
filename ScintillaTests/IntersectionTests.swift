@@ -97,4 +97,40 @@ class IntersectionTests: XCTestCase {
         let computations = intersection.prepareComputations(ray, [intersection])
         XCTAssertTrue(computations.reflected.isAlmostEqual(vector(0, sqrt(2)/2, sqrt(2)/2)))
     }
+
+    func testPrepareComputationsForN1AndN2() throws {
+        let transformA = scaling(2, 2, 2)
+        var materialA = DEFAULT_MATERIAL
+        materialA.refractive = 1.5
+        let glassSphereA = Sphere(transformA, materialA)
+
+        let transformB = translation(0, 0, -0.25)
+        var materialB = DEFAULT_MATERIAL
+        materialB.refractive = 2.0
+        let glassSphereB = Sphere(transformB, materialB)
+
+        let transformC = translation(0, 0, 0.25)
+        var materialC = DEFAULT_MATERIAL
+        materialC.refractive = 2.5
+        let glassSphereC = Sphere(transformC, materialC)
+
+        let ray = Ray(point(0, 0, -4), vector(0, 0, 1))
+        let allIntersections = [
+            Intersection(2, glassSphereA),
+            Intersection(2.75, glassSphereB),
+            Intersection(3.25, glassSphereC),
+            Intersection(4.75, glassSphereB),
+            Intersection(5.25, glassSphereC),
+            Intersection(6, glassSphereA),
+        ]
+        let expectedValues = [(1.0, 1.5), (1.5, 2.0), (2.0, 2.5), (2.5, 2.5), (2.5, 1.5), (1.5, 1.0)]
+
+        for index in 0...5 {
+            let intersection = allIntersections[index]
+            let computations = intersection.prepareComputations(ray, allIntersections)
+            let actualValue = (computations.n1, computations.n2)
+            let expectedValue = expectedValues[index]
+            XCTAssertTrue(actualValue == expectedValue)
+        }
+    }
 }
