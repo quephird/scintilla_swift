@@ -253,4 +253,30 @@ class WorldTests: XCTestCase {
         let expectedValue = Color(0, 0.99888, 0.04722)
         XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
     }
+
+    func testShadeHitWithTransparentMaterial() throws {
+        var world = DEFAULT_WORLD
+
+        let floorTransform = translation(0, -1, 0)
+        var floorMaterial = DEFAULT_MATERIAL
+        floorMaterial.transparency = 0.5
+        floorMaterial.refractive = 1.5
+        let floor = Plane(floorTransform, floorMaterial)
+
+        let ballTransform = translation(0, -3.5, -0.5)
+        var ballMaterial = DEFAULT_MATERIAL
+        ballMaterial.colorStrategy = .solidColor(Color(1, 0, 0))
+        ballMaterial.ambient = 0.5
+        let ball = Sphere(ballTransform, ballMaterial)
+
+        world.objects.append(contentsOf: [floor, ball])
+
+        let ray = Ray(point(0, 0, -3), vector(0, -sqrt(2)/2, sqrt(2)/2))
+        let intersection = Intersection(sqrt(2), floor)
+        let allIntersections = [intersection]
+        let computations = intersection.prepareComputations(ray, allIntersections)
+        let actualValue = world.shadeHit(computations, MAX_RECURSIVE_CALLS)
+        let expectedValue = Color(0.93642, 0.68642, 0.68642)
+        XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
+    }
 }

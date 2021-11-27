@@ -41,7 +41,8 @@ struct World {
         )
 
         let reflectedColor = self.reflectedColorAt(computations, remainingCalls)
-        return materialColor.add(reflectedColor)
+        let refractedColor = self.refractedColorAt(computations, remainingCalls)
+        return materialColor.add(reflectedColor).add(refractedColor)
     }
 
     func reflectedColorAt(_ computations: Computations, _ remainingCalls: Int) -> Color {
