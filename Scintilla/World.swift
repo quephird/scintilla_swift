@@ -7,6 +7,8 @@
 
 import Foundation
 
+let MAX_RECURSIVE_CALLS = 5
+
 struct World {
     var light: Light
     var objects: [Shape]
@@ -25,11 +27,11 @@ struct World {
         return intersections
     }
 
-    func shadeHit(_ computations: Computations) -> Color {
+    func shadeHit(_ computations: Computations, _ remainingCalls: Int) -> Color {
         let material = computations.object.material
         let isShadowed = self.isShadowed(computations.overPoint)
 
-        return material.lighting(
+        let materialColor = material.lighting(
             self.light,
             computations.object,
             computations.point,
@@ -37,18 +39,23 @@ struct World {
             computations.normal,
             isShadowed
         )
+
+        let reflectedColor = self.reflectedColorAt(computations, remainingCalls)
+        return materialColor.add(reflectedColor)
     }
 
-    func reflectedColorAt(_ computations: Computations) -> Color {
-        if computations.object.material.reflective == 0 {
+    func reflectedColorAt(_ computations: Computations, _ remainingCalls: Int) -> Color {
+        if remainingCalls == 0 {
+            return BLACK
+        } else if computations.object.material.reflective == 0 {
             return Color(0, 0, 0)
         } else {
             let reflected = Ray(computations.overPoint, computations.reflected)
-            return self.colorAt(reflected).multiplyScalar(computations.object.material.reflective)
+            return self.colorAt(reflected, remainingCalls-1).multiplyScalar(computations.object.material.reflective)
         }
     }
 
-    func colorAt(_ ray: Ray) -> Color {
+    func colorAt(_ ray: Ray, _ remainingCalls: Int) -> Color {
         var intersections = self.intersect(ray)
         let hit = hit(&intersections)
         switch hit {
@@ -56,7 +63,7 @@ struct World {
             return BLACK
         case .some(let intersection):
             let computations = intersection.prepareComputations(ray)
-            return self.shadeHit(computations)
+            return self.shadeHit(computations, remainingCalls)
         }
     }
 

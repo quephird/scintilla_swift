@@ -67,7 +67,7 @@ struct Camera {
         for y in 0...self.verticalSize-1 {
             for x in 0...self.horizontalSize-1 {
                 let ray = self.rayForPixel(x, y)
-                let color = world.colorAt(ray)
+                let color = world.colorAt(ray, MAX_RECURSIVE_CALLS)
                 canvas.setPixel(x, y, color)
             }
         }
