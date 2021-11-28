@@ -65,6 +65,9 @@
 		87EA18822753122B00267E6E /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA18812753122B00267E6E /* Cube.swift */; };
 		87EA1884275317D700267E6E /* CubeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA1883275317D700267E6E /* CubeTests.swift */; };
 		87EA1885275317DD00267E6E /* Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA18812753122B00267E6E /* Cube.swift */; };
+		87EA18872753213B00267E6E /* Cylinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA18862753213B00267E6E /* Cylinder.swift */; };
+		87EA1889275323D300267E6E /* CylinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA1888275323D300267E6E /* CylinderTests.swift */; };
+		87EA188A2753241D00267E6E /* Cylinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA18862753213B00267E6E /* Cylinder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -120,6 +123,8 @@
 		87A21FF4274F05A80047AE41 /* PlaneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneTests.swift; sourceTree = "<group>"; };
 		87EA18812753122B00267E6E /* Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cube.swift; sourceTree = "<group>"; };
 		87EA1883275317D700267E6E /* CubeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CubeTests.swift; sourceTree = "<group>"; };
+		87EA18862753213B00267E6E /* Cylinder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cylinder.swift; sourceTree = "<group>"; };
+		87EA1888275323D300267E6E /* CylinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CylinderTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +188,7 @@
 				87A21FC0274B7AF90047AE41 /* Transform.swift */,
 				875B39922748BA4700666443 /* Tuple.swift */,
 				87A21FE2274DCF2D0047AE41 /* World.swift */,
+				87EA18862753213B00267E6E /* Cylinder.swift */,
 			);
 			path = Scintilla;
 			sourceTree = "<group>";
@@ -194,6 +200,7 @@
 				870DF23E27496D1F00787095 /* CanvasTests.swift */,
 				870DF23A2748D9B300787095 /* ColorTests.swift */,
 				87EA1883275317D700267E6E /* CubeTests.swift */,
+				87EA1888275323D300267E6E /* CylinderTests.swift */,
 				87A21FD8274C5FCA0047AE41 /* IntersectionTests.swift */,
 				87A21FE0274D9DE30047AE41 /* MaterialTests.swift */,
 				60DE383E788BD47B15D60716 /* MatrixTests.swift */,
@@ -300,6 +307,7 @@
 			files = (
 				87A21FCB274C30190047AE41 /* Sphere.swift in Sources */,
 				875B39932748BA4700666443 /* Tuple.swift in Sources */,
+				87EA18872753213B00267E6E /* Cylinder.swift in Sources */,
 				87A21FEB274E1A520047AE41 /* Camera.swift in Sources */,
 				870DF2382748D80300787095 /* Color.swift in Sources */,
 				870DF2352748CF8D00787095 /* Double.swift in Sources */,
@@ -338,6 +346,7 @@
 				87EA1884275317D700267E6E /* CubeTests.swift in Sources */,
 				87A21FC4274B7CCC0047AE41 /* Transform.swift in Sources */,
 				870DF2452749782C00787095 /* Ppm.swift in Sources */,
+				87EA188A2753241D00267E6E /* Cylinder.swift in Sources */,
 				878C6912274F5B7200EB945E /* PatternTests.swift in Sources */,
 				87A21FC8274C2EB30047AE41 /* RayTests.swift in Sources */,
 				87A21FDF274CAC160047AE41 /* Material.swift in Sources */,
@@ -346,6 +355,7 @@
 				87A21FBF274B375B0047AE41 /* Matrix.swift in Sources */,
 				87A21FC3274B7C8F0047AE41 /* TransformTests.swift in Sources */,
 				870DF2392748D80500787095 /* Color.swift in Sources */,
+				87EA1889275323D300267E6E /* CylinderTests.swift in Sources */,
 				87A21FF1274E29B50047AE41 /* Examples.swift in Sources */,
 				878C6910274F3DF700EB945E /* Pattern.swift in Sources */,
 				87A21FE6274DD8F00047AE41 /* World.swift in Sources */,
