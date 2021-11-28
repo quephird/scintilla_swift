@@ -27,11 +27,38 @@ struct World {
         return intersections
     }
 
+    func schlickReflectanceHelper(_ n1: Double, _ n2: Double, _ cosTheta: Double) -> Double {
+        let r0 = pow((n1 - n2) / (n1 + n2), 2.0)
+        return r0 + (1 - r0) * pow(1 - cosTheta, 5.0)
+    }
+
+    func schlickReflectance(_ computations: Computations) -> Double {
+        // Find the cosine of the angle between the eye and normal vectors
+        let cosThetaI = computations.eye.dot(computations.normal)
+
+        // Total internal reflection can only occur if n1 > n2
+        if computations.n1 > computations.n2 {
+            let ratio = computations.n1 / computations.n2
+            let sin2ThetaT = ratio*ratio * (1.0 - cosThetaI*cosThetaI)
+
+            if sin2ThetaT > 1.0 {
+                return 1.0
+            } else {
+               // Compute cos(theta_t) using trig identity
+               let cosThetaT = sqrt(1.0 - sin2ThetaT)
+               // When n1 > n2, use cos(theta_t) instead
+                return schlickReflectanceHelper(computations.n1, computations.n2, cosThetaT)
+            }
+        } else {
+            return schlickReflectanceHelper(computations.n1, computations.n2, cosThetaI)
+        }
+    }
+
     func shadeHit(_ computations: Computations, _ remainingCalls: Int) -> Color {
         let material = computations.object.material
         let isShadowed = self.isShadowed(computations.overPoint)
 
-        let materialColor = material.lighting(
+        let surfaceColor = material.lighting(
             self.light,
             computations.object,
             computations.point,
@@ -42,7 +69,15 @@ struct World {
 
         let reflectedColor = self.reflectedColorAt(computations, remainingCalls)
         let refractedColor = self.refractedColorAt(computations, remainingCalls)
-        return materialColor.add(reflectedColor).add(refractedColor)
+
+        if material.reflective > 0 && material.transparency > 0 {
+            let reflectance = self.schlickReflectance(computations)
+            return surfaceColor
+                .add(reflectedColor.multiplyScalar(reflectance))
+                .add(refractedColor.multiplyScalar(1 - reflectance))
+        } else {
+            return surfaceColor.add(reflectedColor).add(refractedColor)
+        }
     }
 
     func reflectedColorAt(_ computations: Computations, _ remainingCalls: Int) -> Color {

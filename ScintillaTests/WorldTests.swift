@@ -279,4 +279,80 @@ class WorldTests: XCTestCase {
         let expectedValue = Color(0.93642, 0.68642, 0.68642)
         XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
     }
+
+    func testSchlickReflectanceForTotalInternalReflection() throws {
+        let light = Light(point(-10, 10, -10), WHITE)
+        let glass = Material(.solidColor(WHITE), 0.1, 0.9, 0.9, 200, 0.0, 1.0, 1.5)
+        let glassySphere = Sphere(IDENTITY4, glass)
+        let world = World(light, [glassySphere])
+
+        let ray = Ray(point(0, 0, sqrt(2)/2), vector(0, 1, 0))
+        let allIntersections = [
+            Intersection(-sqrt(2)/2, glassySphere),
+            Intersection(sqrt(2)/2, glassySphere),
+        ]
+        let computations = allIntersections[1].prepareComputations(ray, allIntersections)
+        let actualValue = world.schlickReflectance(computations)
+        let expectedValue = 1.0
+        XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testSchlickReflectanceForPerpendicularRay() throws {
+        let light = Light(point(-10, 10, -10), WHITE)
+        let glass = Material(.solidColor(WHITE), 0.1, 0.9, 0.9, 200, 0.0, 1.0, 1.5)
+        let glassySphere = Sphere(IDENTITY4, glass)
+        let world = World(light, [glassySphere])
+
+        let ray = Ray(point(0, 0, 0), vector(0, 1, 0))
+        let allIntersections = [
+            Intersection(-1, glassySphere),
+            Intersection(1, glassySphere),
+        ]
+        let computations = allIntersections[1].prepareComputations(ray, allIntersections)
+        let actualValue = world.schlickReflectance(computations)
+        let expectedValue = 0.04
+        XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testSchlickReflectanceForSmallAngleAndN2GreaterThanN1() throws {
+        let light = Light(point(-10, 10, -10), WHITE)
+        let glass = Material(.solidColor(WHITE), 0.1, 0.9, 0.9, 200, 0.0, 1.0, 1.5)
+        let glassySphere = Sphere(IDENTITY4, glass)
+        let world = World(light, [glassySphere])
+
+        let ray = Ray(point(0, 0.99, -2), vector(0, 0, 1))
+        let intersection = Intersection(1.8589, glassySphere)
+        let allIntersections = [intersection]
+        let computations = intersection.prepareComputations(ray, allIntersections)
+        let actualValue = world.schlickReflectance(computations)
+        let expectedValue = 0.48873
+        XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
+    }
+
+    func testShadeHitWithReflectiveAndTransparentMaterial() throws {
+        var world = DEFAULT_WORLD
+
+        let floorTransform = translation(0, -1, 0)
+        var floorMaterial = DEFAULT_MATERIAL
+        floorMaterial.transparency = 0.5
+        floorMaterial.reflective = 0.5
+        floorMaterial.refractive = 1.5
+        let floor = Plane(floorTransform, floorMaterial)
+
+        let ballTransform = translation(0, -3.5, -0.5)
+        var ballMaterial = DEFAULT_MATERIAL
+        ballMaterial.colorStrategy = .solidColor(Color(1, 0, 0))
+        ballMaterial.ambient = 0.5
+        let ball = Sphere(ballTransform, ballMaterial)
+
+        world.objects.append(contentsOf: [floor, ball])
+
+        let ray = Ray(point(0, 0, -3), vector(0, -sqrt(2)/2, sqrt(2)/2))
+        let intersection = Intersection(sqrt(2), floor)
+        let allIntersections = [intersection]
+        let computations = intersection.prepareComputations(ray, allIntersections)
+        let actualValue = world.shadeHit(computations, MAX_RECURSIVE_CALLS)
+        let expectedValue = Color(0.93391, 0.69643, 0.69243)
+        XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
+    }
 }
