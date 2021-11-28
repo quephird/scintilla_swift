@@ -47,7 +47,15 @@ class Cube: Shape {
         }
     }
 
-    override func normal(_ worldPoint: Tuple4) -> Tuple4 {
-        return vector(0, 0, 1)
+    override func localNormal(_ localPoint: Tuple4) -> Tuple4 {
+        let maxComponent = max(abs(localPoint.xyzw[0]), abs(localPoint.xyzw[1]), abs(localPoint.xyzw[2]))
+
+        if maxComponent == abs(localPoint.xyzw[0]) {
+            return vector(localPoint.xyzw[0], 0, 0)
+        } else if maxComponent == abs(localPoint.xyzw[1]) {
+            return vector(0, localPoint.xyzw[1], 0)
+        } else {
+            return vector(0, 0, localPoint.xyzw[2])
+        }
     }
 }

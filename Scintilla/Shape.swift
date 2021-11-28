@@ -41,7 +41,7 @@ class Shape {
         return worldNormal.normalize()
     }
 
-    func localNormal(_ point: Tuple4) -> Tuple4 {
+    func localNormal(_ localPoint: Tuple4) -> Tuple4 {
         fatalError("Subclasses must override this method!")
     }
 }

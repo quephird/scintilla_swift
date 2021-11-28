@@ -48,4 +48,24 @@ class CubeTests: XCTestCase {
             XCTAssertEqual(allIntersections.count, 0)
         }
     }
+
+    func testLocalNormal() throws {
+        let cube = Cube(IDENTITY4, DEFAULT_MATERIAL)
+
+        let testCases = [
+            (point(1, 0.5, -0.8), vector(1, 0, 0)),
+            (point(-1, -0.2, 0.9), vector(-1, 0, 0)),
+            (point(-0.4, 1, -0.1), vector(0, 1, 0)),
+            (point(0.3, -1, -0.7), vector(0, -1, 0)),
+            (point(-0.6, 0.3, 1), vector(0, 0, 1)),
+            (point(0.4, 0.4, -1), vector(0, 0, -1)),
+            (point(1, 1, 1), vector(1, 0, 0)),
+            (point(-1, -1, -1), vector(-1, 0, 0))
+        ]
+
+        for (localPoint, expectedValue) in testCases {
+            let actualValue = cube.localNormal(localPoint)
+            XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
+        }
+    }
 }
