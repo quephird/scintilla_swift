@@ -37,10 +37,14 @@ class Cube: Shape {
         let tMin = max(xTMin, yTMin, zTMin)
         let tMax = min(xTMax, yTMax, zTMax)
 
-        return [
-            Intersection(tMin, self),
-            Intersection(tMax, self),
-        ]
+        if tMin > tMax {
+            return []
+        } else {
+            return [
+                Intersection(tMin, self),
+                Intersection(tMax, self),
+            ]
+        }
     }
 
     override func normal(_ worldPoint: Tuple4) -> Tuple4 {

@@ -193,6 +193,7 @@
 				87A21FED274E1FE50047AE41 /* CameraTests.swift */,
 				870DF23E27496D1F00787095 /* CanvasTests.swift */,
 				870DF23A2748D9B300787095 /* ColorTests.swift */,
+				87EA1883275317D700267E6E /* CubeTests.swift */,
 				87A21FD8274C5FCA0047AE41 /* IntersectionTests.swift */,
 				87A21FE0274D9DE30047AE41 /* MaterialTests.swift */,
 				60DE383E788BD47B15D60716 /* MatrixTests.swift */,
@@ -205,7 +206,6 @@
 				875B398C2748B97200666443 /* TupleTests.swift */,
 				87A21FE4274DD8CB0047AE41 /* WorldTests.swift */,
 				875B398E2748B97200666443 /* Info.plist */,
-				87EA1883275317D700267E6E /* CubeTests.swift */,
 			);
 			path = ScintillaTests;
 			sourceTree = "<group>";
