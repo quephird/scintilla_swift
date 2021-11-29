@@ -13,24 +13,53 @@ let IDENTITY4 = Matrix4(
 
 
 struct Matrix2 {
-    var rows: [Tuple2]
+    var data: (
+        Double, Double,
+        Double, Double
+        )
 
     init(
         _ x0: Double, _ y0: Double,
         _ x1: Double, _ y1: Double) {
-        self.rows = [
-            Tuple2(x0, y0),
-            Tuple2(x1, y1)
-        ]
+        self.data = (x0, y0, x1, y1)
+    }
+
+    subscript(_ i: Int, _ j: Int) -> Double {
+        get {
+            let index = j*2+i
+            switch index {
+            case 0: return self.data.0
+            case 1: return self.data.1
+            case 2: return self.data.2
+            case 3: return self.data.3
+            default: fatalError()
+            }
+        }
+        set(newValue) {
+            let index = j*2+i
+            switch index {
+            case 0: self.data.0 = newValue
+            case 1: self.data.1 = newValue
+            case 2: self.data.2 = newValue
+            case 3: self.data.3 = newValue
+            default: fatalError()
+            }
+        }
     }
 
     func determinant() -> Double {
-        rows[0].xy[0]*rows[1].xy[1] - rows[0].xy[1]*rows[1].xy[0]
+        self[0, 0]*self[1, 1] - self[0, 1]*self[1, 0]
     }
 
     func isAlmostEqual(_ other: Matrix2) -> Bool {
-        self.rows[0].isAlmostEqual(other.rows[0]) &&
-            self.rows[1].isAlmostEqual(other.rows[1])
+        for j in 0...1 {
+            for i in 0...1 {
+                if !self[i, j].isAlmostEqual(other[i, j]) {
+                    return false
+                }
+            }
+        }
+        return true
     }
 }
 
@@ -63,7 +92,7 @@ struct Matrix3 {
                 if sourceColumn == column {
                     continue
                 }
-                m.rows[targetRow].xy[targetColumn] = self.rows[sourceRow].xyz[sourceColumn]
+                m[targetColumn, targetRow] = self.rows[sourceRow].xyz[sourceColumn]
                 targetColumn += 1
             }
             targetRow += 1
