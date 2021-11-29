@@ -106,15 +106,22 @@ func chapterTenScene() -> World {
 }
 
 func chapterThirteenScene() -> World {
-    let floorPattern = Checkered2D(BLACK, WHITE, rotationY(PI/6))
+    let floorPattern = Checkered2D(BLACK, WHITE, rotationY(PI/3))
     let floorMaterial = Material(.pattern(floorPattern), 0.1, 0.9, 0.0, 200, 0.0, 0.0, 0.0)
     let floor = Plane(IDENTITY4, floorMaterial)
 
-    let shinyBlue = Material(.solidColor(Color(1.0, 0.3, 0.9)), 0.1, 0.9, 0.0, 200, 0.6, 0.0, 0.0)
-    let cylinder = Cylinder(IDENTITY4, shinyBlue, 0, 2, true)
+    let gradientTransform = scaling(1, 2.01, 1).multiplyMatrix(rotationZ(PI/2))
+    let gradient = Gradient(Color(0.9, 1.0, 0.0), Color(0.1, 0.2, 0.8), gradientTransform)
+    let cylinderMaterial = Material(.pattern(gradient), 0.5, 0.9, 0.9, 200.0, 0.1, 0.0, 1.0)
+    let cylinder = Cylinder(translation(-2, 0, 0), cylinderMaterial, 0, 2, true)
+
+    let checkered = Checkered3D(WHITE, Color(1, 0, 0), scaling(0.25, 0.25, 0.25))
+    let coneMaterial = Material(.pattern(checkered), 0.5, 0.9, 0.9, 200, 0.1, 0.0, 1.0)
+    let coneTransform = translation(2, 2, 0).multiplyMatrix(scaling(1, 2, 1))
+    let cone = Cone(coneTransform, coneMaterial, -1, 0, true)
 
     let light = Light(point(-10, 10, -10), Color(1, 1, 1))
-    let objects = [floor, cylinder]
+    let objects = [floor, cylinder, cone]
 
     return World(light, objects)
 }
