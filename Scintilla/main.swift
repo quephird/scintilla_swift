@@ -7,9 +7,9 @@
 
 import Foundation
 
-let world = chapterTenScene()
+let world = chapterThirteenScene()
 
-let from = point(0, 1.5, -5)
+let from = point(0, 3, -5)
 let to = point(0, 1, 0)
 let up = vector(0, 1, 0)
 let viewTransform = view(from, to, up)

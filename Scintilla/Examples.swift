@@ -104,3 +104,17 @@ func chapterTenScene() -> World {
 
     return World(light, objects)
 }
+
+func chapterThirteenScene() -> World {
+    let floorPattern = Checkered2D(BLACK, WHITE, rotationY(PI/6))
+    let floorMaterial = Material(.pattern(floorPattern), 0.1, 0.9, 0.0, 200, 0.0, 0.0, 0.0)
+    let floor = Plane(IDENTITY4, floorMaterial)
+
+    let shinyBlue = Material(.solidColor(Color(1.0, 0.3, 0.9)), 0.1, 0.9, 0.0, 200, 0.6, 0.0, 0.0)
+    let cylinder = Cylinder(IDENTITY4, shinyBlue, 0, 2, true)
+
+    let light = Light(point(-10, 10, -10), Color(1, 1, 1))
+    let objects = [floor, cylinder]
+
+    return World(light, objects)
+}
