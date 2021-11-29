@@ -64,17 +64,50 @@ struct Matrix2 {
 }
 
 struct Matrix3 {
-    var rows: [Tuple3]
+    var data: (
+        Double, Double, Double,
+        Double, Double, Double,
+        Double, Double, Double
+        )
 
     init(
         _ x0: Double, _ y0: Double, _ z0: Double,
         _ x1: Double, _ y1: Double, _ z1: Double,
         _ x2: Double, _ y2: Double, _ z2: Double) {
-        self.rows = [
-            Tuple3(x0, y0, z0),
-            Tuple3(x1, y1, z1),
-            Tuple3(x2, y2, z2),
-        ]
+        self.data = (x0, y0, z0, x1, y1, z1, x2, y2, z2)
+    }
+
+    subscript(_ i: Int, _ j: Int) -> Double {
+        get {
+            let index = j*3+i
+            switch index {
+            case 0: return self.data.0
+            case 1: return self.data.1
+            case 2: return self.data.2
+            case 3: return self.data.3
+            case 4: return self.data.4
+            case 5: return self.data.5
+            case 6: return self.data.6
+            case 7: return self.data.7
+            case 8: return self.data.8
+            default: fatalError()
+            }
+        }
+        set(newValue) {
+            let index = j*3+i
+            switch index {
+            case 0: self.data.0 = newValue
+            case 1: self.data.1 = newValue
+            case 2: self.data.2 = newValue
+            case 3: self.data.3 = newValue
+            case 4: self.data.4 = newValue
+            case 5: self.data.5 = newValue
+            case 6: self.data.6 = newValue
+            case 7: self.data.7 = newValue
+            case 8: self.data.8 = newValue
+            default: fatalError()
+            }
+        }
     }
 
     func submatrix(_ row: Int, _ column: Int) -> Matrix2 {
@@ -92,7 +125,7 @@ struct Matrix3 {
                 if sourceColumn == column {
                     continue
                 }
-                m[targetColumn, targetRow] = self.rows[sourceRow].xyz[sourceColumn]
+                m[targetColumn, targetRow] = self[sourceColumn, sourceRow]
                 targetColumn += 1
             }
             targetRow += 1
@@ -117,15 +150,20 @@ struct Matrix3 {
     func determinant() -> Double {
         var d = 0.0
         for i in 0...2 {
-            d += self.cofactor(0, i)*self.rows[0].xyz[i]
+            d += self.cofactor(0, i)*self[i, 0]
         }
         return d
     }
 
     func isAlmostEqual(_ other: Matrix3) -> Bool {
-        self.rows[0].isAlmostEqual(other.rows[0]) &&
-            self.rows[1].isAlmostEqual(other.rows[1]) &&
-            self.rows[2].isAlmostEqual(other.rows[2])
+        for j in 0...2 {
+            for i in 0...2 {
+                if !self[i, j].isAlmostEqual(other[i, j]) {
+                    return false
+                }
+            }
+        }
+        return true
     }
 }
 
@@ -214,7 +252,7 @@ struct Matrix4 {
                 if sourceColumn == column {
                     continue
                 }
-                m.rows[targetRow].xyz[targetColumn] = self.rows[sourceRow].xyzw[sourceColumn]
+                m[targetColumn, targetRow] = self.rows[sourceRow].xyzw[sourceColumn]
                 targetColumn += 1
             }
             targetRow += 1
