@@ -168,26 +168,82 @@ struct Matrix3 {
 }
 
 struct Matrix4 {
-    var rows: [Tuple4]
+    var data: (
+        Double, Double, Double, Double,
+        Double, Double, Double, Double,
+        Double, Double, Double, Double,
+        Double, Double, Double, Double
+        )
 
     init(
         _ x0: Double, _ y0: Double, _ z0: Double, _ w0: Double,
         _ x1: Double, _ y1: Double, _ z1: Double, _ w1: Double,
         _ x2: Double, _ y2: Double, _ z2: Double, _ w2: Double,
         _ x3: Double, _ y3: Double, _ z3: Double, _ w3: Double) {
-        self.rows = [
-            Tuple4(x0, y0, z0, w0),
-            Tuple4(x1, y1, z1, w1),
-            Tuple4(x2, y2, z2, w2),
-            Tuple4(x3, y3, z3, w3)
-        ]
+        self.data = (
+            x0, y0, z0, w0,
+            x1, y1, z1, w1,
+            x2, y2, z2, w2,
+            x3, y3, z3, w3
+        )
+    }
+
+    subscript(_ i: Int, _ j: Int) -> Double {
+        get {
+            let index = j*4+i
+            switch index {
+            case 0: return self.data.0
+            case 1: return self.data.1
+            case 2: return self.data.2
+            case 3: return self.data.3
+            case 4: return self.data.4
+            case 5: return self.data.5
+            case 6: return self.data.6
+            case 7: return self.data.7
+            case 8: return self.data.8
+            case 9: return self.data.9
+            case 10: return self.data.10
+            case 11: return self.data.11
+            case 12: return self.data.12
+            case 13: return self.data.13
+            case 14: return self.data.14
+            case 15: return self.data.15
+            default: fatalError()
+            }
+        }
+        set(newValue) {
+            let index = j*4+i
+            switch index {
+            case 0: self.data.0 = newValue
+            case 1: self.data.1 = newValue
+            case 2: self.data.2 = newValue
+            case 3: self.data.3 = newValue
+            case 4: self.data.4 = newValue
+            case 5: self.data.5 = newValue
+            case 6: self.data.6 = newValue
+            case 7: self.data.7 = newValue
+            case 8: self.data.8 = newValue
+            case 9: self.data.9 = newValue
+            case 10: self.data.10 = newValue
+            case 11: self.data.11 = newValue
+            case 12: self.data.12 = newValue
+            case 13: self.data.13 = newValue
+            case 14: self.data.14 = newValue
+            case 15: self.data.15 = newValue
+            default: fatalError()
+            }
+        }
     }
 
     func isAlmostEqual(_ other: Matrix4) -> Bool {
-        self.rows[0].isAlmostEqual(other.rows[0]) &&
-            self.rows[1].isAlmostEqual(other.rows[1]) &&
-            self.rows[2].isAlmostEqual(other.rows[2]) &&
-            self.rows[3].isAlmostEqual(other.rows[3])
+        for j in 0...3 {
+            for i in 0...3 {
+                if !self[i, j].isAlmostEqual(other[i, j]) {
+                    return false
+                }
+            }
+        }
+        return true
     }
 
     func multiplyMatrix(_ other: Matrix4) -> Matrix4 {
@@ -199,14 +255,9 @@ struct Matrix4 {
         )
         for r in 0...3 {
             for c in 0...3 {
-                let selfRow = self.rows[r]
-                let otherColumn = Tuple4(
-                    other.rows[0].xyzw[c],
-                    other.rows[1].xyzw[c],
-                    other.rows[2].xyzw[c],
-                    other.rows[3].xyzw[c]
-                )
-                m.rows[r].xyzw[c] = selfRow.dot(otherColumn)
+                let selfRow = Tuple4(self[0, r], self[1, r], self[2, r], self[3, r])
+                let otherColumn = Tuple4(other[c, 0], other[c, 1], other[c, 2], other[c, 3])
+                m[c, r] = selfRow.dot(otherColumn)
             }
         }
         return m
@@ -215,7 +266,7 @@ struct Matrix4 {
     func multiplyTuple(_ tuple: Tuple4) -> Tuple4 {
         var t = Tuple4(0, 0, 0, 0)
         for r in 0...3 {
-            let selfRow = self.rows[r]
+            let selfRow = Tuple4(self[0, r], self[1, r], self[2, r], self[3, r])
             t.xyzw[r] = selfRow.dot(tuple)
         }
         return t
@@ -230,7 +281,7 @@ struct Matrix4 {
         )
         for r in 0...3 {
             for c in 0...3 {
-                m.rows[r].xyzw[c] = self.rows[c].xyzw[r]
+                m[c, r] = self[r, c]
             }
         }
         return m
@@ -252,7 +303,7 @@ struct Matrix4 {
                 if sourceColumn == column {
                     continue
                 }
-                m[targetColumn, targetRow] = self.rows[sourceRow].xyzw[sourceColumn]
+                m[targetColumn, targetRow] = self[sourceColumn, sourceRow]
                 targetColumn += 1
             }
             targetRow += 1
@@ -277,7 +328,7 @@ struct Matrix4 {
     func determinant() -> Double {
         var d = 0.0
         for i in 0...3 {
-            d += self.cofactor(0, i)*self.rows[0].xyzw[i]
+            d += self.cofactor(0, i)*self[i, 0]
         }
         return d
     }
@@ -292,7 +343,7 @@ struct Matrix4 {
         )
         for r in 0...3 {
             for c in 0...3 {
-                m.rows[c].xyzw[r] = self.cofactor(r, c)/d
+                m[r, c] = self.cofactor(r, c)/d
             }
         }
         return m
