@@ -67,11 +67,11 @@ func view(_ from: Tuple4, _ to: Tuple4, _ up: Tuple4) -> Matrix4 {
     let left = forward.cross(upNormalized)
     let upTrue = left.cross(forward)
     let orientation = Matrix4(
-        left.xyzw[0],     left.xyzw[1],     left.xyzw[2],     0,
-        upTrue.xyzw[0],   upTrue.xyzw[1],   upTrue.xyzw[2],   0,
-        -forward.xyzw[0], -forward.xyzw[1], -forward.xyzw[2], 0,
-        0,                0,                0,                1
+        left[0],     left[1],     left[2],     0,
+        upTrue[0],   upTrue[1],   upTrue[2],   0,
+        -forward[0], -forward[1], -forward[2], 0,
+        0,           0,           0,           1
     )
-    let transform = translation(-from.xyzw[0], -from.xyzw[1], -from.xyzw[2])
+    let transform = translation(-from[0], -from[1], -from[2])
     return orientation.multiplyMatrix(transform)
 }

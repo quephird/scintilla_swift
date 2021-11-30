@@ -30,9 +30,9 @@ class Cube: Shape {
     }
 
     override func localIntersect(_ localRay: Ray) -> [Intersection] {
-        let (xTMin, xTMax) = self.checkAxis(localRay.origin.xyzw[0], localRay.direction.xyzw[0])
-        let (yTMin, yTMax) = self.checkAxis(localRay.origin.xyzw[1], localRay.direction.xyzw[1])
-        let (zTMin, zTMax) = self.checkAxis(localRay.origin.xyzw[2], localRay.direction.xyzw[2])
+        let (xTMin, xTMax) = self.checkAxis(localRay.origin[0], localRay.direction[0])
+        let (yTMin, yTMax) = self.checkAxis(localRay.origin[1], localRay.direction[1])
+        let (zTMin, zTMax) = self.checkAxis(localRay.origin[2], localRay.direction[2])
 
         let tMin = max(xTMin, yTMin, zTMin)
         let tMax = min(xTMax, yTMax, zTMax)
@@ -48,14 +48,14 @@ class Cube: Shape {
     }
 
     override func localNormal(_ localPoint: Tuple4) -> Tuple4 {
-        let maxComponent = max(abs(localPoint.xyzw[0]), abs(localPoint.xyzw[1]), abs(localPoint.xyzw[2]))
+        let maxComponent = max(abs(localPoint[0]), abs(localPoint[1]), abs(localPoint[2]))
 
-        if maxComponent == abs(localPoint.xyzw[0]) {
-            return vector(localPoint.xyzw[0], 0, 0)
-        } else if maxComponent == abs(localPoint.xyzw[1]) {
-            return vector(0, localPoint.xyzw[1], 0)
+        if maxComponent == abs(localPoint[0]) {
+            return vector(localPoint[0], 0, 0)
+        } else if maxComponent == abs(localPoint[1]) {
+            return vector(0, localPoint[1], 0)
         } else {
-            return vector(0, 0, localPoint.xyzw[2])
+            return vector(0, 0, localPoint[2])
         }
     }
 }

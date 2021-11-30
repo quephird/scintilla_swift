@@ -267,7 +267,7 @@ struct Matrix4 {
         var t = Tuple4(0, 0, 0, 0)
         for r in 0...3 {
             let selfRow = Tuple4(self[0, r], self[1, r], self[2, r], self[3, r])
-            t.xyzw[r] = selfRow.dot(tuple)
+            t[r] = selfRow.dot(tuple)
         }
         return t
     }

@@ -9,10 +9,10 @@ import Foundation
 
 class Plane: Shape {
     override func localIntersect(_ localRay: Ray) -> [Intersection] {
-        if abs(localRay.direction.xyzw[1]) < EPSILON {
+        if abs(localRay.direction[1]) < EPSILON {
             return []
         } else {
-            let t = -localRay.origin.xyzw[1] / localRay.direction.xyzw[1]
+            let t = -localRay.origin[1] / localRay.direction[1]
             return [Intersection(t, self)]
         }
     }

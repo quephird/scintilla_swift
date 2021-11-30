@@ -37,7 +37,7 @@ class Shape {
         let localPoint = self.inverseTransform.multiplyTuple(worldPoint)
         let localNormal = self.localNormal(localPoint)
         var worldNormal = self.inverseTransposeTransform.multiplyTuple(localNormal)
-        worldNormal.xyzw[3] = 0.0;
+        worldNormal[3] = 0.0;
         return worldNormal.normalize()
     }
 
