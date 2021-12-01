@@ -35,14 +35,31 @@ class Shape {
     }
 
     func normal(_ worldPoint: Tuple4) -> Tuple4 {
-        let localPoint = self.inverseTransform.multiplyTuple(worldPoint)
+        let localPoint = self.worldToObject(worldPoint)
         let localNormal = self.localNormal(localPoint)
-        var worldNormal = self.inverseTransposeTransform.multiplyTuple(localNormal)
-        worldNormal[3] = 0.0;
-        return worldNormal.normalize()
+        return self.objectToWorld(localNormal)
     }
 
     func localNormal(_ localPoint: Tuple4) -> Tuple4 {
         fatalError("Subclasses must override this method!")
+    }
+
+    func worldToObject(_ worldPoint: Tuple4) -> Tuple4 {
+        var objectPoint = worldPoint
+        if let parent = self.parent {
+            objectPoint = parent.worldToObject(worldPoint)
+        }
+        return self.inverseTransform.multiplyTuple(objectPoint)
+    }
+
+    func objectToWorld(_ objectNormal: Tuple4) -> Tuple4 {
+        var worldNormal = self.inverseTransposeTransform.multiplyTuple(objectNormal)
+        worldNormal[3] = 0
+        worldNormal = worldNormal.normalize()
+
+        if let parent = self.parent {
+            worldNormal = parent.objectToWorld(worldNormal)
+        }
+        return worldNormal
     }
 }

@@ -74,6 +74,7 @@
 		87EA18912757110D00267E6E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA18902757110D00267E6E /* Group.swift */; };
 		87EA1893275714DD00267E6E /* GroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA1892275714DD00267E6E /* GroupTests.swift */; };
 		87EA18942757171900267E6E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA18902757110D00267E6E /* Group.swift */; };
+		87EA18962757278300267E6E /* ShapeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA18952757278300267E6E /* ShapeTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -135,6 +136,7 @@
 		87EA188D27549C7900267E6E /* ConeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConeTests.swift; sourceTree = "<group>"; };
 		87EA18902757110D00267E6E /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
 		87EA1892275714DD00267E6E /* GroupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTests.swift; sourceTree = "<group>"; };
+		87EA18952757278300267E6E /* ShapeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,6 +229,7 @@
 				875B398C2748B97200666443 /* TupleTests.swift */,
 				87A21FE4274DD8CB0047AE41 /* WorldTests.swift */,
 				875B398E2748B97200666443 /* Info.plist */,
+				87EA18952757278300267E6E /* ShapeTests.swift */,
 			);
 			path = ScintillaTests;
 			sourceTree = "<group>";
@@ -376,6 +379,7 @@
 				870DF2392748D80500787095 /* Color.swift in Sources */,
 				87EA1893275714DD00267E6E /* GroupTests.swift in Sources */,
 				87EA1889275323D300267E6E /* CylinderTests.swift in Sources */,
+				87EA18962757278300267E6E /* ShapeTests.swift in Sources */,
 				87A21FF1274E29B50047AE41 /* Examples.swift in Sources */,
 				878C6910274F3DF700EB945E /* Pattern.swift in Sources */,
 				87A21FE6274DD8F00047AE41 /* World.swift in Sources */,

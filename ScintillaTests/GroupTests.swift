@@ -23,6 +23,7 @@ class GroupTests: XCTestCase {
         group.addChild(s1)
         group.addChild(s2)
         group.addChild(s3)
+
         let ray = Ray(point(0, 0, -5), vector(0, 0, 1))
         let allIntersections = group.localIntersect(ray)
         XCTAssertEqual(allIntersections.count, 4)
@@ -30,5 +31,16 @@ class GroupTests: XCTestCase {
         XCTAssertEqual(allIntersections[1].shape.id, s2.id)
         XCTAssertEqual(allIntersections[2].shape.id, s1.id)
         XCTAssertEqual(allIntersections[3].shape.id, s1.id)
+    }
+
+    func testLocalIntersectWithTransformedGroup() throws {
+        let groupTransform = scaling(2, 2, 2)
+        let group = Group(groupTransform, DEFAULT_MATERIAL)
+        let s = Sphere(translation(5, 0, 0), DEFAULT_MATERIAL)
+        group.addChild(s)
+
+        let ray = Ray(point(10, 0, -10), vector(0, 0, 1))
+        let allIntersections = group.intersect(ray)
+        XCTAssertEqual(allIntersections.count, 2)
     }
 }
