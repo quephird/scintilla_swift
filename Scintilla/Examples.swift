@@ -125,3 +125,31 @@ func chapterThirteenScene() -> World {
 
     return World(light, objects)
 }
+
+func chapterFourteenScene() -> World {
+    let hexagon = Group(IDENTITY4, DEFAULT_MATERIAL)
+    for n in 0...5 {
+        let cornerTransform = translation(0, 0, -1)
+            .multiplyMatrix(scaling(0.25, 0.25, 0.25))
+        let corner = Sphere(cornerTransform, DEFAULT_MATERIAL)
+
+        let edgeTransform = translation(0, 0, -1)
+            .multiplyMatrix(rotationY(-PI/6))
+            .multiplyMatrix(rotationZ(-PI/2))
+            .multiplyMatrix(scaling(0.25, 1, 0.25))
+        let edge = Cylinder(edgeTransform, DEFAULT_MATERIAL, 0, 1)
+
+        let sideTransform = rotationY(Double(n)*PI/3)
+        let side = Group(sideTransform, DEFAULT_MATERIAL)
+        side.addChild(corner)
+        side.addChild(edge)
+
+//        side.transform = translation(Double(n-7)*2, 0, 0)
+        hexagon.addChild(side)
+    }
+
+    let light = Light(point(-10, 10, -10), Color(1, 1, 1))
+    let objects = [hexagon]
+
+    return World(light, objects)
+}

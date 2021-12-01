@@ -224,12 +224,12 @@
 				87A21FF4274F05A80047AE41 /* PlaneTests.swift */,
 				870DF243274977C700787095 /* PpmTests.swift */,
 				87A21FC7274C2EB30047AE41 /* RayTests.swift */,
+				87EA18952757278300267E6E /* ShapeTests.swift */,
 				87A21FD1274C57930047AE41 /* SphereTests.swift */,
 				87A21FC2274B7C8F0047AE41 /* TransformTests.swift */,
 				875B398C2748B97200666443 /* TupleTests.swift */,
 				87A21FE4274DD8CB0047AE41 /* WorldTests.swift */,
 				875B398E2748B97200666443 /* Info.plist */,
-				87EA18952757278300267E6E /* ShapeTests.swift */,
 			);
 			path = ScintillaTests;
 			sourceTree = "<group>";
