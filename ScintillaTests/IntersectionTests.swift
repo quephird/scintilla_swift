@@ -86,8 +86,8 @@ class IntersectionTests: XCTestCase {
         let shape = Sphere(transform, DEFAULT_MATERIAL)
         let intersection = Intersection(5, shape)
         let computations = intersection.prepareComputations(ray, [intersection])
-        XCTAssertTrue(computations.overPoint.xyzw[2] < -EPSILON/2)
-        XCTAssertTrue(computations.point.xyzw[2] > computations.overPoint.xyzw[2])
+        XCTAssertTrue(computations.overPoint[2] < -EPSILON/2)
+        XCTAssertTrue(computations.point[2] > computations.overPoint[2])
     }
 
     func testPrepareComputationsShouldComputeUnderPoint() throws {
@@ -96,8 +96,8 @@ class IntersectionTests: XCTestCase {
         let shape = Sphere(transform, DEFAULT_MATERIAL)
         let intersection = Intersection(5, shape)
         let computations = intersection.prepareComputations(ray, [intersection])
-        XCTAssertTrue(computations.underPoint.xyzw[2] > EPSILON/2)
-        XCTAssertTrue(computations.point.xyzw[2] < computations.underPoint.xyzw[2])
+        XCTAssertTrue(computations.underPoint[2] > EPSILON/2)
+        XCTAssertTrue(computations.point[2] < computations.underPoint[2])
     }
 
     func testPrepareComputationsReflected() throws {

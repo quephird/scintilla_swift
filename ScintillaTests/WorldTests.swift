@@ -223,7 +223,7 @@ class WorldTests: XCTestCase {
             }
 
             override func colorAt(_ patternPoint: Tuple4) -> Color {
-                return Color(patternPoint.xyzw[0], patternPoint.xyzw[1], patternPoint.xyzw[2])
+                return Color(patternPoint[0], patternPoint[1], patternPoint[2])
             }
         }
 

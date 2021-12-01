@@ -71,6 +71,9 @@
 		87EA188C27549A8D00267E6E /* Cone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA188B27549A8D00267E6E /* Cone.swift */; };
 		87EA188E27549C7900267E6E /* ConeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA188D27549C7900267E6E /* ConeTests.swift */; };
 		87EA188F27549CCE00267E6E /* Cone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA188B27549A8D00267E6E /* Cone.swift */; };
+		87EA18912757110D00267E6E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA18902757110D00267E6E /* Group.swift */; };
+		87EA1893275714DD00267E6E /* GroupTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA1892275714DD00267E6E /* GroupTests.swift */; };
+		87EA18942757171900267E6E /* Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EA18902757110D00267E6E /* Group.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -130,6 +133,8 @@
 		87EA1888275323D300267E6E /* CylinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CylinderTests.swift; sourceTree = "<group>"; };
 		87EA188B27549A8D00267E6E /* Cone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cone.swift; sourceTree = "<group>"; };
 		87EA188D27549C7900267E6E /* ConeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConeTests.swift; sourceTree = "<group>"; };
+		87EA18902757110D00267E6E /* Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Group.swift; sourceTree = "<group>"; };
+		87EA1892275714DD00267E6E /* GroupTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +187,7 @@
 				87EA18862753213B00267E6E /* Cylinder.swift */,
 				870DF2342748CF8D00787095 /* Double.swift */,
 				87A21FEF274E29B50047AE41 /* Examples.swift */,
+				87EA18902757110D00267E6E /* Group.swift */,
 				87A21FD5274C5B340047AE41 /* Intersection.swift */,
 				87A21FDA274CAB6C0047AE41 /* Light.swift */,
 				87A21FDD274CAC160047AE41 /* Material.swift */,
@@ -208,6 +214,7 @@
 				87EA188D27549C7900267E6E /* ConeTests.swift */,
 				87EA1883275317D700267E6E /* CubeTests.swift */,
 				87EA1888275323D300267E6E /* CylinderTests.swift */,
+				87EA1892275714DD00267E6E /* GroupTests.swift */,
 				87A21FD8274C5FCA0047AE41 /* IntersectionTests.swift */,
 				87A21FE0274D9DE30047AE41 /* MaterialTests.swift */,
 				60DE383E788BD47B15D60716 /* MatrixTests.swift */,
@@ -315,6 +322,7 @@
 				87A21FCB274C30190047AE41 /* Sphere.swift in Sources */,
 				875B39932748BA4700666443 /* Tuple.swift in Sources */,
 				87EA18872753213B00267E6E /* Cylinder.swift in Sources */,
+				87EA18912757110D00267E6E /* Group.swift in Sources */,
 				87A21FEB274E1A520047AE41 /* Camera.swift in Sources */,
 				870DF2382748D80300787095 /* Color.swift in Sources */,
 				870DF2352748CF8D00787095 /* Double.swift in Sources */,
@@ -364,7 +372,9 @@
 				87EA188F27549CCE00267E6E /* Cone.swift in Sources */,
 				87A21FBF274B375B0047AE41 /* Matrix.swift in Sources */,
 				87A21FC3274B7C8F0047AE41 /* TransformTests.swift in Sources */,
+				87EA18942757171900267E6E /* Group.swift in Sources */,
 				870DF2392748D80500787095 /* Color.swift in Sources */,
+				87EA1893275714DD00267E6E /* GroupTests.swift in Sources */,
 				87EA1889275323D300267E6E /* CylinderTests.swift in Sources */,
 				87A21FF1274E29B50047AE41 /* Examples.swift in Sources */,
 				878C6910274F3DF700EB945E /* Pattern.swift in Sources */,

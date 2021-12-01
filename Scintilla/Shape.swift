@@ -14,6 +14,7 @@ class Shape {
     var material: Material
     var inverseTransform: Matrix4
     var inverseTransposeTransform: Matrix4
+    var parent: Group?
 
     init(_ transform: Matrix4, _ material: Material) {
         self.id = Self.latestId
