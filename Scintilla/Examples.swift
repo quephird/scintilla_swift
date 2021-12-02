@@ -127,7 +127,9 @@ func chapterThirteenScene() -> World {
 }
 
 func chapterFourteenScene() -> World {
-    let hexagon = Group(IDENTITY4, DEFAULT_MATERIAL)
+    let hexagonTransform = translation(0, 1.5, 0)
+        .multiplyMatrix(rotationX(-PI/6))
+    let hexagon = Group(hexagonTransform, DEFAULT_MATERIAL)
     for n in 0...5 {
         let cornerTransform = translation(0, 0, -1)
             .multiplyMatrix(scaling(0.25, 0.25, 0.25))
