@@ -17,5 +17,5 @@ let camera = Camera(800, 600, PI/3, viewTransform)
 
 let canvas = camera.render(world)
 
-let filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("test.ppm")
+let filePath = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask).first!.appendingPathComponent("test.ppm")
 try canvas.toPPM().write(to: filePath, atomically: true, encoding: .utf8)

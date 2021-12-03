@@ -30,6 +30,6 @@ class Group: Shape {
 
     func addChild(_ childObject: Shape) {
         self.children.append(childObject)
-        childObject.parent = self
+        childObject.parent = .group(self)
     }
 }

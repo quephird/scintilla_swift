@@ -14,7 +14,7 @@ class Shape {
     var material: Material
     var inverseTransform: Matrix4
     var inverseTransposeTransform: Matrix4
-    var parent: Group?
+    var parent: Container?
 
     init(_ transform: Matrix4, _ material: Material) {
         self.id = Self.latestId
@@ -47,7 +47,12 @@ class Shape {
     func worldToObject(_ worldPoint: Tuple4) -> Tuple4 {
         var objectPoint = worldPoint
         if let parent = self.parent {
-            objectPoint = parent.worldToObject(worldPoint)
+            switch parent {
+            case .group(let group):
+                objectPoint = group.worldToObject(worldPoint)
+            case .csg(let csg):
+                fatalError("Not yet supported!!!")
+            }
         }
         return self.inverseTransform.multiplyTuple(objectPoint)
     }
@@ -58,8 +63,24 @@ class Shape {
         worldNormal = worldNormal.normalize()
 
         if let parent = self.parent {
-            worldNormal = parent.objectToWorld(worldNormal)
+            switch parent {
+            case .group(let group):
+                worldNormal = group.objectToWorld(worldNormal)
+            case .csg(let csg):
+                fatalError("Not yet supported!!!")
+            }
         }
         return worldNormal
+    }
+
+    func includes(_ other: Shape) -> Bool {
+        switch self {
+        case let group as Group:
+            return group.children.contains(where: {shape in shape.includes(other)})
+        case let csg as CSG:
+            return csg.left.includes(other) || csg.right.includes(other)
+        default:
+            return self.id == other.id
+        }
     }
 }
