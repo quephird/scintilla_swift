@@ -46,13 +46,11 @@ class Shape {
 
     func worldToObject(_ worldPoint: Tuple4) -> Tuple4 {
         var objectPoint = worldPoint
-        if let parent = self.parent {
-            switch parent {
-            case .group(let group):
-                objectPoint = group.worldToObject(worldPoint)
-            case .csg(let csg):
-                fatalError("Not yet supported!!!")
-            }
+        if case .group(let group) = parent {
+            objectPoint = group.worldToObject(worldPoint)
+        }
+        if case .csg(let csg) = parent {
+            objectPoint = csg.worldToObject(worldPoint)
         }
         return self.inverseTransform.multiplyTuple(objectPoint)
     }
@@ -62,14 +60,13 @@ class Shape {
         worldNormal[3] = 0
         worldNormal = worldNormal.normalize()
 
-        if let parent = self.parent {
-            switch parent {
-            case .group(let group):
-                worldNormal = group.objectToWorld(worldNormal)
-            case .csg(let csg):
-                fatalError("Not yet supported!!!")
-            }
+        if case .group(let group) = parent {
+            worldNormal = group.objectToWorld(worldNormal)
         }
+        if case .csg(let csg) = parent {
+            worldNormal = csg.objectToWorld(worldNormal)
+        }
+
         return worldNormal
     }
 

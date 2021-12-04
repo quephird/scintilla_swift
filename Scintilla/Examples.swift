@@ -146,12 +146,131 @@ func chapterFourteenScene() -> World {
         side.addChild(corner)
         side.addChild(edge)
 
-//        side.transform = translation(Double(n-7)*2, 0, 0)
         hexagon.addChild(side)
     }
 
     let light = Light(point(-10, 10, -10), Color(1, 1, 1))
     let objects = [hexagon]
+
+    return World(light, objects)
+}
+
+func makeDie(_ color: Color, _ transform: Matrix4) -> Shape {
+    let roundingRadius = 0.125
+    let dieBody = Group(IDENTITY4, DEFAULT_MATERIAL)
+    var dieMaterial = DEFAULT_MATERIAL
+    dieMaterial.colorStrategy = .solidColor(color)
+
+    for z in 0...1 {
+        for y in 0...1 {
+            for x in 0...1 {
+                let transform = translation(Double(x)-0.5, Double(y)-0.5, Double(z)-0.5)
+                    .multiplyMatrix(scaling(roundingRadius, roundingRadius, roundingRadius))
+                let corner = Sphere(transform, dieMaterial)
+                dieBody.addChild(corner)
+            }
+        }
+    }
+
+    for z in 0...1 {
+        for x in 0...1 {
+            let transform = translation(Double(x)-0.5, 0, Double(z)-0.5)
+                .multiplyMatrix(scaling(roundingRadius, 1, roundingRadius))
+            let edge = Cylinder(transform, dieMaterial, -0.5, 0.5)
+            dieBody.addChild(edge)
+        }
+    }
+
+    for y in 0...1 {
+        for z in 0...1 {
+            let transform = translation(0, Double(y)-0.5, Double(z)-0.5)
+                .multiplyMatrix(rotationZ(PI/2))
+                .multiplyMatrix(scaling(roundingRadius, 1, roundingRadius))
+            let edge = Cylinder(transform, dieMaterial, -0.5, 0.5)
+            dieBody.addChild(edge)
+        }
+    }
+
+    for y in 0...1 {
+        for x in 0...1 {
+            let transform = translation(Double(x)-0.5, Double(y)-0.5, 0)
+                .multiplyMatrix(rotationX(PI/2))
+                .multiplyMatrix(scaling(roundingRadius, 1, roundingRadius))
+            let edge = Cylinder(transform, dieMaterial, -0.5, 0.5)
+            dieBody.addChild(edge)
+        }
+    }
+
+    for x in 0...1 {
+        let transform = translation(Double(x)-0.5, 0, 0)
+            .multiplyMatrix(scaling(roundingRadius, 0.5, 0.5))
+        let side = Cube(transform, dieMaterial)
+        dieBody.addChild(side)
+    }
+
+    for y in 0...1 {
+        let transform = translation(0, Double(y)-0.5, 0)
+            .multiplyMatrix(scaling(0.5, roundingRadius, 0.5))
+        let side = Cube(transform, dieMaterial)
+        dieBody.addChild(side)
+    }
+
+    for z in 0...1 {
+        let transform = translation(0, 0, Double(z)-0.5)
+            .multiplyMatrix(scaling(0.5, 0.5, roundingRadius))
+        let side = Cube(transform, dieMaterial)
+        dieBody.addChild(side)
+    }
+
+    var pitMaterial = DEFAULT_MATERIAL
+    pitMaterial.colorStrategy = .solidColor(WHITE)
+
+    let pitTransform = translation(0, 0, -roundingRadius-0.5)
+        .multiplyMatrix(scaling(roundingRadius, roundingRadius, roundingRadius))
+    let pit = Sphere(pitTransform, pitMaterial)
+
+    let pitTransform21 = translation(roundingRadius+0.5, -0.3, -0.3)
+        .multiplyMatrix(scaling(roundingRadius, roundingRadius, roundingRadius))
+    let pit21 = Sphere(pitTransform21, pitMaterial)
+    let pitTransform22 = translation(roundingRadius+0.5, 0.3, 0.3)
+        .multiplyMatrix(scaling(roundingRadius, roundingRadius, roundingRadius))
+    let pit22 = Sphere(pitTransform22, pitMaterial)
+
+    let pitTransform31 = translation(-0.3, roundingRadius+0.5, -0.3)
+        .multiplyMatrix(scaling(roundingRadius, roundingRadius, roundingRadius))
+    let pit31 = Sphere(pitTransform31, pitMaterial)
+    let pitTransform32 = translation(0, roundingRadius+0.5, 0)
+        .multiplyMatrix(scaling(roundingRadius, roundingRadius, roundingRadius))
+    let pit32 = Sphere(pitTransform32, pitMaterial)
+    let pitTransform33 = translation(0.3, roundingRadius+0.5, 0.3)
+        .multiplyMatrix(scaling(roundingRadius, roundingRadius, roundingRadius))
+    let pit33 = Sphere(pitTransform33, pitMaterial)
+
+    var die = CSG(.difference, dieBody, pit)
+    die = CSG(.difference, die, pit21)
+    die = CSG(.difference, die, pit22)
+    die = CSG(.difference, die, pit31)
+    die = CSG(.difference, die, pit32)
+    die = CSG(.difference, die, pit33)
+    die.transform = transform
+    die.inverseTransform = transform.inverse()
+    die.inverseTransposeTransform = transform.inverse().transpose()
+    return die
+}
+
+func chapterSixteenScene() -> World {
+    let floorPattern = Checkered2D(Color(0.1, 0.1, 0.1), WHITE, rotationY(PI/3))
+    let floorMaterial = Material(.pattern(floorPattern), 0.1, 0.9, 0.0, 200, 0.0, 0.0, 0.0)
+    let floor = Plane(translation(0, -1, 0), floorMaterial)
+
+    let leftTransform = translation(-2, 0.25, 0).multiplyMatrix(rotationY(PI/4))
+    let leftDie = makeDie(Color(0.8, 0.4, 0.8), leftTransform)
+
+    let rightTransform = translation(2, 0.25, 0).multiplyMatrix(rotationY(PI/3))
+    let rightDie = makeDie(Color(0.8, 0.6, 0.1), rightTransform)
+
+    let light = Light(point(-10, 10, -10), Color(1, 1, 1))
+    let objects = [floor, leftDie, rightDie]
 
     return World(light, objects)
 }
