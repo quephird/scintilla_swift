@@ -48,8 +48,7 @@ class Shape {
         var objectPoint = worldPoint
         if case .group(let group) = parent {
             objectPoint = group.worldToObject(worldPoint)
-        }
-        if case .csg(let csg) = parent {
+        } else if case .csg(let csg) = parent {
             objectPoint = csg.worldToObject(worldPoint)
         }
         return self.inverseTransform.multiplyTuple(objectPoint)
@@ -62,8 +61,7 @@ class Shape {
 
         if case .group(let group) = parent {
             worldNormal = group.objectToWorld(worldNormal)
-        }
-        if case .csg(let csg) = parent {
+        } else if case .csg(let csg) = parent {
             worldNormal = csg.objectToWorld(worldNormal)
         }
 
