@@ -10,7 +10,12 @@ import Foundation
 class Shape {
     static var latestId: Int = 0
     var id: Int
-    var transform: Matrix4
+    var transform: Matrix4 {
+        didSet {
+            self.inverseTransform = transform.inverse()
+            self.inverseTransposeTransform = transform.inverse().transpose()
+        }
+    }
     var material: Material
     var inverseTransform: Matrix4
     var inverseTransposeTransform: Matrix4

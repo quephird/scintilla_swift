@@ -157,9 +157,10 @@ func chapterFourteenScene() -> World {
 
 func makeDie(_ color: Color, _ transform: Matrix4) -> Shape {
     let roundingRadius = 0.125
-    let dieBody = Group(IDENTITY4, DEFAULT_MATERIAL)
     var dieMaterial = DEFAULT_MATERIAL
     dieMaterial.colorStrategy = .solidColor(color)
+    dieMaterial.reflective = 0.2
+    let dieBody = Group(IDENTITY4, dieMaterial)
 
     for z in 0...1 {
         for y in 0...1 {
@@ -253,21 +254,19 @@ func makeDie(_ color: Color, _ transform: Matrix4) -> Shape {
     die = CSG(.difference, die, pit32)
     die = CSG(.difference, die, pit33)
     die.transform = transform
-    die.inverseTransform = transform.inverse()
-    die.inverseTransposeTransform = transform.inverse().transpose()
     return die
 }
 
 func chapterSixteenScene() -> World {
     let floorPattern = Checkered2D(Color(0.1, 0.1, 0.1), WHITE, rotationY(PI/3))
-    let floorMaterial = Material(.pattern(floorPattern), 0.1, 0.9, 0.0, 200, 0.0, 0.0, 0.0)
-    let floor = Plane(translation(0, -1, 0), floorMaterial)
+    let floorMaterial = Material(.pattern(floorPattern), 0.1, 0.9, 0.0, 200, 0.4, 0.0, 0.0)
+    let floor = Plane(translation(0, -0.625, 0), floorMaterial)
 
-    let leftTransform = translation(-2, 0.25, 0).multiplyMatrix(rotationY(PI/4))
+    let leftTransform = translation(-1.5, 0, 0).multiplyMatrix(rotationY(PI/4))
     let leftDie = makeDie(Color(0.8, 0.4, 0.8), leftTransform)
 
-    let rightTransform = translation(2, 0.25, 0).multiplyMatrix(rotationY(PI/3))
-    let rightDie = makeDie(Color(0.8, 0.6, 0.1), rightTransform)
+    let rightTransform = translation(1.5, 0, 0).multiplyMatrix(rotationY(PI/3))
+    let rightDie = makeDie(Color(0.8, 0.4, 0.1), rightTransform)
 
     let light = Light(point(-10, 10, -10), Color(1, 1, 1))
     let objects = [floor, leftDie, rightDie]
