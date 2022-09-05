@@ -4,14 +4,6 @@
 
 import Foundation
 
-let IDENTITY4 = Matrix4(
-    1, 0, 0, 0,
-    0, 1, 0, 0,
-    0, 0, 1, 0,
-    0, 0, 0, 1
-)
-
-
 struct Matrix2 {
     var data: (
         Double, Double,
@@ -174,6 +166,13 @@ struct Matrix4 {
         Double, Double, Double, Double,
         Double, Double, Double, Double
         )
+
+    static let identity = Matrix4(
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+    )
 
     init(
         _ x0: Double, _ y0: Double, _ z0: Double, _ w0: Double,

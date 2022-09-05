@@ -12,26 +12,47 @@ class Cylinder: Shape {
     var maximum: Double
     var isCapped: Bool
 
-    override init(_ transform: Matrix4, _ material: Material) {
+    override init( _ material: Material, @ShapeBuilder builder: () -> [Matrix4]) {
         self.minimum = -.infinity
         self.maximum = .infinity
         self.isCapped = false
-        super.init(transform, material)
+        super.init(material, builder: builder)
     }
 
-    init(_ transform: Matrix4, _ material: Material, _ minimum: Double, _ maximum: Double) {
+    init(_ material: Material, _ minimum: Double, _ maximum: Double, @ShapeBuilder builder: () -> [Matrix4]) {
         self.minimum = minimum
         self.maximum = maximum
         self.isCapped = false
-        super.init(transform, material)
+        super.init(material, builder: builder)
     }
 
-    init(_ transform: Matrix4, _ material: Material, _ minimum: Double, _ maximum: Double, _ isCapped: Bool) {
+    init(_ material: Material, _ minimum: Double, _ maximum: Double, _ isCapped: Bool, @ShapeBuilder builder: () -> [Matrix4]) {
         self.minimum = minimum
         self.maximum = maximum
         self.isCapped = isCapped
-        super.init(transform, material)
+        super.init(material, builder: builder)
     }
+
+//    override init(_ transform: Matrix4, _ material: Material) {
+//        self.minimum = -.infinity
+//        self.maximum = .infinity
+//        self.isCapped = false
+//        super.init(transform, material)
+//    }
+//
+//    init(_ transform: Matrix4, _ material: Material, _ minimum: Double, _ maximum: Double) {
+//        self.minimum = minimum
+//        self.maximum = maximum
+//        self.isCapped = false
+//        super.init(transform, material)
+//    }
+//
+//    init(_ transform: Matrix4, _ material: Material, _ minimum: Double, _ maximum: Double, _ isCapped: Bool) {
+//        self.minimum = minimum
+//        self.maximum = maximum
+//        self.isCapped = isCapped
+//        super.init(transform, material)
+//    }
 
     // A helper function to reduce duplication.
     // checks to see if the intersection at `t` is within a radius

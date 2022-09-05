@@ -12,6 +12,9 @@ struct Color {
     var g: Double
     var b: Double
 
+    static let white = Color(1.0, 1.0, 1.0)
+    static let black = Color(0.0, 0.0, 0.0)
+
     init(_ r: Double, _ g: Double, _ b: Double) {
         self.r = r
         self.g = g
@@ -40,6 +43,3 @@ struct Color {
             self.b.isAlmostEqual(to.b)
     }
 }
-
-let WHITE = Color(1.0, 1.0, 1.0)
-let BLACK = Color(0.0, 0.0, 0.0)

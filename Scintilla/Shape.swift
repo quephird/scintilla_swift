@@ -21,13 +21,31 @@ class Shape {
     var inverseTransposeTransform: Matrix4
     var parent: Container?
 
-    init(_ transform: Matrix4, _ material: Material) {
-        self.id = Self.latestId
+    init( _ material: Material, @ShapeBuilder builder: () -> [Matrix4]) {
+        var transform = Matrix4.identity
+        for matrix in builder() {
+            transform = transform.multiplyMatrix(matrix)
+        }
+
         self.transform = transform
+        self.id = Self.latestId
         self.material = material
         self.inverseTransform = transform.inverse()
         self.inverseTransposeTransform = transform.inverse().transpose()
         Self.latestId += 1
+    }
+
+//    init(_ transform: Matrix4, _ material: Material) {
+//        self.id = Self.latestId
+//        self.transform = transform
+//        self.material = material
+//        self.inverseTransform = transform.inverse()
+//        self.inverseTransposeTransform = transform.inverse().transpose()
+//        Self.latestId += 1
+//    }
+
+    convenience init(_ material: Material) {
+        self.init(material, builder: { return [] })
     }
 
     func intersect(_ worldRay: Ray) -> [Intersection] {

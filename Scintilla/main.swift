@@ -7,7 +7,8 @@
 
 import Foundation
 
-let world = testTorus()
+//let world = testTorus()
+let world = testScene()
 
 let from = point(0, 10, -10)
 let to = point(0, 0, 0)

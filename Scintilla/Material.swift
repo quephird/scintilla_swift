@@ -52,8 +52,8 @@ struct Material {
         var diffuse: Color
         var specular: Color
         if lightDotNormal < 0 || isShadowed == true {
-            diffuse = BLACK
-            specular = BLACK
+            diffuse = .black
+            specular = .black
         } else {
             // Compute the diffuse contribution
             diffuse = effectiveColor.multiplyScalar(self.diffuse * lightDotNormal)
@@ -65,7 +65,7 @@ struct Material {
             let reflectDotEye = reflected.dot(eye)
 
             if reflectDotEye <= 0 {
-                specular = BLACK
+                specular = .black
             } else {
                 // Compute the specular contribution
                 let factor = pow(reflectDotEye, self.shininess)
