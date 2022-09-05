@@ -8,10 +8,6 @@
 import Foundation
 
 class Sphere: Shape {
-    override init( _ material: Material, @ShapeBuilder builder: () -> [Matrix4]) {
-        super.init(material, builder: builder)
-    }
-
     override func localIntersect(_ localRay: Ray) -> [Intersection] {
         // The vector from the sphere's center, to the ray origin
         // remember: the sphere is centered at the world origin

@@ -12,47 +12,26 @@ class Cone: Shape {
     var maximum: Double
     var isCapped: Bool
 
-    override init( _ material: Material, @ShapeBuilder builder: () -> [Matrix4]) {
+    override init( _ material: Material) {
         self.minimum = -.infinity
         self.maximum = .infinity
         self.isCapped = false
-        super.init(material, builder: builder)
+        super.init(material)
     }
 
-    init(_ material: Material, _ minimum: Double, _ maximum: Double, @ShapeBuilder builder: () -> [Matrix4]) {
+    init(_ material: Material, _ minimum: Double, _ maximum: Double) {
         self.minimum = minimum
         self.maximum = maximum
         self.isCapped = false
-        super.init(material, builder: builder)
+        super.init(material)
     }
 
-    init(_ material: Material, _ minimum: Double, _ maximum: Double, _ isCapped: Bool, @ShapeBuilder builder: () -> [Matrix4]) {
+    init(_ material: Material, _ minimum: Double, _ maximum: Double, _ isCapped: Bool) {
         self.minimum = minimum
         self.maximum = maximum
         self.isCapped = isCapped
-        super.init(material, builder: builder)
+        super.init(material)
     }
-
-//    override init(_ transform: Matrix4, _ material: Material) {
-//        self.minimum = -.infinity
-//        self.maximum = .infinity
-//        self.isCapped = false
-//        super.init(transform, material)
-//    }
-//
-//    init(_ transform: Matrix4, _ material: Material, _ minimum: Double, _ maximum: Double) {
-//        self.minimum = minimum
-//        self.maximum = maximum
-//        self.isCapped = false
-//        super.init(transform, material)
-//    }
-//
-//    init(_ transform: Matrix4, _ material: Material, _ minimum: Double, _ maximum: Double, _ isCapped: Bool) {
-//        self.minimum = minimum
-//        self.maximum = maximum
-//        self.isCapped = isCapped
-//        super.init(transform, material)
-//    }
 
     // A helper function to reduce duplication.
     // checks to see if the intersection at `t` is within a radius of y

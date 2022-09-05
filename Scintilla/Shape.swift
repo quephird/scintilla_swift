@@ -21,31 +21,79 @@ class Shape {
     var inverseTransposeTransform: Matrix4
     var parent: Container?
 
-    init( _ material: Material, @ShapeBuilder builder: () -> [Matrix4]) {
-        var transform = Matrix4.identity
-        for matrix in builder() {
-            transform = transform.multiplyMatrix(matrix)
-        }
-
-        self.transform = transform
+    init(_ material: Material) {
         self.id = Self.latestId
+        self.transform = .identity
         self.material = material
         self.inverseTransform = transform.inverse()
         self.inverseTransposeTransform = transform.inverse().transpose()
         Self.latestId += 1
     }
 
-//    init(_ transform: Matrix4, _ material: Material) {
-//        self.id = Self.latestId
-//        self.transform = transform
-//        self.material = material
-//        self.inverseTransform = transform.inverse()
-//        self.inverseTransposeTransform = transform.inverse().transpose()
-//        Self.latestId += 1
-//    }
+    func translate(_ x: Double, _ y: Double, _ z: Double) -> Self {
+        self.transform = Matrix4(
+            1, 0, 0, x,
+            0, 1, 0, y,
+            0, 0, 1, z,
+            0, 0, 0, 1
+        ).multiplyMatrix(self.transform)
 
-    convenience init(_ material: Material) {
-        self.init(material, builder: { return [] })
+        return self
+    }
+
+    func scale(_ x: Double, _ y: Double, _ z: Double) -> Self {
+        self.transform = Matrix4(
+            x, 0, 0, 0,
+            0, y, 0, 0,
+            0, 0, z, 0,
+            0, 0, 0, 1
+        ).multiplyMatrix(self.transform)
+
+        return self
+    }
+
+    func rotateX(_ t: Double) -> Self {
+        self.transform = Matrix4(
+            1, 0,      0,       0,
+            0, cos(t), -sin(t), 0,
+            0, sin(t), cos(t),  0,
+            0, 0,      0,       1
+        ).multiplyMatrix(self.transform)
+
+        return self
+    }
+
+    func rotateY(_ t: Double) -> Self {
+        self.transform = Matrix4(
+            cos(t),  0, sin(t), 0,
+            0,       1, 0,      0,
+            -sin(t), 0, cos(t), 0,
+            0, 0,      0,       1
+        ).multiplyMatrix(self.transform)
+
+        return self
+    }
+
+    func rotateZ(_ t: Double) -> Self {
+        self.transform = Matrix4(
+            cos(t), -sin(t), 0, 0,
+            sin(t), cos(t),  0, 0,
+            0,      0,       1, 0,
+            0,      0,       0, 1
+        ).multiplyMatrix(self.transform)
+
+        return self
+    }
+
+    func shear(_ xy: Double, _ xz: Double, _ yx: Double, _ yz: Double, _ zx: Double, _ zy: Double) -> Self {
+        self.transform = Matrix4(
+            1,  xy, xz, 0,
+            yx, 1,  yz, 0,
+            zx, zy, 1,  0,
+            0,  0,  0,  1
+        ).multiplyMatrix(self.transform)
+
+        return self
     }
 
     func intersect(_ worldRay: Ray) -> [Intersection] {

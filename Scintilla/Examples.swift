@@ -13,10 +13,11 @@ func testScene() -> World {
     return World(
         Light(point(-10, 10, -10))
     ) {
-        Sphere(material) {
-            scaling(2, 2, 2)
-            translation(0, 0, 0)
-        }
+        Cube(material)
+            .rotateY(PI/4)
+            .rotateX(PI/4)
+            .rotateZ(PI/4)
+            .translate(1, 0, 0)
     }
 }
 

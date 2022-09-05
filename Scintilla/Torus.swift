@@ -9,16 +9,16 @@ class Torus: Shape {
     var majorRadius: Double
     var minorRadius: Double
 
-    override init( _ material: Material, @ShapeBuilder builder: () -> [Matrix4]) {
+    override init( _ material: Material) {
         self.majorRadius = 2.0
         self.minorRadius = 1.0
-        super.init(material, builder: builder)
+        super.init(material)
     }
 
-    init(_ material: Material, _ majorRadius: Double, _ minorRadius: Double, @ShapeBuilder builder: () -> [Matrix4]) {
+    init(_ material: Material, _ majorRadius: Double, _ minorRadius: Double) {
         self.majorRadius = majorRadius
         self.minorRadius = minorRadius
-        super.init(material, builder: builder)
+        super.init(material)
     }
 
     override func localIntersect(_ localRay: Ray) -> [Intersection] {

@@ -16,7 +16,7 @@ class CSG: Shape {
         self.operation = operation
         self.left = left
         self.right = right
-        super.init(DEFAULT_MATERIAL, builder: { return [] })
+        super.init(DEFAULT_MATERIAL)
         left.parent = .csg(self)
         right.parent = .csg(self)
     }
