@@ -8,16 +8,50 @@
 import Foundation
 
 func testScene() -> World {
-    let material = Material(.solidColor(Color(1, 0, 0)), 0.1, 0.9, 0.0, 200, 0.0, 0.0, 0.0)
-
     return World(
         Light(point(-10, 10, -10))
     ) {
-        Cube(material)
+        Cube(Material(.solidColor(Color(1, 0, 0))))
             .rotateY(PI/4)
             .rotateX(PI/4)
             .rotateZ(PI/4)
             .translate(1, 0, 0)
+    }
+}
+
+func chapterSevenScene() -> World {
+    return World(
+        Light(point(-10, 10, -10))
+    ) {
+        Sphere(Material(.solidColor(Color(1, 0.9, 0.9))))
+            .scale(10, 0.01, 10)
+        Sphere(Material(.solidColor(Color(1, 0.9, 0.9))))
+            .scale(10, 0.01, 10)
+            .rotateX(PI/2)
+            .rotateY(-PI/4)
+            .translate(0, 0, 5)
+        Sphere(Material(.solidColor(Color(1, 0.9, 0.9))))
+            .scale(10, 0.01, 10)
+            .rotateX(PI/2)
+            .rotateY(PI/4)
+            .translate(0, 0, 5)
+        Sphere(
+            Material(.solidColor(Color(1, 0.8, 0.1)))
+                .diffuse(0.7)
+                .specular(0.3))
+            .scale(0.33, 0.33, 0.33)
+            .translate(-1.5, 0.33, -0.75)
+        Sphere(
+            Material(.solidColor(Color(0.1, 1.0, 0.5)))
+                .diffuse(0.7)
+                .specular(0.3))
+            .translate(-0.5, 1.0, 0.5)
+        Sphere(
+            Material(.solidColor(Color(0.5, 1, 0.1)))
+                .diffuse(0.7)
+                .specular(0.3))
+            .scale(0.5, 0.5, 0.5)
+            .translate(1.5, 0.5, -0.5)
     }
 }
 

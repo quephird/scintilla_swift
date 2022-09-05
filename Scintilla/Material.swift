@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Material {
+class Material {
     var colorStrategy: ColorStrategy
     var ambient: Double
     var diffuse: Double
@@ -16,6 +16,14 @@ struct Material {
     var reflective: Double
     var transparency: Double
     var refractive: Double
+
+    let default_ambient = 0.1
+    let default_diffuse = 0.9
+    let default_specular = 0.9
+    let default_shininess = 200.0
+    let default_reflective = 0.0
+    let default_transparency = 0.0
+    let default_refractive = 1.0
 
     init(_ colorStrategy: ColorStrategy, _ ambient: Double, _ diffuse: Double, _ specular: Double, _ shininess: Double, _ reflective: Double, _ transparency: Double, _ refractive: Double) {
         self.colorStrategy = colorStrategy
@@ -26,6 +34,59 @@ struct Material {
         self.reflective = reflective
         self.transparency = transparency
         self.refractive = refractive
+    }
+
+    init(_ colorStrategy: ColorStrategy) {
+        self.colorStrategy = colorStrategy
+        self.ambient = default_ambient
+        self.diffuse = default_diffuse
+        self.specular = default_specular
+        self.shininess = default_shininess
+        self.reflective = default_reflective
+        self.transparency = default_transparency
+        self.refractive = default_refractive
+    }
+
+    func ambient(_ ambient: Double) -> Self {
+        self.ambient = ambient
+
+        return self
+    }
+
+    func diffuse(_ diffuse: Double) -> Self {
+        self.diffuse = diffuse
+
+        return self
+    }
+
+    func specular(_ specular: Double) -> Self {
+        self.specular = specular
+
+        return self
+    }
+
+    func shininess(_ shininess: Double) -> Self {
+        self.shininess = shininess
+
+        return self
+    }
+
+    func reflective(_ reflective: Double) -> Self {
+        self.reflective = reflective
+
+        return self
+    }
+
+    func transparency(_ transparency: Double) -> Self {
+        self.transparency = transparency
+
+        return self
+    }
+
+    func refractive(_ refractive: Double) -> Self {
+        self.refractive = refractive
+
+        return self
     }
 
     func lighting(_ light: Light, _ object: Shape, _ point: Tuple4, _ eye: Tuple4, _ normal: Tuple4, _ isShadowed: Bool) -> Color {

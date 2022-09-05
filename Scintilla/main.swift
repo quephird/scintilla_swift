@@ -7,10 +7,9 @@
 
 import Foundation
 
-//let world = testTorus()
-let world = testScene()
+let world = chapterSevenScene()
 
-let from = point(0, 0, -5)
+let from = point(0, 2, -5)
 let to = point(0, 0, 0)
 let up = vector(0, 1, 0)
 let viewTransform = view(from, to, up)
