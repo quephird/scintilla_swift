@@ -24,7 +24,7 @@ extension Canvas {
                 line.append(temp)
                 characterCount += temp.count
             } else {
-                var temp = "\(r) \(g)"
+                temp = "\(r) \(g)"
                 if characterCount + temp.count <= MAX_PPM_LINE_WIDTH {
                     line.append(temp)
                     line.append("\n")
@@ -63,9 +63,6 @@ extension Canvas {
         var body = ""
         for y in 0...self.height-1 {
             body.append(self.line(y))
-            if y != self.height-1 {
-                body.append("\n")
-            }
         }
 
         return body
@@ -76,7 +73,6 @@ extension Canvas {
         ppm.append(self.ppmHeader())
         ppm.append("\n")
         ppm.append(self.body())
-        ppm.append("\n")
         return ppm
     }
 }
