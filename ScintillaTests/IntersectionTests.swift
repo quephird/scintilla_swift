@@ -117,7 +117,14 @@ class IntersectionTests: XCTestCase {
             Intersection(5.25, glassSphereC),
             Intersection(6, glassSphereA),
         ]
-        let expectedValues = [(1.0, 1.5), (1.5, 2.0), (2.0, 2.5), (2.5, 2.5), (2.5, 1.5), (1.5, 1.0)]
+        let expectedValues = [
+            (1.0, 1.5),
+            (1.5, 2.0),
+            (2.0, 2.5),
+            (2.5, 2.5),
+            (2.5, 1.5),
+            (1.5, 1.0)
+        ]
 
         for index in 0...5 {
             let intersection = allIntersections[index]

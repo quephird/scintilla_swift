@@ -179,7 +179,7 @@ class TransformTests: XCTestCase {
         let to = point(0, 0, 1)
         let up = vector(0, 1, 0)
         let actualValue = view(from, to, up)
-        let expectedValue = translation(0, 0, 8)
+        let expectedValue = translation(0, 0, -8)
         XCTAssert(actualValue.isAlmostEqual(expectedValue))
     }
 
