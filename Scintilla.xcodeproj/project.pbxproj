@@ -31,6 +31,7 @@
 		878120A628CAAC45004EBEF8 /* TorusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878120A528CAAC45004EBEF8 /* TorusTests.swift */; };
 		8781209928C5248F004EBEF8 /* WorldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209828C5248F004EBEF8 /* WorldBuilder.swift */; };
 		8781209B28C58572004EBEF8 /* ShapeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209A28C58572004EBEF8 /* ShapeBuilder.swift */; };
+		8781209C28C6B9CD004EBEF8 /* WorldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209828C5248F004EBEF8 /* WorldBuilder.swift */; };
 		878C690C274F373300EB945E /* ColorStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690B274F373300EB945E /* ColorStrategy.swift */; };
 		878C690D274F380400EB945E /* ColorStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690B274F373300EB945E /* ColorStrategy.swift */; };
 		878C690F274F3D5700EB945E /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690E274F3D5700EB945E /* Pattern.swift */; };
@@ -428,6 +429,7 @@
 				870DF2392748D80500787095 /* Color.swift in Sources */,
 				87EA1893275714DD00267E6E /* GroupTests.swift in Sources */,
 				87EA1889275323D300267E6E /* CylinderTests.swift in Sources */,
+				8781209C28C6B9CD004EBEF8 /* WorldBuilder.swift in Sources */,
 				87EA18962757278300267E6E /* ShapeTests.swift in Sources */,
 				87A21FF1274E29B50047AE41 /* Examples.swift in Sources */,
 				878C6910274F3DF700EB945E /* Pattern.swift in Sources */,

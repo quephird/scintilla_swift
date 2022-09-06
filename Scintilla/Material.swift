@@ -17,13 +17,15 @@ class Material {
     var transparency: Double
     var refractive: Double
 
-    let default_ambient = 0.1
-    let default_diffuse = 0.9
-    let default_specular = 0.9
-    let default_shininess = 200.0
-    let default_reflective = 0.0
-    let default_transparency = 0.0
-    let default_refractive = 1.0
+    let defaultAmbient = 0.1
+    let defaultDiffuse = 0.9
+    let defaultSpecular = 0.9
+    let defaultShininess = 200.0
+    let defaultReflective = 0.0
+    let defaultTransparency = 0.0
+    let defaultRefractive = 1.0
+
+    static let defaultMaterial = Material(ColorStrategy.solidColor(Color(1, 1, 1)), 0.1, 0.9, 0.9, 200.0, 0.0, 0.0, 1.0)
 
     init(_ colorStrategy: ColorStrategy, _ ambient: Double, _ diffuse: Double, _ specular: Double, _ shininess: Double, _ reflective: Double, _ transparency: Double, _ refractive: Double) {
         self.colorStrategy = colorStrategy
@@ -38,13 +40,13 @@ class Material {
 
     init(_ colorStrategy: ColorStrategy) {
         self.colorStrategy = colorStrategy
-        self.ambient = default_ambient
-        self.diffuse = default_diffuse
-        self.specular = default_specular
-        self.shininess = default_shininess
-        self.reflective = default_reflective
-        self.transparency = default_transparency
-        self.refractive = default_refractive
+        self.ambient = defaultAmbient
+        self.diffuse = defaultDiffuse
+        self.specular = defaultSpecular
+        self.shininess = defaultShininess
+        self.reflective = defaultReflective
+        self.transparency = defaultTransparency
+        self.refractive = defaultRefractive
     }
 
     func ambient(_ ambient: Double) -> Self {
@@ -137,5 +139,3 @@ class Material {
         return ambient.add(diffuse).add(specular)
     }
 }
-
-let DEFAULT_MATERIAL = Material(ColorStrategy.solidColor(Color(1, 1, 1)), 0.1, 0.9, 0.9, 200.0, 0.0, 0.0, 1.0)

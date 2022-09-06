@@ -9,79 +9,81 @@ import XCTest
 
 class PatternTests: XCTestCase {
     func testStripePatternIsConstantInY() throws {
-        let pattern = Striped(WHITE, BLACK, IDENTITY4)
-        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(WHITE))
-        XCTAssertTrue(pattern.colorAt(point(0, 1, 0)).isAlmostEqual(WHITE))
-        XCTAssertTrue(pattern.colorAt(point(0, 2, 0)).isAlmostEqual(WHITE))
+        let pattern = Striped(.white, .black, .identity)
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(.white))
+        XCTAssertTrue(pattern.colorAt(point(0, 1, 0)).isAlmostEqual(.white))
+        XCTAssertTrue(pattern.colorAt(point(0, 2, 0)).isAlmostEqual(.white))
     }
 
     func testStripePatternIsConstantInZ() throws {
-        let pattern = Striped(WHITE, BLACK, IDENTITY4)
-        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(WHITE))
-        XCTAssertTrue(pattern.colorAt(point(0, 0, 1)).isAlmostEqual(WHITE))
-        XCTAssertTrue(pattern.colorAt(point(0, 0, 2)).isAlmostEqual(WHITE))
+        let pattern = Striped(.white, .black, .identity)
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(.white))
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 1)).isAlmostEqual(.white))
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 2)).isAlmostEqual(.white))
     }
 
     func testStripePatternAlternatestInX() throws {
-        let pattern = Striped(WHITE, BLACK, IDENTITY4)
-        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(WHITE))
-        XCTAssertTrue(pattern.colorAt(point(0.9, 0, 0)).isAlmostEqual(WHITE))
-        XCTAssertTrue(pattern.colorAt(point(1, 0, 0)).isAlmostEqual(BLACK))
-        XCTAssertTrue(pattern.colorAt(point(-0.1, 0, 0)).isAlmostEqual(BLACK))
-        XCTAssertTrue(pattern.colorAt(point(-1, 0, 0)).isAlmostEqual(BLACK))
-        XCTAssertTrue(pattern.colorAt(point(-1.1, 0, 0)).isAlmostEqual(WHITE))
+        let pattern = Striped(.white, .black, .identity)
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(.white))
+        XCTAssertTrue(pattern.colorAt(point(0.9, 0, 0)).isAlmostEqual(.white))
+        XCTAssertTrue(pattern.colorAt(point(1, 0, 0)).isAlmostEqual(.black))
+        XCTAssertTrue(pattern.colorAt(point(-0.1, 0, 0)).isAlmostEqual(.black))
+        XCTAssertTrue(pattern.colorAt(point(-1, 0, 0)).isAlmostEqual(.black))
+        XCTAssertTrue(pattern.colorAt(point(-1.1, 0, 0)).isAlmostEqual(.white))
     }
 
     func testStripePatternWithObjectTransformation() throws {
-        let shape = Sphere(scaling(2, 2, 2), DEFAULT_MATERIAL)
-        let pattern = Striped(WHITE, BLACK, IDENTITY4)
+        let shape = Sphere(.defaultMaterial)
+            .scale(2, 2, 2)
+        let pattern = Striped(.white, .black, .identity)
         let actualValue = pattern.colorAt(shape, point(1.5, 0, 0))
-        let expectedValue = WHITE
+        let expectedValue = Color.white
         XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
     }
 
     func testStripePatternWithPatternTransformation() throws {
-        let shape = Sphere(IDENTITY4, DEFAULT_MATERIAL)
-        let pattern = Striped(WHITE, BLACK, scaling(2, 2, 2))
+        let shape = Sphere(.defaultMaterial)
+        let pattern = Striped(.white, .black, .scaling(2, 2, 2))
         let actualValue = pattern.colorAt(shape, point(1.5, 0, 0))
-        let expectedValue = WHITE
+        let expectedValue = Color.white
         XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
     }
 
     func testStripePatternWithBothTransformations() throws {
-        let shape = Sphere(scaling(2, 2, 2), DEFAULT_MATERIAL)
-        let pattern = Striped(WHITE, BLACK, translation(0.5, 0, 0))
+        let shape = Sphere(.defaultMaterial)
+            .scale(2, 2, 2)
+        let pattern = Striped(.white, .black, .translation(0.5, 0, 0))
         let actualValue = pattern.colorAt(shape, point(2.5, 0, 0))
-        let expectedValue = WHITE
+        let expectedValue = Color.white
         XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
     }
 
     func testGradientPatternInterpolatesBetweenColors() throws {
-        let pattern = Gradient(WHITE, BLACK, IDENTITY4)
-        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(WHITE))
+        let pattern = Gradient(.white, .black, .identity)
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(.white))
         XCTAssertTrue(pattern.colorAt(point(0.25, 0, 0)).isAlmostEqual(Color(0.75, 0.75, 0.75)))
         XCTAssertTrue(pattern.colorAt(point(0.5, 0, 0)).isAlmostEqual(Color(0.5, 0.5, 0.5)))
         XCTAssertTrue(pattern.colorAt(point(0.75, 0, 0)).isAlmostEqual(Color(0.25, 0.25, 0.25)))
     }
 
     func testCheckered3DPatternShouldRepeatInX() throws {
-        let pattern = Checkered3D(WHITE, BLACK, IDENTITY4)
-        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(WHITE))
-        XCTAssertTrue(pattern.colorAt(point(0.99, 0, 0)).isAlmostEqual(WHITE))
-        XCTAssertTrue(pattern.colorAt(point(1.01, 0, 0)).isAlmostEqual(BLACK))
+        let pattern = Checkered3D(.white, .black, .identity)
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(.white))
+        XCTAssertTrue(pattern.colorAt(point(0.99, 0, 0)).isAlmostEqual(.white))
+        XCTAssertTrue(pattern.colorAt(point(1.01, 0, 0)).isAlmostEqual(.black))
     }
 
     func testCheckered3DPatternShouldRepeatInY() throws {
-        let pattern = Checkered3D(WHITE, BLACK, IDENTITY4)
-        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(WHITE))
-        XCTAssertTrue(pattern.colorAt(point(0, 0.99, 0)).isAlmostEqual(WHITE))
-        XCTAssertTrue(pattern.colorAt(point(0, 1.01, 0)).isAlmostEqual(BLACK))
+        let pattern = Checkered3D(.white, .black, .identity)
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(.white))
+        XCTAssertTrue(pattern.colorAt(point(0, 0.99, 0)).isAlmostEqual(.white))
+        XCTAssertTrue(pattern.colorAt(point(0, 1.01, 0)).isAlmostEqual(.black))
     }
 
     func testCheckered3DPatternShouldRepeatInZ() throws {
-        let pattern = Checkered3D(WHITE, BLACK, IDENTITY4)
-        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(WHITE))
-        XCTAssertTrue(pattern.colorAt(point(0, 0, 0.99)).isAlmostEqual(WHITE))
-        XCTAssertTrue(pattern.colorAt(point(0, 0, 1.01)).isAlmostEqual(BLACK))
+        let pattern = Checkered3D(.white, .black, .identity)
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 0)).isAlmostEqual(.white))
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 0.99)).isAlmostEqual(.white))
+        XCTAssertTrue(pattern.colorAt(point(0, 0, 1.01)).isAlmostEqual(.black))
     }
 }

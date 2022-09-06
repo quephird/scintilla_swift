@@ -7,9 +7,33 @@
 
 import XCTest
 
+let testWorld = World(Light(point(-10, 10, -10))) {
+    Sphere(Material(.solidColor(Color(0.8, 1.0, 0.6)))
+        .ambient(0.1)
+        .diffuse(0.7)
+        .specular(0.2)
+        .refractive(0.0)
+    )
+    Sphere(.defaultMaterial)
+        .scale(0.5, 0.5, 0.5)
+}
+
+//let testWorld = World(Light(point(-10, 10, -10), Color(1, 1, 1)),
+//    [
+//        Sphere(
+//            IDENTITY4,
+//            Material(ColorStrategy.solidColor(Color(0.8, 1.0, 0.6)), 0.1, 0.7, 0.2, 200.0, 0.0, 0.0, 0.0)
+//        ),
+//        Sphere(
+//            scaling(0.5, 0.5, 0.5),
+//            DEFAULT_MATERIAL
+//        )
+//    ]
+//)
+
 class WorldTests: XCTestCase {
     func testIntersect() throws {
-        let world = DEFAULT_WORLD
+        let world = testWorld
         let ray = Ray(point(0, 0, -5), vector(0, 0, 1))
         let intersections = world.intersect(ray)
         XCTAssertEqual(intersections.count, 4)
@@ -20,7 +44,7 @@ class WorldTests: XCTestCase {
     }
 
     func testShadeHit() throws {
-        let world = DEFAULT_WORLD
+        let world = testWorld
         let ray = Ray(point(0, 0, -5), vector(0, 0, 1))
         let shape = world.objects[0]
         let intersection = Intersection(4, shape)
@@ -31,7 +55,7 @@ class WorldTests: XCTestCase {
     }
 
     func testShadeHitInside() throws {
-        var world = DEFAULT_WORLD
+        var world = testWorld
         let light = Light(point(0, 0.25, 0), Color(1, 1, 1))
         world.light = light
         let ray = Ray(point(0, 0, 0), vector(0, 0, 1))
@@ -45,9 +69,9 @@ class WorldTests: XCTestCase {
 
     func testShadeHitIntersectionInShadow() throws {
         let light = Light(point(0, 0, -10), Color(1, 1, 1))
-        let s1 = Sphere(IDENTITY4, DEFAULT_MATERIAL)
-        let transform = translation(0, 0, 10)
-        let s2 = Sphere(transform, DEFAULT_MATERIAL)
+        let s1 = Sphere(.defaultMaterial)
+        let s2 = Sphere(.defaultMaterial)
+            .translate(0, 0, 10)
         let world = World(light, [s1, s2])
         let ray = Ray(point(0, 0, 5), vector(0, 0, 1))
         let intersection = Intersection(4, s2)
@@ -58,7 +82,7 @@ class WorldTests: XCTestCase {
     }
 
     func testColorAtMiss() throws {
-        let world = DEFAULT_WORLD
+        let world = testWorld
         let ray = Ray(point(0, 0, -5), vector(0, 1, 0))
         let actualValue = world.colorAt(ray, MAX_RECURSIVE_CALLS)
         let expectedValue = Color(0, 0, 0)
@@ -66,7 +90,7 @@ class WorldTests: XCTestCase {
     }
 
     func testColorAtHit() throws {
-        let world = DEFAULT_WORLD
+        let world = testWorld
         let ray = Ray(point(0, 0, -5), vector(0, 0, 1))
         let actualValue = world.colorAt(ray, MAX_RECURSIVE_CALLS)
         let expectedValue = Color(0.38066, 0.47583, 0.2855)
@@ -74,7 +98,7 @@ class WorldTests: XCTestCase {
     }
 
     func testColorAtIntersectionBehindRay() throws {
-        let world = DEFAULT_WORLD
+        let world = testWorld
         let outerSphere = world.objects[0]
         outerSphere.material.ambient = 1
         let innerSphere = world.objects[0]
@@ -86,31 +110,31 @@ class WorldTests: XCTestCase {
     }
 
     func testIsShadowedPointAndLightNotCollinear() throws {
-        let world = DEFAULT_WORLD
+        let world = testWorld
         let point = point(0, 10, 0)
         XCTAssertFalse(world.isShadowed(point))
     }
 
     func testIsShadowedObjectBetweenPointAndLight() throws {
-        let world = DEFAULT_WORLD
+        let world = testWorld
         let point = point(10, -10, 10)
         XCTAssertTrue(world.isShadowed(point))
     }
 
     func testIsShadowedObjectBehindLight() throws {
-        let world = DEFAULT_WORLD
+        let world = testWorld
         let point = point(-20, 20, -20)
         XCTAssertFalse(world.isShadowed(point))
     }
 
     func testIsShadowedObjectBehindPoint() throws {
-        let world = DEFAULT_WORLD
+        let world = testWorld
         let point = point(-2, 2, -2)
         XCTAssertFalse(world.isShadowed(point))
     }
 
     func testReflectedColorForNonreflectiveMaterial() {
-        let world = DEFAULT_WORLD
+        let world = testWorld
         let secondShape = world.objects[1]
         secondShape.material.ambient = 1
 
@@ -123,12 +147,12 @@ class WorldTests: XCTestCase {
     }
 
     func testShadeHitWithReflectiveMaterial() throws {
-        var world = DEFAULT_WORLD
-        let transform = translation(0, -1, 0)
-        var material = DEFAULT_MATERIAL
-        material.reflective = 0.5
-        let anotherShape = Plane(transform, material)
+        var world = testWorld
+        let anotherShape = Plane(.defaultMaterial
+            .reflective(0.5))
+            .translate(0, -1, 0)
         world.objects.append(anotherShape)
+
         let ray = Ray(point(0, 0, -3), vector(0, -sqrt(2)/2, sqrt(2)/2))
         let intersection = Intersection(sqrt(2), anotherShape)
         let computations = intersection.prepareComputations(ray, [intersection])
@@ -138,13 +162,11 @@ class WorldTests: XCTestCase {
     }
 
     func testColorAtTerminatesForWorldWithMutuallyReflectiveSurfaces() throws {
-        let light = Light(point(0, 0, 0), Color(1, 1, 1))
-        var material = DEFAULT_MATERIAL
-        material.reflective = 1
-        let lowerTransform = translation(0, -1, 0)
-        let lowerPlane = Plane(lowerTransform, material)
-        let upperTransform = translation(0, 1, 0)
-        let upperPlane = Plane(upperTransform, material)
+        let lowerPlane = Plane(.defaultMaterial.reflective(1.0))
+            .translate(0, -1, 0)
+        let upperPlane = Plane(.defaultMaterial.reflective(1.0))
+            .translate(0, 1, 0)
+        let light = Light(point(0, 0, 0))
         let world = World(light, [lowerPlane, upperPlane])
         let ray = Ray(point(0, 0, 0), vector(0, 1, 0))
         // The following call should terminate; no need to test return value
@@ -152,22 +174,22 @@ class WorldTests: XCTestCase {
     }
 
     func testColorAtMaxRecursiveDepth() throws {
-        var world = DEFAULT_WORLD
-        let transform = translation(0, -1, 0)
-        var material = DEFAULT_MATERIAL
-        material.reflective = 0.5
-        let additionalShape = Plane(transform, material)
+        var world = testWorld
+        let additionalShape = Plane(Material.defaultMaterial
+            .reflective(0.5))
+            .translate(0, -1, 0)
         world.objects.append(additionalShape)
+
         let ray = Ray(point(0, 0, -3), vector(0, -sqrt(2)/2, sqrt(2)/2))
         let intersection = Intersection(sqrt(2), additionalShape)
         let computations = intersection.prepareComputations(ray, [intersection])
         let actualValue = world.reflectedColorAt(computations, 0)
-        let expectedValue = BLACK
+        let expectedValue = Color.black
         XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
     }
 
     func testRefractedColorWithOpaqueSurface() throws {
-        let world = DEFAULT_WORLD
+        let world = testWorld
         let firstShape = world.objects[0]
         let ray = Ray(point(0, 0, -5), vector(0, 0, 1))
         let allIntersections = [
@@ -181,9 +203,9 @@ class WorldTests: XCTestCase {
     }
 
     func testRefractedColorAtMaximumRecursiveDepth() throws {
-        let world = DEFAULT_WORLD
+        let world = testWorld
         let firstShape = world.objects[0]
-        var material = DEFAULT_MATERIAL
+        var material = Material.defaultMaterial
         material.transparency = 1.0
         material.refractive = 1.5
         firstShape.material = material
@@ -194,14 +216,14 @@ class WorldTests: XCTestCase {
         ]
         let computations = allIntersections[0].prepareComputations(ray, allIntersections)
         let actualValue = world.refractedColorAt(computations, 0)
-        let expectedValue = BLACK
+        let expectedValue = Color.black
         XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
     }
 
     func testRefractedColorUnderTotalInternalReflection() throws {
-        let world = DEFAULT_WORLD
+        let world = testWorld
         let firstShape = world.objects[0]
-        var material = DEFAULT_MATERIAL
+        var material = Material.defaultMaterial
         material.transparency = 1.0
         material.refractive = 1.5
         firstShape.material = material
@@ -212,7 +234,7 @@ class WorldTests: XCTestCase {
         ]
         let computations = allIntersections[1].prepareComputations(ray, allIntersections)
         let actualValue = world.refractedColorAt(computations, MAX_RECURSIVE_CALLS)
-        let expectedValue = BLACK
+        let expectedValue = Color.black
         XCTAssertTrue(actualValue.isAlmostEqual(expectedValue))
     }
 
@@ -227,16 +249,16 @@ class WorldTests: XCTestCase {
             }
         }
 
-        let world = DEFAULT_WORLD
+        let world = testWorld
 
         let shapeA = world.objects[0]
-        var materialA = DEFAULT_MATERIAL
-        materialA.colorStrategy = .pattern(Test(IDENTITY4))
+        var materialA = Material.defaultMaterial
+        materialA.colorStrategy = .pattern(Test(.identity))
         materialA.ambient = 1.0
         shapeA.material = materialA
 
         let shapeB = world.objects[1]
-        var materialB = DEFAULT_MATERIAL
+        var materialB = Material.defaultMaterial
         materialB.transparency = 1.0
         materialB.refractive = 1.5
         shapeB.material = materialB
@@ -255,19 +277,16 @@ class WorldTests: XCTestCase {
     }
 
     func testShadeHitWithTransparentMaterial() throws {
-        var world = DEFAULT_WORLD
+        var world = testWorld
 
-        let floorTransform = translation(0, -1, 0)
-        var floorMaterial = DEFAULT_MATERIAL
-        floorMaterial.transparency = 0.5
-        floorMaterial.refractive = 1.5
-        let floor = Plane(floorTransform, floorMaterial)
+        let floor = Plane(Material.defaultMaterial
+            .transparency(0.5)
+            .refractive(1.5))
+            .translate(0, -1, 0)
 
-        let ballTransform = translation(0, -3.5, -0.5)
-        var ballMaterial = DEFAULT_MATERIAL
-        ballMaterial.colorStrategy = .solidColor(Color(1, 0, 0))
-        ballMaterial.ambient = 0.5
-        let ball = Sphere(ballTransform, ballMaterial)
+        let ball = Sphere(Material(.solidColor(Color(1, 0, 0)))
+            .ambient(0.5))
+            .translate(0, -3.5, -0.5)
 
         world.objects.append(contentsOf: [floor, ball])
 
@@ -281,9 +300,9 @@ class WorldTests: XCTestCase {
     }
 
     func testSchlickReflectanceForTotalInternalReflection() throws {
-        let light = Light(point(-10, 10, -10), WHITE)
-        let glass = Material(.solidColor(WHITE), 0.1, 0.9, 0.9, 200, 0.0, 1.0, 1.5)
-        let glassySphere = Sphere(IDENTITY4, glass)
+        let light = Light(point(-10, 10, -10))
+        let glass = Material(.solidColor(.white), 0.1, 0.9, 0.9, 200, 0.0, 1.0, 1.5)
+        let glassySphere = Sphere(glass)
         let world = World(light, [glassySphere])
 
         let ray = Ray(point(0, 0, sqrt(2)/2), vector(0, 1, 0))
@@ -298,9 +317,9 @@ class WorldTests: XCTestCase {
     }
 
     func testSchlickReflectanceForPerpendicularRay() throws {
-        let light = Light(point(-10, 10, -10), WHITE)
-        let glass = Material(.solidColor(WHITE), 0.1, 0.9, 0.9, 200, 0.0, 1.0, 1.5)
-        let glassySphere = Sphere(IDENTITY4, glass)
+        let light = Light(point(-10, 10, -10))
+        let glass = Material(.solidColor(.white), 0.1, 0.9, 0.9, 200, 0.0, 1.0, 1.5)
+        let glassySphere = Sphere(glass)
         let world = World(light, [glassySphere])
 
         let ray = Ray(point(0, 0, 0), vector(0, 1, 0))
@@ -315,9 +334,9 @@ class WorldTests: XCTestCase {
     }
 
     func testSchlickReflectanceForSmallAngleAndN2GreaterThanN1() throws {
-        let light = Light(point(-10, 10, -10), WHITE)
-        let glass = Material(.solidColor(WHITE), 0.1, 0.9, 0.9, 200, 0.0, 1.0, 1.5)
-        let glassySphere = Sphere(IDENTITY4, glass)
+        let light = Light(point(-10, 10, -10))
+        let glass = Material(.solidColor(.white), 0.1, 0.9, 0.9, 200, 0.0, 1.0, 1.5)
+        let glassySphere = Sphere(glass)
         let world = World(light, [glassySphere])
 
         let ray = Ray(point(0, 0.99, -2), vector(0, 0, 1))
@@ -330,20 +349,17 @@ class WorldTests: XCTestCase {
     }
 
     func testShadeHitWithReflectiveAndTransparentMaterial() throws {
-        var world = DEFAULT_WORLD
+        var world = testWorld
 
-        let floorTransform = translation(0, -1, 0)
-        var floorMaterial = DEFAULT_MATERIAL
-        floorMaterial.transparency = 0.5
-        floorMaterial.reflective = 0.5
-        floorMaterial.refractive = 1.5
-        let floor = Plane(floorTransform, floorMaterial)
+        let floor = Plane(Material.defaultMaterial
+            .transparency(0.5)
+            .reflective(0.5)
+            .refractive(1.5))
+            .translate(0, -1, 0)
 
-        let ballTransform = translation(0, -3.5, -0.5)
-        var ballMaterial = DEFAULT_MATERIAL
-        ballMaterial.colorStrategy = .solidColor(Color(1, 0, 0))
-        ballMaterial.ambient = 0.5
-        let ball = Sphere(ballTransform, ballMaterial)
+        let ball = Sphere(Material(.solidColor(Color(1, 0, 0)))
+            .ambient(0.5))
+            .translate(0, -3.5, -0.5)
 
         world.objects.append(contentsOf: [floor, ball])
 

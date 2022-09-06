@@ -9,17 +9,19 @@ import XCTest
 
 class GroupTests: XCTestCase {
     func testLocalIntersectWithEmptyGroup() throws {
-        let group = Group(IDENTITY4, DEFAULT_MATERIAL)
+        let group = Group(.defaultMaterial)
         let ray = Ray(point(0, 0, 0), vector(0, 0, 1))
         let allIntersections = group.localIntersect(ray)
         XCTAssertEqual(allIntersections.count, 0)
     }
 
     func testLocalIntersectWithNonEmptyGroup() throws {
-        let group = Group(IDENTITY4, DEFAULT_MATERIAL)
-        let s1 = Sphere(IDENTITY4, DEFAULT_MATERIAL)
-        let s2 = Sphere(translation(0, 0, -3), DEFAULT_MATERIAL)
-        let s3 = Sphere(translation(5, 0, 0), DEFAULT_MATERIAL)
+        let group = Group(.defaultMaterial)
+        let s1 = Sphere(.defaultMaterial)
+        let s2 = Sphere(.defaultMaterial)
+            .translate(0, 0, -3)
+        let s3 = Sphere(.defaultMaterial)
+            .translate(5, 0, 0)
         group.addChild(s1)
         group.addChild(s2)
         group.addChild(s3)
@@ -34,9 +36,10 @@ class GroupTests: XCTestCase {
     }
 
     func testLocalIntersectWithTransformedGroup() throws {
-        let groupTransform = scaling(2, 2, 2)
-        let group = Group(groupTransform, DEFAULT_MATERIAL)
-        let s = Sphere(translation(5, 0, 0), DEFAULT_MATERIAL)
+        let group = Group(.defaultMaterial)
+            .scale(2, 2, 2)
+        let s = Sphere(.defaultMaterial)
+            .translate(5, 0, 0)
         group.addChild(s)
 
         let ray = Ray(point(10, 0, -10), vector(0, 0, 1))

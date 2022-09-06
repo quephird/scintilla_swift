@@ -9,10 +9,13 @@ import XCTest
 
 class ShapeTests: XCTestCase {
     func testWorldToObjectForNestedObject() throws {
-        let g1 = Group(rotationY(PI/2), DEFAULT_MATERIAL)
-        let g2 = Group(scaling(2, 2, 2), DEFAULT_MATERIAL)
+        let g1 = Group(.defaultMaterial)
+            .rotateY(PI/2)
+        let g2 = Group(.defaultMaterial)
+            .scale(2, 2, 2)
         g1.addChild(g2)
-        let s = Sphere(translation(5, 0, 0), DEFAULT_MATERIAL)
+        let s = Sphere(.defaultMaterial)
+            .translate(5, 0, 0)
         g2.addChild(s)
 
         let actualValue = s.worldToObject(point(-2, 0, -10))
@@ -21,10 +24,13 @@ class ShapeTests: XCTestCase {
     }
 
     func testObjectToWorldForNestedObject() throws {
-        let g1 = Group(rotationY(PI/2), DEFAULT_MATERIAL)
-        let g2 = Group(scaling(1, 2, 3), DEFAULT_MATERIAL)
+        let g1 = Group(.defaultMaterial)
+            .rotateY(PI/2)
+        let g2 = Group(.defaultMaterial)
+            .scale(1, 2, 3)
         g1.addChild(g2)
-        let s = Sphere(translation(5, 0, 0), DEFAULT_MATERIAL)
+        let s = Sphere(.defaultMaterial)
+            .translate(5, 0, 0)
         g2.addChild(s)
 
         let actualValue = s.objectToWorld(vector(sqrt(3)/3, sqrt(3)/3, sqrt(3)/3))
@@ -33,10 +39,13 @@ class ShapeTests: XCTestCase {
     }
 
     func testNormalForNestedObject() throws {
-        let g1 = Group(rotationY(PI/2), DEFAULT_MATERIAL)
-        let g2 = Group(scaling(1, 2, 3), DEFAULT_MATERIAL)
+        let g1 = Group(.defaultMaterial)
+            .rotateY(PI/2)
+        let g2 = Group(.defaultMaterial)
+            .scale(1, 2, 3)
         g1.addChild(g2)
-        let s = Sphere(translation(5, 0, 0), DEFAULT_MATERIAL)
+        let s = Sphere(.defaultMaterial)
+            .translate(5, 0, 0)
         g2.addChild(s)
 
         let actualValue = s.normal(point(1.7321, 1.1547, -5.5774))

@@ -31,67 +31,43 @@ class Shape {
     }
 
     func translate(_ x: Double, _ y: Double, _ z: Double) -> Self {
-        self.transform = Matrix4(
-            1, 0, 0, x,
-            0, 1, 0, y,
-            0, 0, 1, z,
-            0, 0, 0, 1
-        ).multiplyMatrix(self.transform)
+        self.transform = .translation(x, y, z)
+            .multiplyMatrix(self.transform)
 
         return self
     }
 
     func scale(_ x: Double, _ y: Double, _ z: Double) -> Self {
-        self.transform = Matrix4(
-            x, 0, 0, 0,
-            0, y, 0, 0,
-            0, 0, z, 0,
-            0, 0, 0, 1
-        ).multiplyMatrix(self.transform)
+        self.transform = .scaling(x, y, z)
+            .multiplyMatrix(self.transform)
 
         return self
     }
 
     func rotateX(_ t: Double) -> Self {
-        self.transform = Matrix4(
-            1, 0,      0,       0,
-            0, cos(t), -sin(t), 0,
-            0, sin(t), cos(t),  0,
-            0, 0,      0,       1
-        ).multiplyMatrix(self.transform)
+        self.transform = .rotationX(t)
+            .multiplyMatrix(self.transform)
 
         return self
     }
 
     func rotateY(_ t: Double) -> Self {
-        self.transform = Matrix4(
-            cos(t),  0, sin(t), 0,
-            0,       1, 0,      0,
-            -sin(t), 0, cos(t), 0,
-            0, 0,      0,       1
-        ).multiplyMatrix(self.transform)
+        self.transform = .rotationY(t)
+            .multiplyMatrix(self.transform)
 
         return self
     }
 
     func rotateZ(_ t: Double) -> Self {
-        self.transform = Matrix4(
-            cos(t), -sin(t), 0, 0,
-            sin(t), cos(t),  0, 0,
-            0,      0,       1, 0,
-            0,      0,       0, 1
-        ).multiplyMatrix(self.transform)
+        self.transform = .rotationZ(t)
+            .multiplyMatrix(self.transform)
 
         return self
     }
 
     func shear(_ xy: Double, _ xz: Double, _ yx: Double, _ yz: Double, _ zx: Double, _ zy: Double) -> Self {
-        self.transform = Matrix4(
-            1,  xy, xz, 0,
-            yx, 1,  yz, 0,
-            zx, zy, 1,  0,
-            0,  0,  0,  1
-        ).multiplyMatrix(self.transform)
+        self.transform = .shearing(xy, xz, yx, yz, zx, zy)
+            .multiplyMatrix(self.transform)
 
         return self
     }

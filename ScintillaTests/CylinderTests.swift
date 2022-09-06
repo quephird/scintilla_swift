@@ -9,7 +9,7 @@ import XCTest
 
 class CylinderTests: XCTestCase {
     func testLocalIntersectMisses() throws {
-        let cylinder = Cylinder(IDENTITY4, DEFAULT_MATERIAL)
+        let cylinder = Cylinder(.defaultMaterial)
 
         let testCases = [
             (point(1, 0, 0), vector(0, 1, 0)),
@@ -25,7 +25,7 @@ class CylinderTests: XCTestCase {
     }
 
     func testLocalIntersectHitsWalls() throws {
-        let cylinder = Cylinder(IDENTITY4, DEFAULT_MATERIAL)
+        let cylinder = Cylinder(.defaultMaterial)
 
         let testCases = [
             (point(1, 0, -5), vector(0, 0, 1), [5.0]),
@@ -48,7 +48,7 @@ class CylinderTests: XCTestCase {
     }
 
     func testLocalIntersectHitsCaps() throws {
-        let cylinder = Cylinder(IDENTITY4, DEFAULT_MATERIAL, 1, 2, true)
+        let cylinder = Cylinder(.defaultMaterial, 1, 2, true)
 
         let testCases = [
             (point(0, 3, 0), vector(0, -1, 0), 2),
@@ -66,7 +66,7 @@ class CylinderTests: XCTestCase {
     }
 
     func testLocalIntersectTruncated() throws {
-        let cylinder = Cylinder(IDENTITY4, DEFAULT_MATERIAL, 1, 2)
+        let cylinder = Cylinder(.defaultMaterial, 1, 2)
 
         let testCases = [
             (point(0, 1.5, 0), vector(0.1, 1, 0), 0),
@@ -85,7 +85,7 @@ class CylinderTests: XCTestCase {
     }
 
     func testLocalNormalOnWalls() throws {
-        let cylinder = Cylinder(IDENTITY4, DEFAULT_MATERIAL)
+        let cylinder = Cylinder(.defaultMaterial)
 
         let testCases = [
             (point(1, 0, 0), vector(1, 0, 0)),
@@ -101,7 +101,7 @@ class CylinderTests: XCTestCase {
     }
 
     func testLocalNormalOnCaps() throws {
-        let cylinder = Cylinder(IDENTITY4, DEFAULT_MATERIAL, 1, 2, true)
+        let cylinder = Cylinder(.defaultMaterial, 1, 2, true)
 
         let testCases = [
             (point(0, 1, 0), vector(0, -1, 0)),

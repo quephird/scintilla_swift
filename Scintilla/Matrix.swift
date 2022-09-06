@@ -187,6 +187,60 @@ struct Matrix4 {
         )
     }
 
+    static func translation(_ x: Double, _ y: Double, _ z: Double) -> Self {
+        return Matrix4(
+            1, 0, 0, x,
+            0, 1, 0, y,
+            0, 0, 1, z,
+            0, 0, 0, 1
+        )
+    }
+
+    static func scaling(_ x: Double, _ y: Double, _ z: Double) -> Self {
+        return Matrix4(
+            x, 0, 0, 0,
+            0, y, 0, 0,
+            0, 0, z, 0,
+            0, 0, 0, 1
+        )
+    }
+
+    static func rotationX(_ t: Double) -> Self {
+        return Matrix4(
+            1, 0,      0,       0,
+            0, cos(t), -sin(t), 0,
+            0, sin(t), cos(t),  0,
+            0, 0,      0,       1
+        )
+    }
+
+    static func rotationY(_ t: Double) -> Self {
+        return Matrix4(
+            cos(t),  0, sin(t), 0,
+            0,       1, 0,      0,
+            -sin(t), 0, cos(t), 0,
+            0, 0,      0,       1
+        )
+    }
+
+    static func rotationZ(_ t: Double) -> Self {
+        return Matrix4(
+            cos(t), -sin(t), 0, 0,
+            sin(t), cos(t),  0, 0,
+            0,      0,       1, 0,
+            0,      0,       0, 1
+        )
+    }
+
+    static func shearing(_ xy: Double, _ xz: Double, _ yx: Double, _ yz: Double, _ zx: Double, _ zy: Double) -> Self {
+        return Matrix4(
+            1,  xy, xz, 0,
+            yx, 1,  yz, 0,
+            zx, zy, 1,  0,
+            0,  0,  0,  1
+        )
+    }
+
     subscript(_ i: Int, _ j: Int) -> Double {
         get {
             let index = j*4+i

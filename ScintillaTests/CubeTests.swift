@@ -9,7 +9,7 @@ import XCTest
 
 class CubeTests: XCTestCase {
     func testLocalIntersectHits() throws {
-        let cube = Cube(IDENTITY4, DEFAULT_MATERIAL)
+        let cube = Cube(.defaultMaterial)
 
         let testCases = [
             (point(5, 0.5, 0), vector(-1, 0, 0), 4.0, 6.0),
@@ -31,7 +31,7 @@ class CubeTests: XCTestCase {
     }
 
     func testLocalIntersectMisses() throws {
-        let cube = Cube(IDENTITY4, DEFAULT_MATERIAL)
+        let cube = Cube(.defaultMaterial)
 
         let testCases = [
             (point(-2, 0, 0), vector(0.2673, 0.5345, 0.8018)),
@@ -50,7 +50,7 @@ class CubeTests: XCTestCase {
     }
 
     func testLocalNormal() throws {
-        let cube = Cube(IDENTITY4, DEFAULT_MATERIAL)
+        let cube = Cube(.defaultMaterial)
 
         let testCases = [
             (point(1, 0.5, -0.8), vector(1, 0, 0)),

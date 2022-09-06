@@ -32,7 +32,7 @@ class TransformTests: XCTestCase {
     }
 
     func testScalingPoint() throws {
-        let transform = scaling(2, 3, 4)
+        let transform = Matrix4.scaling(2, 3, 4)
         let p = point(-4, 6, 8)
         let actualValue = transform.multiplyTuple(p)
         let expectedValue = point(-8, 18, 32)
@@ -40,7 +40,7 @@ class TransformTests: XCTestCase {
     }
 
     func testScalingVector() throws {
-        let transform = scaling(2, 3, 4)
+        let transform = Matrix4.scaling(2, 3, 4)
         let v = vector(-4, 6, 8)
         let actualValue = transform.multiplyTuple(v)
         let expectedValue = vector(-8, 18, 32)
@@ -48,7 +48,7 @@ class TransformTests: XCTestCase {
     }
 
     func testScalingInverse() throws {
-        let transform = scaling(2, 3, 4).inverse()
+        let transform = Matrix4.scaling(2, 3, 4).inverse()
         let v = vector(-4, 6, 8)
         let actualValue = transform.multiplyTuple(v)
         let expectedValue = vector(-2, 2, 2)
@@ -57,8 +57,8 @@ class TransformTests: XCTestCase {
 
     func testRotationX() throws {
         let p = point(0, 1, 0)
-        let halfQuarter = rotationX(PI/4)
-        let fullQuarter = rotationX(PI/2)
+        let halfQuarter = Matrix4.rotationX(PI/4)
+        let fullQuarter = Matrix4.rotationX(PI/2)
 
         var actualValue = halfQuarter.multiplyTuple(p)
         var expectedValue = point(0, sqrt(2)/2, sqrt(2)/2)
@@ -71,8 +71,8 @@ class TransformTests: XCTestCase {
 
     func testRotationY() throws {
         let p = point(0, 0, 1)
-        let halfQuarter = rotationY(PI/4)
-        let fullQuarter = rotationY(PI/2)
+        let halfQuarter = Matrix4.rotationY(PI/4)
+        let fullQuarter = Matrix4.rotationY(PI/2)
 
         var actualValue = halfQuarter.multiplyTuple(p)
         var expectedValue = point(sqrt(2)/2, 0, sqrt(2)/2)
@@ -85,8 +85,8 @@ class TransformTests: XCTestCase {
 
     func testRotationZ() throws {
         let p = point(0, 1, 0)
-        let halfQuarter = rotationZ(PI/4)
-        let fullQuarter = rotationZ(PI/2)
+        let halfQuarter = Matrix4.rotationZ(PI/4)
+        let fullQuarter = Matrix4.rotationZ(PI/2)
 
         var actualValue = halfQuarter.multiplyTuple(p)
         var expectedValue = point(-sqrt(2)/2, sqrt(2)/2, 0)
@@ -98,7 +98,7 @@ class TransformTests: XCTestCase {
     }
 
     func testShearingXy() throws {
-        let transform = shearing(1, 0, 0, 0, 0, 0)
+        let transform = Matrix4.shearing(1, 0, 0, 0, 0, 0)
         let p = point(2, 3, 4)
         let actualValue = transform.multiplyTuple(p)
         let expectedValue = point(5, 3, 4)
@@ -106,7 +106,7 @@ class TransformTests: XCTestCase {
     }
 
     func testShearingXz() throws {
-        let transform = shearing(0, 1, 0, 0, 0, 0)
+        let transform = Matrix4.shearing(0, 1, 0, 0, 0, 0)
         let p = point(2, 3, 4)
         let actualValue = transform.multiplyTuple(p)
         let expectedValue = point(6, 3, 4)
@@ -114,7 +114,7 @@ class TransformTests: XCTestCase {
     }
 
     func testShearingYx() throws {
-        let transform = shearing(0, 0, 1, 0, 0, 0)
+        let transform = Matrix4.shearing(0, 0, 1, 0, 0, 0)
         let p = point(2, 3, 4)
         let actualValue = transform.multiplyTuple(p)
         let expectedValue = point(2, 5, 4)
@@ -122,7 +122,7 @@ class TransformTests: XCTestCase {
     }
 
     func testShearingYz() throws {
-        let transform = shearing(0, 0, 0, 1, 0, 0)
+        let transform = Matrix4.shearing(0, 0, 0, 1, 0, 0)
         let p = point(2, 3, 4)
         let actualValue = transform.multiplyTuple(p)
         let expectedValue = point(2, 7, 4)
@@ -130,7 +130,7 @@ class TransformTests: XCTestCase {
     }
 
     func testShearingZx() throws {
-        let transform = shearing(0, 0, 0, 0, 1, 0)
+        let transform = Matrix4.shearing(0, 0, 0, 0, 1, 0)
         let p = point(2, 3, 4)
         let actualValue = transform.multiplyTuple(p)
         let expectedValue = point(2, 3, 6)
@@ -138,7 +138,7 @@ class TransformTests: XCTestCase {
     }
 
     func testShearingZy() throws {
-        let transform = shearing(0, 0, 0, 0, 0, 1)
+        let transform = Matrix4.shearing(0, 0, 0, 0, 0, 1)
         let p = point(2, 3, 4)
         let actualValue = transform.multiplyTuple(p)
         let expectedValue = point(2, 3, 7)
@@ -147,9 +147,9 @@ class TransformTests: XCTestCase {
 
     func testChainingTransformations() throws {
         let p = point(1, 0, 1)
-        let rx = rotationX(PI/2)
-        let s = scaling(5, 5, 5)
-        let t = translation(10, 5, 7)
+        let rx = Matrix4.rotationX(PI/2)
+        let s = Matrix4.scaling(5, 5, 5)
+        let t = Matrix4.translation(10, 5, 7)
         let fullTransform = t.multiplyMatrix(s).multiplyMatrix(rx)
         let actualValue = fullTransform.multiplyTuple(p)
         let expectedValue = point(15, 0, 7)
@@ -161,7 +161,7 @@ class TransformTests: XCTestCase {
         let to = point(0, 0, -1)
         let up = vector(0, 1, 0)
         let actualValue = view(from, to, up)
-        let expectedValue = IDENTITY4
+        let expectedValue = Matrix4.identity
         XCTAssert(actualValue.isAlmostEqual(expectedValue))
     }
 
@@ -170,7 +170,7 @@ class TransformTests: XCTestCase {
         let to = point(0, 0, 1)
         let up = vector(0, 1, 0)
         let actualValue = view(from, to, up)
-        let expectedValue = scaling(-1, 1, -1)
+        let expectedValue = Matrix4.scaling(-1, 1, -1)
         XCTAssert(actualValue.isAlmostEqual(expectedValue))
     }
 
