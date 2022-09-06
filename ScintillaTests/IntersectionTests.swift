@@ -9,7 +9,7 @@ import XCTest
 
 class IntersectionTests: XCTestCase {
     func testHitIntersectionsWithAllPositiveTs() throws {
-        let s = Sphere(.defaultMaterial)
+        let s = Sphere(.basicMaterial())
         let i1 = Intersection(1, s)
         let i2 = Intersection(2, s)
         var intersections = [i2, i1]
@@ -18,7 +18,7 @@ class IntersectionTests: XCTestCase {
     }
 
     func testHitIntersectionsWithSomeNegativeTs() throws {
-        let s = Sphere(.defaultMaterial)
+        let s = Sphere(.basicMaterial())
         let i1 = Intersection(-1, s)
         let i2 = Intersection(1, s)
         var intersections = [i2, i1]
@@ -27,7 +27,7 @@ class IntersectionTests: XCTestCase {
     }
 
     func testHitIntersectionsWithAllNegativeTs() throws {
-        let s = Sphere(.defaultMaterial)
+        let s = Sphere(.basicMaterial())
         let i1 = Intersection(-2, s)
         let i2 = Intersection(-1, s)
         var intersections = [i2, i1]
@@ -36,7 +36,7 @@ class IntersectionTests: XCTestCase {
     }
 
     func testHitReturnsLowestNonnegativeIntersection() throws {
-        let s = Sphere(.defaultMaterial)
+        let s = Sphere(.basicMaterial())
         let i1 = Intersection(5, s)
         let i2 = Intersection(7, s)
         let i3 = Intersection(-3, s)
@@ -48,7 +48,7 @@ class IntersectionTests: XCTestCase {
 
     func testPrepareComputationsOutside() throws {
         let ray = Ray(point(0, 0, -5), vector(0, 0, 1))
-        let shape = Sphere(.defaultMaterial)
+        let shape = Sphere(.basicMaterial())
         let intersection = Intersection(4, shape)
         let computations = intersection.prepareComputations(ray, [intersection])
         XCTAssertEqual(computations.t, intersection.t)
@@ -61,7 +61,7 @@ class IntersectionTests: XCTestCase {
 
     func testPrepareComputationsInside() throws {
         let ray = Ray(point(0, 0, 0), vector(0, 0, 1))
-        let shape = Sphere(.defaultMaterial)
+        let shape = Sphere(.basicMaterial())
         let intersection = Intersection(1, shape)
         let computations = intersection.prepareComputations(ray, [intersection])
         XCTAssertEqual(computations.t, intersection.t)
@@ -74,7 +74,7 @@ class IntersectionTests: XCTestCase {
 
     func testPrepareComputationsShouldComputeOverPoint() throws {
         let ray = Ray(point(0, 0, -5), vector(0, 0, 1))
-        let shape = Sphere(.defaultMaterial)
+        let shape = Sphere(.basicMaterial())
             .translate(0, 0, 1)
         let intersection = Intersection(5, shape)
         let computations = intersection.prepareComputations(ray, [intersection])
@@ -84,7 +84,7 @@ class IntersectionTests: XCTestCase {
 
     func testPrepareComputationsShouldComputeUnderPoint() throws {
         let ray = Ray(point(0, 0, -5), vector(0, 0, 1))
-        let shape = Sphere(.defaultMaterial)
+        let shape = Sphere(.basicMaterial())
             .translate(0, 0, 1)
         let intersection = Intersection(5, shape)
         let computations = intersection.prepareComputations(ray, [intersection])
@@ -93,7 +93,7 @@ class IntersectionTests: XCTestCase {
     }
 
     func testPrepareComputationsReflected() throws {
-        let shape = Plane(.defaultMaterial)
+        let shape = Plane(.basicMaterial())
         let ray = Ray(point(0, 1, -1), vector(0, -sqrt(2)/2, sqrt(2)/2))
         let intersection = Intersection(sqrt(2), shape)
         let computations = intersection.prepareComputations(ray, [intersection])
@@ -101,11 +101,11 @@ class IntersectionTests: XCTestCase {
     }
 
     func testPrepareComputationsForN1AndN2() throws {
-        let glassSphereA = Sphere(.defaultMaterial.refractive(1.5))
+        let glassSphereA = Sphere(.basicMaterial().refractive(1.5))
             .scale(2, 2, 2)
-        let glassSphereB = Sphere(.defaultMaterial.refractive(2.0))
+        let glassSphereB = Sphere(.basicMaterial().refractive(2.0))
             .translate(0, 0, -0.25)
-        let glassSphereC = Sphere(.defaultMaterial.refractive(2.5))
+        let glassSphereC = Sphere(.basicMaterial().refractive(2.5))
             .translate(0, 0, 0.25)
 
         let ray = Ray(point(0, 0, -4), vector(0, 0, 1))

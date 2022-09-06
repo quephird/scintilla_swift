@@ -9,12 +9,12 @@ import XCTest
 
 class ShapeTests: XCTestCase {
     func testWorldToObjectForNestedObject() throws {
-        let g1 = Group(.defaultMaterial)
+        let g1 = Group(.basicMaterial())
             .rotateY(PI/2)
-        let g2 = Group(.defaultMaterial)
+        let g2 = Group(.basicMaterial())
             .scale(2, 2, 2)
         g1.addChild(g2)
-        let s = Sphere(.defaultMaterial)
+        let s = Sphere(.basicMaterial())
             .translate(5, 0, 0)
         g2.addChild(s)
 
@@ -24,12 +24,12 @@ class ShapeTests: XCTestCase {
     }
 
     func testObjectToWorldForNestedObject() throws {
-        let g1 = Group(.defaultMaterial)
+        let g1 = Group(.basicMaterial())
             .rotateY(PI/2)
-        let g2 = Group(.defaultMaterial)
+        let g2 = Group(.basicMaterial())
             .scale(1, 2, 3)
         g1.addChild(g2)
-        let s = Sphere(.defaultMaterial)
+        let s = Sphere(.basicMaterial())
             .translate(5, 0, 0)
         g2.addChild(s)
 
@@ -39,12 +39,12 @@ class ShapeTests: XCTestCase {
     }
 
     func testNormalForNestedObject() throws {
-        let g1 = Group(.defaultMaterial)
+        let g1 = Group(.basicMaterial())
             .rotateY(PI/2)
-        let g2 = Group(.defaultMaterial)
+        let g2 = Group(.basicMaterial())
             .scale(1, 2, 3)
         g1.addChild(g2)
-        let s = Sphere(.defaultMaterial)
+        let s = Sphere(.basicMaterial())
             .translate(5, 0, 0)
         g2.addChild(s)
 

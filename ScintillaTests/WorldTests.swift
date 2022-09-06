@@ -14,7 +14,7 @@ let testWorld = World(Light(point(-10, 10, -10))) {
         .specular(0.2)
         .refractive(0.0)
     )
-    Sphere(.defaultMaterial)
+    Sphere(.basicMaterial())
         .scale(0.5, 0.5, 0.5)
 }
 
@@ -69,8 +69,8 @@ class WorldTests: XCTestCase {
 
     func testShadeHitIntersectionInShadow() throws {
         let light = Light(point(0, 0, -10), Color(1, 1, 1))
-        let s1 = Sphere(.defaultMaterial)
-        let s2 = Sphere(.defaultMaterial)
+        let s1 = Sphere(.basicMaterial())
+        let s2 = Sphere(.basicMaterial())
             .translate(0, 0, 10)
         let world = World(light, [s1, s2])
         let ray = Ray(point(0, 0, 5), vector(0, 0, 1))
@@ -148,7 +148,7 @@ class WorldTests: XCTestCase {
 
     func testShadeHitWithReflectiveMaterial() throws {
         var world = testWorld
-        let anotherShape = Plane(.defaultMaterial
+        let anotherShape = Plane(.basicMaterial()
             .reflective(0.5))
             .translate(0, -1, 0)
         world.objects.append(anotherShape)
@@ -162,9 +162,9 @@ class WorldTests: XCTestCase {
     }
 
     func testColorAtTerminatesForWorldWithMutuallyReflectiveSurfaces() throws {
-        let lowerPlane = Plane(.defaultMaterial.reflective(1.0))
+        let lowerPlane = Plane(.basicMaterial().reflective(1.0))
             .translate(0, -1, 0)
-        let upperPlane = Plane(.defaultMaterial.reflective(1.0))
+        let upperPlane = Plane(.basicMaterial().reflective(1.0))
             .translate(0, 1, 0)
         let light = Light(point(0, 0, 0))
         let world = World(light, [lowerPlane, upperPlane])
@@ -175,7 +175,7 @@ class WorldTests: XCTestCase {
 
     func testColorAtMaxRecursiveDepth() throws {
         var world = testWorld
-        let additionalShape = Plane(Material.defaultMaterial
+        let additionalShape = Plane(Material.basicMaterial()
             .reflective(0.5))
             .translate(0, -1, 0)
         world.objects.append(additionalShape)
@@ -205,7 +205,7 @@ class WorldTests: XCTestCase {
     func testRefractedColorAtMaximumRecursiveDepth() throws {
         let world = testWorld
         let firstShape = world.objects[0]
-        var material = Material.defaultMaterial
+        var material = Material.basicMaterial()
         material.transparency = 1.0
         material.refractive = 1.5
         firstShape.material = material
@@ -223,7 +223,7 @@ class WorldTests: XCTestCase {
     func testRefractedColorUnderTotalInternalReflection() throws {
         let world = testWorld
         let firstShape = world.objects[0]
-        var material = Material.defaultMaterial
+        var material = Material.basicMaterial()
         material.transparency = 1.0
         material.refractive = 1.5
         firstShape.material = material
@@ -252,13 +252,13 @@ class WorldTests: XCTestCase {
         let world = testWorld
 
         let shapeA = world.objects[0]
-        var materialA = Material.defaultMaterial
+        var materialA = Material.basicMaterial()
         materialA.colorStrategy = .pattern(Test(.identity))
         materialA.ambient = 1.0
         shapeA.material = materialA
 
         let shapeB = world.objects[1]
-        var materialB = Material.defaultMaterial
+        var materialB = Material.basicMaterial()
         materialB.transparency = 1.0
         materialB.refractive = 1.5
         shapeB.material = materialB
@@ -279,7 +279,7 @@ class WorldTests: XCTestCase {
     func testShadeHitWithTransparentMaterial() throws {
         var world = testWorld
 
-        let floor = Plane(Material.defaultMaterial
+        let floor = Plane(Material.basicMaterial()
             .transparency(0.5)
             .refractive(1.5))
             .translate(0, -1, 0)
@@ -351,7 +351,7 @@ class WorldTests: XCTestCase {
     func testShadeHitWithReflectiveAndTransparentMaterial() throws {
         var world = testWorld
 
-        let floor = Plane(Material.defaultMaterial
+        let floor = Plane(Material.basicMaterial()
             .transparency(0.5)
             .reflective(0.5)
             .refractive(1.5))

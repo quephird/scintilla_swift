@@ -9,7 +9,7 @@ import XCTest
 
 class MaterialTests: XCTestCase {
     func testLightingEyeBetweenLightAndSurface() throws {
-        let m = Material.defaultMaterial
+        let m = Material.basicMaterial()
         let shape = Sphere(m)
         let position = point(0, 0, 0)
         let eye = vector(0, 0, -1)
@@ -21,7 +21,7 @@ class MaterialTests: XCTestCase {
     }
 
     func testLightingEyeOffsetFortyFiveDegrees() throws {
-        let m = Material.defaultMaterial
+        let m = Material.basicMaterial()
         let shape = Sphere(m)
         let position = point(0, 0, 0)
         let eye = vector(0, sqrt(2)/2, -sqrt(2)/2)
@@ -33,7 +33,7 @@ class MaterialTests: XCTestCase {
     }
 
     func testLightingLightOffsetFortyFiveDegrees() throws {
-        let m = Material.defaultMaterial
+        let m = Material.basicMaterial()
         let shape = Sphere(m)
         let position = point(0, 0, 0)
         let eye = vector(0, 0, -1)
@@ -45,7 +45,7 @@ class MaterialTests: XCTestCase {
     }
 
     func testLightingEyeInPathOfReflectionVector() throws {
-        let m = Material.defaultMaterial
+        let m = Material.basicMaterial()
         let shape = Sphere(m)
         let position = point(0, 0, 0)
         let eye = vector(0, -sqrt(2)/2, -sqrt(2)/2)
@@ -57,7 +57,7 @@ class MaterialTests: XCTestCase {
     }
 
     func testLightingLightBehindSurface() throws {
-        let m = Material.defaultMaterial
+        let m = Material.basicMaterial()
         let shape = Sphere(m)
         let position = point(0, 0, 0)
         let eye = vector(0, 0, -1)
@@ -74,7 +74,7 @@ class MaterialTests: XCTestCase {
         let eye = vector(0, 0, -1)
         let normal = vector(0, 0, -1)
         let isShadowed = true
-        let material = Material.defaultMaterial
+        let material = Material.basicMaterial()
         let shape = Sphere(material)
         let actualValue = material.lighting(light, shape, position, eye, normal, isShadowed)
         let expectedValue = Color(0.1, 0.1, 0.1)
