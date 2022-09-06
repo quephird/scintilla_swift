@@ -105,7 +105,6 @@ class SphereTests: XCTestCase {
             .rotateY(PI/5)
         let actualValue = s.normal(point(0, sqrt(2)/2, -sqrt(2)/2))
         let expectedValue = vector(0, 0.97014, -0.24254)
-        print(actualValue)
         XCTAssert(actualValue.isAlmostEqual(expectedValue))
     }
 }

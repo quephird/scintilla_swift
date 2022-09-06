@@ -131,7 +131,6 @@ class IntersectionTests: XCTestCase {
             let computations = intersection.prepareComputations(ray, allIntersections)
             let actualValue = (computations.n1, computations.n2)
             let expectedValue = expectedValues[index]
-            print("Actual: \(actualValue); expected: \(expectedValue)")
             XCTAssertTrue(actualValue == expectedValue)
         }
     }

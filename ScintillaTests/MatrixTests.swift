@@ -24,7 +24,6 @@ class Matrix3Tests: XCTestCase {
             0, 6, -3
         )
         let actualValue = m.submatrix(0, 2)
-        print(actualValue)
         let expectedValue = Matrix2(
             -3, 2,
             0, 6
@@ -103,7 +102,6 @@ class Matrix4Tests: XCTestCase {
             16, 26, 46, 42
         )
         let actualValue = m1.multiplyMatrix(m2)
-        print(actualValue)
         XCTAssert(actualValue.isAlmostEqual(expectedValue))
     }
 
@@ -145,7 +143,6 @@ class Matrix4Tests: XCTestCase {
             -7, 1, -1, 1
         )
         let actualValue = m.submatrix(2, 1)
-        print(actualValue)
         let expectedValue = Matrix3(
             -6, 1, 6,
             -8, 8, 6,
@@ -174,7 +171,6 @@ class Matrix4Tests: XCTestCase {
             -3, 0, -9, -4
         )
         let actualValue = m.inverse()
-        print(actualValue)
         let expectedValue = Matrix4(
             -0.15385, -0.15385, -0.28205, -0.53846,
             -0.07692, 0.12308, 0.02564, 0.03077,
