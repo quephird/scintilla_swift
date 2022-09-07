@@ -75,24 +75,13 @@ extension Canvas {
         ppm.append(self.body())
         return ppm
     }
-}
 
-extension Color {
-    func clampAndScale(_ component: Double) -> Int {
-        var c: Int
-        if component < 0.0 {
-            c = 0
-        } else if component > 1.0 {
-            c = 255
-        } else {
-            var cTemp = component*255
-            cTemp.round()
-            c = Int(cTemp)
+    func save(to fileName: String) {
+        let filePath = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask).first!.appendingPathComponent(fileName)
+        do {
+            try self.toPPM().write(to: filePath, atomically: true, encoding: .utf8)
+        } catch {
+            print("Could not save to file")
         }
-        return c
-    }
-
-    func toPpm() -> (Int, Int, Int) {
-        (clampAndScale(self.r), clampAndScale(self.g), clampAndScale(self.b))
     }
 }

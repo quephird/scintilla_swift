@@ -42,4 +42,22 @@ struct Color {
             self.g.isAlmostEqual(to.g) &&
             self.b.isAlmostEqual(to.b)
     }
+
+    func clampAndScale(_ component: Double) -> Int {
+        var c: Int
+        if component < 0.0 {
+            c = 0
+        } else if component > 1.0 {
+            c = 255
+        } else {
+            var cTemp = component*255
+            cTemp.round()
+            c = Int(cTemp)
+        }
+        return c
+    }
+
+    func toPpm() -> (Int, Int, Int) {
+        (clampAndScale(self.r), clampAndScale(self.g), clampAndScale(self.b))
+    }
 }

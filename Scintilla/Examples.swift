@@ -9,7 +9,11 @@ import Foundation
 
 func testScene() -> World {
     return World(
-        Light(point(-10, 10, -10))
+        Light(point(-10, 10, -10)),
+        Camera(800, 600, PI/3, .view(
+            point(0, 2, -5),
+            point(0, 0, 0),
+            vector(0, 1, 0)))
     ) {
         Cube(Material(.solidColor(Color(1, 0, 0))))
             .rotateY(PI/4)
@@ -21,7 +25,11 @@ func testScene() -> World {
 
 func chapterSevenScene() -> World {
     return World(
-        Light(point(-10, 10, -10))
+        Light(point(-10, 10, -10)),
+        Camera(800, 600, PI/3, .view(
+            point(0, 2, -5),
+            point(0, 0, 0),
+            vector(0, 1, 0)))
     ) {
         Sphere(Material(.solidColor(Color(1, 0.9, 0.9))))
             .scale(10, 0.01, 10)
