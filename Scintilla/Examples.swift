@@ -7,6 +7,16 @@
 
 import Foundation
 
+func testTorus() -> World {
+    let material = Material(.solidColor(Color(0, 1, 0)), 0.1, 0.9, 0.0, 200, 0.0, 0.0, 0.0)
+    let torus = Torus(IDENTITY4, material, 3, 1)
+
+    let light = Light(point(-10, 10, -10), Color(1, 1, 1))
+    let objects = [torus]
+
+    return World(light, objects)
+}
+
 func chapterSevenScene() -> World {
     let floorTransform = scaling(10, 0.01, 10)
     let floorAndWallMaterial = Material(.solidColor(Color(1, 0.9, 0.9)), 0.1, 0.9, 0.0, 200, 0.0, 0.0, 0.0)
