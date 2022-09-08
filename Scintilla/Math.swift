@@ -7,6 +7,10 @@
 
 import Foundation
 
+func isAlmostZero(_ n: Double) -> Bool {
+    return abs(n) < 1e-9
+}
+
 func cbrt(_ n: Double) -> Double {
     if n>=0 {
         return pow(n, 1.0/3.0)
@@ -18,11 +22,14 @@ func cbrt(_ n: Double) -> Double {
 func solveQuadratic(_ a: Double, _ b: Double, _ c: Double) -> [Double] {
     let discriminant = b*b - 4*a*c
 
-    if discriminant < 0 {
-        return []
-    } else if discriminant == 0 {
+    if isAlmostZero(discriminant) {
+        // One double root
         return [-b/2/a]
+    } else if discriminant < 0 {
+        // No real roots
+        return []
     } else {
+        // Both real roots
         return [
             (-b - sqrt(discriminant))/2/a,
             (-b + sqrt(discriminant))/2/a
@@ -46,8 +53,8 @@ func solveCubic(_ c3: Double, _ c2: Double, _ c1: Double, _ c0: Double) -> [Doub
     let discriminant = q*q - p*p*p
 
     var roots: [Double] = []
-    if discriminant == 0 {
-        if q == 0 {
+    if isAlmostZero(discriminant) {
+        if isAlmostZero(q) {
             // One triple root
             roots = [0.0];
         } else {
@@ -95,7 +102,7 @@ func solveQuartic(_ c4: Double, _ c3: Double, _ c2: Double, _ c1: Double, _ c0: 
 
     var roots: [Double] = []
 
-    if r == 0 {
+    if isAlmostZero(r) {
         // Equation is of the form:
         //
         //     t(t³ + pt + q) = 0
@@ -121,23 +128,28 @@ func solveQuartic(_ c4: Double, _ c3: Double, _ c2: Double, _ c1: Double, _ c0: 
         }
 
         // ... then determine the roots of each quadratic
-        let roots1 = solveQuadratic(
+        roots = solveQuadratic(
             1,
             -sqrt(z - p),
             z/2.0 + q/2.0/sqrt(z - p)
         )
-        let roots2 = solveQuadratic(
+        roots.append(contentsOf: solveQuadratic(
             1,
             sqrt(z - p),
             z/2.0 - q/2.0/sqrt(z - p)
-        )
-
-        // ... and combine them all
-        roots.append(contentsOf: roots1)
-        roots.append(contentsOf: roots2)
+        ))
     }
 
-    return roots.map { root in
+    var dedupedRoots: [Double] = []
+    for root in roots {
+        if dedupedRoots.allSatisfy({ dedupedRoot in
+            !isAlmostZero(dedupedRoot - root)
+        }) {
+            dedupedRoots.append(root)
+        }
+    }
+
+    return dedupedRoots.map { root in
         root - 1.0/4.0 * a
     }
 }
