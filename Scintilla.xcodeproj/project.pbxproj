@@ -28,6 +28,7 @@
 		878120A128CA6FB6004EBEF8 /* Torus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209F28C9E981004EBEF8 /* Torus.swift */; };
 		878120A228CA6FC2004EBEF8 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209D28C9427C004EBEF8 /* Math.swift */; };
 		878120A428CA7025004EBEF8 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878120A328CA7025004EBEF8 /* MathTests.swift */; };
+		878120A628CAAC45004EBEF8 /* TorusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878120A528CAAC45004EBEF8 /* TorusTests.swift */; };
 		878C690C274F373300EB945E /* ColorStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690B274F373300EB945E /* ColorStrategy.swift */; };
 		878C690D274F380400EB945E /* ColorStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690B274F373300EB945E /* ColorStrategy.swift */; };
 		878C690F274F3D5700EB945E /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690E274F3D5700EB945E /* Pattern.swift */; };
@@ -120,6 +121,7 @@
 		8781209D28C9427C004EBEF8 /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		8781209F28C9E981004EBEF8 /* Torus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Torus.swift; sourceTree = "<group>"; };
 		878120A328CA7025004EBEF8 /* MathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
+		878120A528CAAC45004EBEF8 /* TorusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorusTests.swift; sourceTree = "<group>"; };
 		878C690B274F373300EB945E /* ColorStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStrategy.swift; sourceTree = "<group>"; };
 		878C690E274F3D5700EB945E /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
 		878C6911274F5B7200EB945E /* PatternTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternTests.swift; sourceTree = "<group>"; };
@@ -256,6 +258,7 @@
 				87A21FE4274DD8CB0047AE41 /* WorldTests.swift */,
 				875B398E2748B97200666443 /* Info.plist */,
 				878120A328CA7025004EBEF8 /* MathTests.swift */,
+				878120A528CAAC45004EBEF8 /* TorusTests.swift */,
 			);
 			path = ScintillaTests;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				87EA188E27549C7900267E6E /* ConeTests.swift in Sources */,
 				870DF244274977C700787095 /* PpmTests.swift in Sources */,
 				875B39942748BA8400666443 /* Tuple.swift in Sources */,
+				878120A628CAAC45004EBEF8 /* TorusTests.swift in Sources */,
 				87EA18A12759A70700267E6E /* CSGTests.swift in Sources */,
 				87EA1884275317D700267E6E /* CubeTests.swift in Sources */,
 				87A21FC4274B7CCC0047AE41 /* Transform.swift in Sources */,

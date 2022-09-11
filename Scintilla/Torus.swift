@@ -16,19 +16,27 @@ class Torus: Shape {
     }
 
     override func localIntersect(_ localRay: Ray) -> [Intersection] {
-        let oDotO = localRay.origin.dot(localRay.origin)
+        // NOTA BENE: We need to exclude the fourth "component" when
+        // taking the dot product of the origin point with itself
+        // because points are represented with a fourth component of 1.
+        // Not doing so adds 1 to the product and throws off all subsequent
+        // calculations. Ultimately, we need to improve the abstraction
+        // for points and vectors.
+        let oDotO = localRay.origin[0]*localRay.origin[0] +
+                    localRay.origin[1]*localRay.origin[1] +
+                    localRay.origin[2]*localRay.origin[2]
         let dDotD = localRay.direction.dot(localRay.direction)
         let oDotD = localRay.origin.dot(localRay.direction)
-        let r2PlusR2 = self.majorRadius*self.majorRadius + self.minorRadius*self.minorRadius
         let R2 = self.majorRadius*self.majorRadius
         let r2 = self.minorRadius*self.minorRadius
+        let r2PlusR2 = R2 + r2
         let oy = localRay.origin[1]
         let dy = localRay.direction[1]
 
         let c4 = dDotD * dDotD
         let c3 = 4.0 * dDotD * oDotD
         let c2 = 2.0 * dDotD * (oDotO - r2PlusR2) + 4.0 * oDotD  * oDotD + 4.0 * R2 * dy * dy
-        let c1 = 4.0 * (oDotO - r2PlusR2) * oDotD + 8.0 * R2 * oy * dy
+        let c1 = 4.0 * oDotD * (oDotO - r2PlusR2) + 8.0 * R2 * oy * dy
         let c0 = (oDotO - r2PlusR2) * (oDotO - r2PlusR2) - 4.0 * R2 * (r2 - oy * oy)
 
         return solveQuartic(c4, c3, c2, c1, c0)

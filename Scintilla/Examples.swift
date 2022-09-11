@@ -8,11 +8,15 @@
 import Foundation
 
 func testTorus() -> World {
-    let material = Material(.solidColor(Color(0, 1, 0)), 0.1, 0.9, 0.0, 200, 0.0, 0.0, 0.0)
-    let torus = Torus(IDENTITY4, material, 3, 1)
+    let yellow = Material(.solidColor(Color(1, 1.0, 0)), 0.1, 0.9, 0.0, 200, 0.5, 0.0, 0.0)
+    let yellowTorus = Torus(translation(0, 1, 0), yellow, 3, 1)
+
+    let floorPattern = Checkered2D(BLACK, WHITE, IDENTITY4)
+    let floorMaterial = Material(.pattern(floorPattern), 0.1, 0.9, 0.0, 200, 0.0, 0.0, 0.0)
+    let floor = Plane(IDENTITY4, floorMaterial)
 
     let light = Light(point(-10, 10, -10), Color(1, 1, 1))
-    let objects = [torus]
+    let objects = [yellowTorus, floor]
 
     return World(light, objects)
 }

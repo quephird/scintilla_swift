@@ -111,32 +111,45 @@ func solveQuartic(_ c4: Double, _ c3: Double, _ c2: Double, _ c1: Double, _ c0: 
         // found by solving the cubic factor.
         roots = solveCubic(1.0, 0.0, p, q)
         roots.append(0.0)
+    } else if isAlmostZero(q) {
+        // Equation is of the form:
+        //
+        //     t⁴ + pt² + r = 0
+        //
+        // ... and the roots can be found by solving a quadratic in t²
+        let resolventRoots = solveQuadratic(1, p, r)
+        for root in resolventRoots {
+            if root >= 0.0 {
+                roots.append(sqrt(root))
+                roots.append(-sqrt(root))
+            }
+        }
     } else {
         // Resort to Ferrari's method...
         let resolvantRoots = solveCubic(
             1,
-            -p,
-            -4 * r,
-            4 * p * r - q * q
+            p,
+            p*p/4.0 - r,
+            -q*q/8.0
         )
 
         // Choose the first root of the resolvant cubic...
-        let z = resolvantRoots[0]
-
-        if z - p < 0 {
+        guard let z = resolvantRoots.first(where: { root in
+            root > 0.0
+        }) else {
             return []
         }
 
         // ... then determine the roots of each quadratic
         roots = solveQuadratic(
             1,
-            -sqrt(z - p),
-            z/2.0 + q/2.0/sqrt(z - p)
+            sqrt(2*z),
+            p/2.0 + z - q/2.0/sqrt(2*z)
         )
         roots.append(contentsOf: solveQuadratic(
             1,
-            sqrt(z - p),
-            z/2.0 - q/2.0/sqrt(z - p)
+            -sqrt(2*z),
+            p/2.0 + z + q/2.0/sqrt(2*z)
         ))
     }
 
