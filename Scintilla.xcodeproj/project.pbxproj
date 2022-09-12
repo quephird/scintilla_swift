@@ -23,15 +23,13 @@
 		875B398D2748B97200666443 /* TupleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B398C2748B97200666443 /* TupleTests.swift */; };
 		875B39932748BA4700666443 /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B39922748BA4700666443 /* Tuple.swift */; };
 		875B39942748BA8400666443 /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B39922748BA4700666443 /* Tuple.swift */; };
+		8781209B28C58572004EBEF8 /* ShapeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209A28C58572004EBEF8 /* ShapeBuilder.swift */; };
 		8781209E28C9427C004EBEF8 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209D28C9427C004EBEF8 /* Math.swift */; };
 		878120A028C9E981004EBEF8 /* Torus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209F28C9E981004EBEF8 /* Torus.swift */; };
 		878120A128CA6FB6004EBEF8 /* Torus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209F28C9E981004EBEF8 /* Torus.swift */; };
 		878120A228CA6FC2004EBEF8 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209D28C9427C004EBEF8 /* Math.swift */; };
 		878120A428CA7025004EBEF8 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878120A328CA7025004EBEF8 /* MathTests.swift */; };
 		878120A628CAAC45004EBEF8 /* TorusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878120A528CAAC45004EBEF8 /* TorusTests.swift */; };
-		8781209928C5248F004EBEF8 /* WorldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209828C5248F004EBEF8 /* WorldBuilder.swift */; };
-		8781209B28C58572004EBEF8 /* ShapeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209A28C58572004EBEF8 /* ShapeBuilder.swift */; };
-		8781209C28C6B9CD004EBEF8 /* WorldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209828C5248F004EBEF8 /* WorldBuilder.swift */; };
 		878C690C274F373300EB945E /* ColorStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690B274F373300EB945E /* ColorStrategy.swift */; };
 		878C690D274F380400EB945E /* ColorStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690B274F373300EB945E /* ColorStrategy.swift */; };
 		878C690F274F3D5700EB945E /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690E274F3D5700EB945E /* Pattern.swift */; };
@@ -121,12 +119,11 @@
 		875B398C2748B97200666443 /* TupleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupleTests.swift; sourceTree = "<group>"; };
 		875B398E2748B97200666443 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		875B39922748BA4700666443 /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
+		8781209A28C58572004EBEF8 /* ShapeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeBuilder.swift; sourceTree = "<group>"; };
 		8781209D28C9427C004EBEF8 /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		8781209F28C9E981004EBEF8 /* Torus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Torus.swift; sourceTree = "<group>"; };
 		878120A328CA7025004EBEF8 /* MathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
 		878120A528CAAC45004EBEF8 /* TorusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorusTests.swift; sourceTree = "<group>"; };
-		8781209828C5248F004EBEF8 /* WorldBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorldBuilder.swift; sourceTree = "<group>"; };
-		8781209A28C58572004EBEF8 /* ShapeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShapeBuilder.swift; sourceTree = "<group>"; };
 		878C690B274F373300EB945E /* ColorStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStrategy.swift; sourceTree = "<group>"; };
 		878C690E274F3D5700EB945E /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
 		878C6911274F5B7200EB945E /* PatternTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternTests.swift; sourceTree = "<group>"; };
@@ -235,7 +232,6 @@
 				87A21FE2274DCF2D0047AE41 /* World.swift */,
 				8781209D28C9427C004EBEF8 /* Math.swift */,
 				8781209F28C9E981004EBEF8 /* Torus.swift */,
-				8781209828C5248F004EBEF8 /* WorldBuilder.swift */,
 			);
 			path = Scintilla;
 			sourceTree = "<group>";
@@ -383,7 +379,6 @@
 				60DE365BAF950F74D35DF9EA /* Matrix.swift in Sources */,
 				87EA188C27549A8D00267E6E /* Cone.swift in Sources */,
 				87EA189F27598F3100267E6E /* CSG.swift in Sources */,
-				8781209928C5248F004EBEF8 /* WorldBuilder.swift in Sources */,
 				87A21FD6274C5B340047AE41 /* Intersection.swift in Sources */,
 				87A21FDB274CAB6C0047AE41 /* Light.swift in Sources */,
 				87A21FE3274DCF2D0047AE41 /* World.swift in Sources */,
@@ -429,7 +424,6 @@
 				870DF2392748D80500787095 /* Color.swift in Sources */,
 				87EA1893275714DD00267E6E /* GroupTests.swift in Sources */,
 				87EA1889275323D300267E6E /* CylinderTests.swift in Sources */,
-				8781209C28C6B9CD004EBEF8 /* WorldBuilder.swift in Sources */,
 				87EA18962757278300267E6E /* ShapeTests.swift in Sources */,
 				87A21FF1274E29B50047AE41 /* Examples.swift in Sources */,
 				878C6910274F3DF700EB945E /* Pattern.swift in Sources */,

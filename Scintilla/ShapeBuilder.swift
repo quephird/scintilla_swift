@@ -9,7 +9,7 @@ import Foundation
 
 @resultBuilder
 enum ShapeBuilder {
-    static func buildBlock(_ matrices: Matrix4...) -> [Matrix4] {
-        return matrices
+    static func buildBlock(_ shapes: Shape...) -> [Shape] {
+        return shapes
     }
 }

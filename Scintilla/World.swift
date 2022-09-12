@@ -14,7 +14,7 @@ struct World {
     var camera: Camera
     var objects: [Shape]
 
-    init(_ light: Light, _ camera: Camera, @WorldBuilder builder: () -> [Shape]) {
+    init(_ light: Light, _ camera: Camera, @ShapeBuilder builder: () -> [Shape]) {
         self.light = light
         self.camera = camera
         self.objects = builder()
