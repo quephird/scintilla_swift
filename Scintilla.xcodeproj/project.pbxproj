@@ -23,6 +23,12 @@
 		875B398D2748B97200666443 /* TupleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B398C2748B97200666443 /* TupleTests.swift */; };
 		875B39932748BA4700666443 /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B39922748BA4700666443 /* Tuple.swift */; };
 		875B39942748BA8400666443 /* Tuple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 875B39922748BA4700666443 /* Tuple.swift */; };
+		8781209E28C9427C004EBEF8 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209D28C9427C004EBEF8 /* Math.swift */; };
+		878120A028C9E981004EBEF8 /* Torus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209F28C9E981004EBEF8 /* Torus.swift */; };
+		878120A128CA6FB6004EBEF8 /* Torus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209F28C9E981004EBEF8 /* Torus.swift */; };
+		878120A228CA6FC2004EBEF8 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209D28C9427C004EBEF8 /* Math.swift */; };
+		878120A428CA7025004EBEF8 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878120A328CA7025004EBEF8 /* MathTests.swift */; };
+		878120A628CAAC45004EBEF8 /* TorusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878120A528CAAC45004EBEF8 /* TorusTests.swift */; };
 		878C690C274F373300EB945E /* ColorStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690B274F373300EB945E /* ColorStrategy.swift */; };
 		878C690D274F380400EB945E /* ColorStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690B274F373300EB945E /* ColorStrategy.swift */; };
 		878C690F274F3D5700EB945E /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690E274F3D5700EB945E /* Pattern.swift */; };
@@ -112,6 +118,10 @@
 		875B398C2748B97200666443 /* TupleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TupleTests.swift; sourceTree = "<group>"; };
 		875B398E2748B97200666443 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		875B39922748BA4700666443 /* Tuple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tuple.swift; sourceTree = "<group>"; };
+		8781209D28C9427C004EBEF8 /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		8781209F28C9E981004EBEF8 /* Torus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Torus.swift; sourceTree = "<group>"; };
+		878120A328CA7025004EBEF8 /* MathTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MathTests.swift; sourceTree = "<group>"; };
+		878120A528CAAC45004EBEF8 /* TorusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TorusTests.swift; sourceTree = "<group>"; };
 		878C690B274F373300EB945E /* ColorStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStrategy.swift; sourceTree = "<group>"; };
 		878C690E274F3D5700EB945E /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
 		878C6911274F5B7200EB945E /* PatternTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternTests.swift; sourceTree = "<group>"; };
@@ -217,6 +227,8 @@
 				87A21FC0274B7AF90047AE41 /* Transform.swift */,
 				875B39922748BA4700666443 /* Tuple.swift */,
 				87A21FE2274DCF2D0047AE41 /* World.swift */,
+				8781209D28C9427C004EBEF8 /* Math.swift */,
+				8781209F28C9E981004EBEF8 /* Torus.swift */,
 			);
 			path = Scintilla;
 			sourceTree = "<group>";
@@ -245,6 +257,8 @@
 				875B398C2748B97200666443 /* TupleTests.swift */,
 				87A21FE4274DD8CB0047AE41 /* WorldTests.swift */,
 				875B398E2748B97200666443 /* Info.plist */,
+				878120A328CA7025004EBEF8 /* MathTests.swift */,
+				878120A528CAAC45004EBEF8 /* TorusTests.swift */,
 			);
 			path = ScintillaTests;
 			sourceTree = "<group>";
@@ -351,6 +365,8 @@
 				870DF23D27496AF100787095 /* Canvas.swift in Sources */,
 				87A21FCD274C32200047AE41 /* Shape.swift in Sources */,
 				875B39802748B94C00666443 /* main.swift in Sources */,
+				8781209E28C9427C004EBEF8 /* Math.swift in Sources */,
+				878120A028C9E981004EBEF8 /* Torus.swift in Sources */,
 				87EA18822753122B00267E6E /* Cube.swift in Sources */,
 				878C690F274F3D5700EB945E /* Pattern.swift in Sources */,
 				87EA189D27598EDD00267E6E /* Container.swift in Sources */,
@@ -373,14 +389,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				878C690D274F380400EB945E /* ColorStrategy.swift in Sources */,
+				878120A428CA7025004EBEF8 /* MathTests.swift in Sources */,
 				87A21FF6274F07530047AE41 /* Plane.swift in Sources */,
 				87A21FEE274E1FE50047AE41 /* CameraTests.swift in Sources */,
+				878120A128CA6FB6004EBEF8 /* Torus.swift in Sources */,
 				87A21FBE274B373B0047AE41 /* MatrixTests.swift in Sources */,
 				870DF24027496D3B00787095 /* Canvas.swift in Sources */,
 				87A21FD3274C59180047AE41 /* Sphere.swift in Sources */,
 				87EA188E27549C7900267E6E /* ConeTests.swift in Sources */,
 				870DF244274977C700787095 /* PpmTests.swift in Sources */,
 				875B39942748BA8400666443 /* Tuple.swift in Sources */,
+				878120A628CAAC45004EBEF8 /* TorusTests.swift in Sources */,
 				87EA18A12759A70700267E6E /* CSGTests.swift in Sources */,
 				87EA1884275317D700267E6E /* CubeTests.swift in Sources */,
 				87A21FC4274B7CCC0047AE41 /* Transform.swift in Sources */,
@@ -388,6 +407,7 @@
 				870DF2452749782C00787095 /* Ppm.swift in Sources */,
 				87EA188A2753241D00267E6E /* Cylinder.swift in Sources */,
 				878C6912274F5B7200EB945E /* PatternTests.swift in Sources */,
+				878120A228CA6FC2004EBEF8 /* Math.swift in Sources */,
 				87A21FC8274C2EB30047AE41 /* RayTests.swift in Sources */,
 				87A21FDF274CAC160047AE41 /* Material.swift in Sources */,
 				87A21FD7274C5C5B0047AE41 /* Intersection.swift in Sources */,
