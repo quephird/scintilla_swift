@@ -8,13 +8,12 @@
 import Foundation
 
 func testScene() -> World {
-    return World(
-        Light(point(-10, 10, -10)),
+    return World {
+        Light(point(-10, 10, -10))
         Camera(800, 600, PI/3, .view(
             point(0, 2, -5),
             point(0, 0, 0),
             vector(0, 1, 0)))
-    ) {
         Cube(Material(.solidColor(Color(1, 0, 0))))
             .rotateY(PI/4)
             .rotateX(PI/4)
@@ -23,14 +22,47 @@ func testScene() -> World {
     }
 }
 
+func testGroup() -> World {
+    return World {
+        Light(point(-10, 10, -10))
+        Camera(800, 600, PI/3, .view(
+            point(0, 5, -10),
+            point(0, 0, 0),
+            vector(0, 1, 0)))
+        Group {
+            Sphere(Material(.solidColor(Color(1, 0, 0))))
+            for n in 0...2 {
+                Sphere(
+                    Material(.solidColor(Color(0, 1, 0))))
+                .translate(2, 0, 0)
+                .rotateY(2*Double(n)*PI/3)
+            }
+        }
+            .translate(0, 1, 0)
+        Plane(Material(.pattern(Checkered2D(.black, .white, .identity))))
+    }
+}
+
+func testTorus() -> World {
+    return World {
+        Light(point(-10, 10, -10))
+        Camera(800, 600, PI/3, .view(
+            point(0, 5, -10),
+            point(0, 0, 0),
+            vector(0, 1, 0)))
+        Torus(Material(.solidColor(Color(1, 0.5, 0))))
+            .translate(0, 1, 0)
+        Plane(Material(.pattern(Checkered2D(.black, .white, .identity))))
+    }
+}
+
 func chapterSevenScene() -> World {
-    return World(
-        Light(point(-10, 10, -10)),
+    return World {
+        Light(point(-10, 10, -10))
         Camera(800, 600, PI/3, .view(
             point(0, 2, -5),
             point(0, 0, 0),
             vector(0, 1, 0)))
-    ) {
         Sphere(Material(.solidColor(Color(1, 0.9, 0.9))))
             .scale(10, 0.01, 10)
         Sphere(Material(.solidColor(Color(1, 0.9, 0.9))))
@@ -63,81 +95,6 @@ func chapterSevenScene() -> World {
     }
 }
 
-func testGroup() -> World {
-    return World(
-        Light(point(-10, 10, -10)),
-        Camera(800, 600, PI/3, .view(
-            point(0, 5, -10),
-            point(0, 0, 0),
-            vector(0, 1, 0)))
-    ) {
-        Group {
-            Sphere(Material(.solidColor(Color(1, 0, 0))))
-            for n in 0...2 {
-                Sphere(
-                    Material(.solidColor(Color(0, 1, 0))))
-                .translate(2, 0, 0)
-                .rotateY(2*Double(n)*PI/3)
-            }
-        }
-            .translate(0, 1, 0)
-        Plane(Material(.pattern(Checkered2D(.black, .white, .identity))))
-    }
-}
-
-//func testTorus() -> World {
-//    let yellow = Material(.solidColor(Color(1, 1.0, 0)), 0.1, 0.9, 0.0, 200, 0.5, 0.0, 0.0)
-//    let yellowTorus = Torus(translation(0, 1, 0), yellow, 3, 1)
-//
-//    let floorPattern = Checkered2D(BLACK, WHITE, IDENTITY4)
-//    let floorMaterial = Material(.pattern(floorPattern), 0.1, 0.9, 0.0, 200, 0.0, 0.0, 0.0)
-//    let floor = Plane(IDENTITY4, floorMaterial)
-//
-//    let light = Light(point(-10, 10, -10), Color(1, 1, 1))
-//    let objects = [yellowTorus, floor]
-//
-//    return World(light, objects)
-//}
-
-//func chapterSevenScene() -> World {
-//    let floorTransform = scaling(10, 0.01, 10)
-//    let floorAndWallMaterial = Material(.solidColor(Color(1, 0.9, 0.9)), 0.1, 0.9, 0.0, 200, 0.0, 0.0, 0.0)
-//    let floor = Sphere(floorTransform, floorAndWallMaterial)
-//
-//    let leftWallTransform = translation(0, 0, 5)
-//        .multiplyMatrix(rotationY(-PI/4))
-//        .multiplyMatrix(rotationX(PI/2))
-//        .multiplyMatrix(scaling(10, 0.01, 10))
-//    let leftWall = Sphere(leftWallTransform, floorAndWallMaterial)
-//
-//    let rightWallTransform = translation(0, 0, 5)
-//        .multiplyMatrix(rotationY(PI/4))
-//        .multiplyMatrix(rotationX(PI/2))
-//        .multiplyMatrix(scaling(10, 0.01, 10))
-//    let rightWall = Sphere(rightWallTransform, floorAndWallMaterial)
-//
-//    let leftBallTransform = translation(-1.5, 0.33, -0.75)
-//        .multiplyMatrix(scaling(0.33, 0.33, 0.33))
-//    let leftBallMaterial = Material(.solidColor(Color(1, 0.8, 0.1)), 0.1, 0.7, 0.3, 200, 0.0, 0.0, 0.0)
-//    let leftBall = Sphere(leftBallTransform, leftBallMaterial)
-//
-//
-//    let middleBallTransform = translation(-0.5, 1, 0.5)
-//    let middleBallMaterial = Material(.solidColor(Color(0.1, 1, 0.5)), 0.1, 0.7, 0.3, 200, 0.0, 0.0, 0.0)
-//    let middleBall = Sphere(middleBallTransform, middleBallMaterial)
-//
-//
-//    let rightBallTransform = translation(1.5, 0.5, -0.5)
-//        .multiplyMatrix(scaling(0.5, 0.5, 0.5))
-//    let rightBallMaterial = Material(.solidColor(Color(0.5, 1, 0.1)), 0.1, 0.7, 0.3, 200, 0.0, 0.0, 0.0)
-//    let rightBall = Sphere(rightBallTransform, rightBallMaterial)
-//
-//    let light = Light(point(-10, 10, -10), Color(1, 1, 1))
-//    let objects = [floor, leftWall, rightWall, leftBall, middleBall, rightBall]
-//
-//    return World(light, objects)
-//}
-//
 //func chapterNineScene() -> World {
 //    let floorMaterial = Material(.solidColor(Color(1, 0.9, 0.9)), 0.1, 0.9, 0.0, 200, 0.0, 0.0, 0.0)
 //    let floor = Plane(.identity, floorMaterial)

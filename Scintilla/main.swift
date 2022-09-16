@@ -5,7 +5,7 @@
 //  Created by Danielle Kefford on 11/19/21.
 //
 
-let world = testGroup()
+let world = testScene()
 
 let canvas = world.render()
 
