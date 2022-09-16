@@ -63,6 +63,28 @@ func chapterSevenScene() -> World {
     }
 }
 
+func testGroup() -> World {
+    return World(
+        Light(point(-10, 10, -10)),
+        Camera(800, 600, PI/3, .view(
+            point(0, 5, -10),
+            point(0, 0, 0),
+            vector(0, 1, 0)))
+    ) {
+        Group {
+            Sphere(Material(.solidColor(Color(1, 0, 0))))
+            for n in 0...2 {
+                Sphere(
+                    Material(.solidColor(Color(0, 1, 0))))
+                .translate(2, 0, 0)
+                .rotateY(2*Double(n)*PI/3)
+            }
+        }
+            .translate(0, 1, 0)
+        Plane(Material(.pattern(Checkered2D(.black, .white, .identity))))
+    }
+}
+
 //func testTorus() -> World {
 //    let yellow = Material(.solidColor(Color(1, 1.0, 0)), 0.1, 0.9, 0.0, 200, 0.5, 0.0, 0.0)
 //    let yellowTorus = Torus(translation(0, 1, 0), yellow, 3, 1)

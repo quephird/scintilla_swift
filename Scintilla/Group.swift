@@ -10,6 +10,11 @@ import Foundation
 class Group: Shape {
     var children: [Shape] = []
 
+    init(@ShapeBuilder builder: () -> [Shape]) {
+        self.children = builder()
+        super.init(.basicMaterial())
+    }
+
     override func localIntersect(_ localRay: Ray) -> [Intersection] {
         var allIntersections: [Intersection] = []
 
