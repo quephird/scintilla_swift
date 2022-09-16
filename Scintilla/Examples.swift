@@ -14,7 +14,7 @@ func testScene() -> World {
             point(0, 2, -5),
             point(0, 0, 0),
             vector(0, 1, 0)))
-        Cube(Material(.solidColor(Color(1, 0, 0))))
+        Cube(.solidColor(Color(1, 0, 0)))
             .rotateY(PI/4)
             .rotateX(PI/4)
             .rotateZ(PI/4)
@@ -30,16 +30,15 @@ func testGroup() -> World {
             point(0, 0, 0),
             vector(0, 1, 0)))
         Group {
-            Sphere(Material(.solidColor(Color(1, 0, 0))))
+            Sphere(.solidColor(Color(1, 0, 0)))
             for n in 0...2 {
-                Sphere(
-                    Material(.solidColor(Color(0, 1, 0))))
-                .translate(2, 0, 0)
-                .rotateY(2*Double(n)*PI/3)
+                Sphere(.solidColor(Color(0, 1, 0)))
+                    .translate(2, 0, 0)
+                    .rotateY(2*Double(n)*PI/3)
             }
         }
             .translate(0, 1, 0)
-        Plane(Material(.pattern(Checkered2D(.black, .white, .identity))))
+        Plane(.pattern(Checkered2D(.black, .white, .identity)))
     }
 }
 
@@ -50,9 +49,9 @@ func testTorus() -> World {
             point(0, 5, -10),
             point(0, 0, 0),
             vector(0, 1, 0)))
-        Torus(Material(.solidColor(Color(1, 0.5, 0))))
+        Torus(.solidColor(Color(1, 0.5, 0)))
             .translate(0, 1, 0)
-        Plane(Material(.pattern(Checkered2D(.black, .white, .identity))))
+        Plane(.pattern(Checkered2D(.black, .white, .identity)))
     }
 }
 
@@ -63,31 +62,28 @@ func chapterSevenScene() -> World {
             point(0, 2, -5),
             point(0, 0, 0),
             vector(0, 1, 0)))
-        Sphere(Material(.solidColor(Color(1, 0.9, 0.9))))
+        Sphere(.solidColor(Color(1, 0.9, 0.9)))
             .scale(10, 0.01, 10)
-        Sphere(Material(.solidColor(Color(1, 0.9, 0.9))))
+        Sphere(.solidColor(Color(1, 0.9, 0.9)))
             .scale(10, 0.01, 10)
             .rotateX(PI/2)
             .rotateY(-PI/4)
             .translate(0, 0, 5)
-        Sphere(Material(.solidColor(Color(1, 0.9, 0.9))))
+        Sphere(.solidColor(Color(1, 0.9, 0.9)))
             .scale(10, 0.01, 10)
             .rotateX(PI/2)
             .rotateY(PI/4)
             .translate(0, 0, 5)
-        Sphere(
-            Material(.solidColor(Color(1, 0.8, 0.1)))
+        Sphere(.solidColor(Color(1, 0.8, 0.1))
                 .diffuse(0.7)
                 .specular(0.3))
             .scale(0.33, 0.33, 0.33)
             .translate(-1.5, 0.33, -0.75)
-        Sphere(
-            Material(.solidColor(Color(0.1, 1.0, 0.5)))
+        Sphere(.solidColor(Color(0.1, 1.0, 0.5))
                 .diffuse(0.7)
                 .specular(0.3))
             .translate(-0.5, 1.0, 0.5)
-        Sphere(
-            Material(.solidColor(Color(0.5, 1, 0.1)))
+        Sphere(.solidColor(Color(0.5, 1, 0.1))
                 .diffuse(0.7)
                 .specular(0.3))
             .scale(0.5, 0.5, 0.5)

@@ -51,6 +51,14 @@ class Material {
         return Material(ColorStrategy.solidColor(Color(1, 1, 1)), 0.1, 0.9, 0.9, 200.0, 0.0, 0.0, 1.0)
     }
 
+    static func solidColor(_ color: Color) -> Material {
+        return Material(.solidColor(color))
+    }
+
+    static func pattern(_ pattern: Pattern) -> Material {
+        return Material(.pattern(pattern))
+    }
+
     func ambient(_ ambient: Double) -> Self {
         self.ambient = ambient
 

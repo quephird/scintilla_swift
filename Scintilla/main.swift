@@ -5,7 +5,7 @@
 //  Created by Danielle Kefford on 11/19/21.
 //
 
-let world = testScene()
+let world = chapterSevenScene()
 
 let canvas = world.render()
 
