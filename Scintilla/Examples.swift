@@ -8,29 +8,29 @@
 import Foundation
 
 func testScene() -> World {
-    return World (
-        Light(point(-10, 10, -10)),
+    return World {
+        Light(point(-10, 10, -10))
         Camera(800, 600, PI/3, .view(
-            point(0, 2, -5),
+            point(0, 10, -15),
             point(0, 0, 0),
             vector(0, 1, 0)))
-    ) {
-        Cube(.solidColor(Color(1, 0, 0)))
-            .rotateY(PI/4)
-            .rotateX(PI/4)
-            .rotateZ(PI/4)
-            .translate(1, 0, 0)
+        for n in 0...3 {
+            Cube(.solidColor(Color(1, 0, 0)))
+                .rotateY(PI/6)
+                .rotateX(PI/6)
+                .rotateZ(PI/6)
+                .translate(4*cos(Double(n)*PI/2), 0, 4*sin(Double(n)*PI/2))
+        }
     }
 }
 
 func testGroup() -> World {
-    return World (
-        Light(point(-10, 10, -10)),
+    return World {
+        Light(point(-10, 10, -10))
         Camera(800, 600, PI/3, .view(
             point(0, 5, -10),
             point(0, 0, 0),
             vector(0, 1, 0)))
-    ) {
         Group {
             Sphere(.solidColor(Color(1, 0, 0)))
             for n in 0...2 {
@@ -45,13 +45,12 @@ func testGroup() -> World {
 }
 
 func testTorus() -> World {
-    return World (
-        Light(point(-10, 10, -10)),
+    return World {
+        Light(point(-10, 10, -10))
         Camera(800, 600, PI/3, .view(
             point(0, 5, -10),
             point(0, 0, 0),
             vector(0, 1, 0)))
-    ) {
         Torus(.solidColor(Color(1, 0.5, 0)))
             .translate(0, 1, 0)
         Plane(.pattern(Checkered2D(.black, .white, .identity)))
@@ -62,13 +61,12 @@ func testDie() -> World {
     let material = Material.solidColor(Color(1, 0.5, 0))
         .reflective(0.2)
 
-    return World (
-        Light(point(-10, 10, -10)),
+    return World {
+        Light(point(-10, 10, -10))
         Camera(800, 600, PI/3, .view(
             point(0, 5, -10),
             point(0, 0, 0),
             vector(0, 1, 0)))
-    ) {
         Cube(material).intersection {
             Sphere(material)
                 .scale(1.55, 1.55, 1.55)
@@ -122,13 +120,12 @@ func testDie() -> World {
 }
 
 func chapterSevenScene() -> World {
-    return World (
-        Light(point(-10, 10, -10)),
+    return World {
+        Light(point(-10, 10, -10))
         Camera(800, 600, PI/3, .view(
             point(0, 2, -5),
             point(0, 0, 0),
             vector(0, 1, 0)))
-    ) {
         Sphere(.solidColor(Color(1, 0.9, 0.9)))
             .scale(10, 0.01, 10)
         Sphere(.solidColor(Color(1, 0.9, 0.9)))
