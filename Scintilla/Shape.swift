@@ -30,6 +30,18 @@ class Shape {
         Self.latestId += 1
     }
 
+    func union(@ShapeBuilder _ otherShapesBuilder: () -> [Shape]) -> Shape {
+        return CSG.makeCSG(.union, self, otherShapesBuilder)
+    }
+
+    func difference(@ShapeBuilder _ otherShapesBuilder: () -> [Shape]) -> Shape {
+        return CSG.makeCSG(.difference, self, otherShapesBuilder)
+    }
+
+    func intersection(@ShapeBuilder _ otherShapesBuilder: () -> [Shape]) -> Shape {
+        return CSG.makeCSG(.intersection, self, otherShapesBuilder)
+    }
+
     func translate(_ x: Double, _ y: Double, _ z: Double) -> Self {
         self.transform = .translation(x, y, z)
             .multiplyMatrix(self.transform)

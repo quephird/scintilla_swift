@@ -69,7 +69,7 @@ func testDie() -> World {
             point(0, 0, 0),
             vector(0, 1, 0)))
     ) {
-        CSG.intersection(Cube(material)) {
+        Cube(material).intersection {
             Sphere(material)
                 .scale(1.55, 1.55, 1.55)
             Cylinder(material, -2, 2, true)
