@@ -21,6 +21,43 @@ class CSG: Shape {
         right.parent = .csg(self)
     }
 
+    static func makeCSG(_ operation: Operation, _ baseShape: Shape, @ShapeBuilder _ otherShapesBuilder: () -> [Shape]) -> CSG {
+        let rightShapes = otherShapesBuilder()
+        guard let firstRight = rightShapes.first else {
+            fatalError()
+        }
+        var csg = CSG(operation, baseShape, firstRight)
+        for shape in rightShapes.dropFirst() {
+            csg = CSG(operation, csg, shape)
+        }
+
+        return csg
+    }
+
+    static func union(_ baseShape: Shape, @ShapeBuilder otherShapesBuilder: () -> [Shape]) -> CSG {
+        return makeCSG(.union, baseShape, otherShapesBuilder)
+    }
+
+    static func difference(_ baseShape: Shape, @ShapeBuilder _ otherShapesBuilder: () -> [Shape]) -> CSG {
+        return makeCSG(.difference, baseShape, otherShapesBuilder)
+    }
+
+    static func intersection(_ baseShape: Shape, @ShapeBuilder _ otherShapesBuilder: () -> [Shape]) -> CSG {
+        return makeCSG(.intersection, baseShape, otherShapesBuilder)
+    }
+
+    func union(@ShapeBuilder _ otherShapesBuilder: () -> [Shape]) -> CSG {
+        return Self.makeCSG(.union, self, otherShapesBuilder)
+    }
+
+    func difference(@ShapeBuilder _ otherShapesBuilder: () -> [Shape]) -> CSG {
+        return Self.makeCSG(.difference, self, otherShapesBuilder)
+    }
+
+    func intersection(@ShapeBuilder _ otherShapesBuilder: () -> [Shape]) -> CSG {
+        return Self.makeCSG(.intersection, self, otherShapesBuilder)
+    }
+
     func isIntersectionAllowed(_ leftHit: Bool, _ insideLeft: Bool, _ insideRight: Bool) -> Bool {
         switch self.operation {
         case .union:

@@ -8,12 +8,13 @@
 import Foundation
 
 func testScene() -> World {
-    return World {
-        Light(point(-10, 10, -10))
+    return World (
+        Light(point(-10, 10, -10)),
         Camera(800, 600, PI/3, .view(
             point(0, 2, -5),
             point(0, 0, 0),
             vector(0, 1, 0)))
+    ) {
         Cube(.solidColor(Color(1, 0, 0)))
             .rotateY(PI/4)
             .rotateX(PI/4)
@@ -23,12 +24,13 @@ func testScene() -> World {
 }
 
 func testGroup() -> World {
-    return World {
-        Light(point(-10, 10, -10))
+    return World (
+        Light(point(-10, 10, -10)),
         Camera(800, 600, PI/3, .view(
             point(0, 5, -10),
             point(0, 0, 0),
             vector(0, 1, 0)))
+    ) {
         Group {
             Sphere(.solidColor(Color(1, 0, 0)))
             for n in 0...2 {
@@ -43,25 +45,90 @@ func testGroup() -> World {
 }
 
 func testTorus() -> World {
-    return World {
-        Light(point(-10, 10, -10))
+    return World (
+        Light(point(-10, 10, -10)),
         Camera(800, 600, PI/3, .view(
             point(0, 5, -10),
             point(0, 0, 0),
             vector(0, 1, 0)))
+    ) {
         Torus(.solidColor(Color(1, 0.5, 0)))
             .translate(0, 1, 0)
         Plane(.pattern(Checkered2D(.black, .white, .identity)))
     }
 }
 
+func testDie() -> World {
+    let material = Material.solidColor(Color(1, 0.5, 0))
+        .reflective(0.2)
+
+    return World (
+        Light(point(-10, 10, -10)),
+        Camera(800, 600, PI/3, .view(
+            point(0, 5, -10),
+            point(0, 0, 0),
+            vector(0, 1, 0)))
+    ) {
+        CSG.intersection(Cube(material)) {
+            Sphere(material)
+                .scale(1.55, 1.55, 1.55)
+            Cylinder(material, -2, 2, true)
+                .scale(1.35, 1.35, 1.35)
+            Cylinder(material, -2, 2, true)
+                .scale(1.35, 1.35, 1.35)
+                .rotateX(PI/2)
+            Cylinder(material, -2, 2, true)
+                .scale(1.35, 1.35, 1.35)
+                .rotateZ(PI/2)
+        }.difference {
+            for (x, y, z) in [
+                // face with six dimples
+                (-0.6, 1.0, 0.6),
+                (-0.6, 1.0, 0.0),
+                (-0.6, 1.0, -0.6),
+                (0.6, 1.0, 0.6),
+                (0.6, 1.0, 0.0),
+                (0.6, 1.0, -0.6),
+                // face with five dimples
+                (0.0, 0.0, -1.0),
+                (0.6, 0.6, -1.0),
+                (0.6, -0.6, -1.0),
+                (-0.6, 0.6, -1.0),
+                (-0.6, -0.6, -1.0),
+                // face with four dimples
+                (1.0, 0.6, 0.6),
+                (1.0, 0.6, -0.6),
+                (1.0, -0.6, 0.6),
+                (1.0, -0.6, -0.6),
+                // face with three dimples
+                (-1.0, 0.6, 0.6),
+                (-1.0, 0, 0),
+                (-1.0, -0.6, -0.6),
+                // face with two dimples
+                (0.6, 0.6, 1.0),
+                (-0.6, -0.6, 1.0),
+                // face with one dimple
+                (0.0, -1.0, 0.0),
+            ] {
+                Sphere(.solidColor(Color(1, 1, 1)))
+                    .scale(0.2, 0.2, 0.2)
+                    .translate(x, y, z)
+            }
+        }
+            .rotateY(PI/3)
+            .translate(0.0, 1.0, 0.0)
+        Plane(.pattern(Checkered2D(.black, .white, .identity)))
+    }
+}
+
 func chapterSevenScene() -> World {
-    return World {
-        Light(point(-10, 10, -10))
+    return World (
+        Light(point(-10, 10, -10)),
         Camera(800, 600, PI/3, .view(
             point(0, 2, -5),
             point(0, 0, 0),
             vector(0, 1, 0)))
+    ) {
         Sphere(.solidColor(Color(1, 0.9, 0.9)))
             .scale(10, 0.01, 10)
         Sphere(.solidColor(Color(1, 0.9, 0.9)))

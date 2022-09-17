@@ -14,12 +14,13 @@ struct World {
     var camera: Camera
     var objects: [Shape]
 
-    init(@WorldBuilder builder: () -> (Light, Camera, [Shape])) {
-        let (light, camera, shapes) = builder()
-        self.light = light
-        self.camera = camera
-        self.objects = shapes
-    }
+// TODO: Need to figure out if there's a way of using this with for-in loops
+//    init(@WorldBuilder builder: () -> (Light, Camera, [Shape])) {
+//        let (light, camera, shapes) = builder()
+//        self.light = light
+//        self.camera = camera
+//        self.objects = shapes
+//    }
 
     init(_ light: Light, _ camera: Camera, @ShapeBuilder builder: () -> [Shape]) {
         self.light = light
