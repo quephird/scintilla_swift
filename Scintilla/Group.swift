@@ -13,6 +13,9 @@ class Group: Shape {
     init(@ShapeBuilder builder: () -> [Shape]) {
         self.children = builder()
         super.init(.basicMaterial())
+        for child in children {
+            child.parent = .group(self)
+        }
     }
 
     override func localIntersect(_ localRay: Ray) -> [Intersection] {
