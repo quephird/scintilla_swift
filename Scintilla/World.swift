@@ -14,7 +14,6 @@ struct World {
     var camera: Camera
     var objects: [Shape]
 
-// TODO: Need to figure out if there's a way of using this with for-in loops
     init(@WorldBuilder builder: () -> (Light, Camera, [Shape])) {
         let (light, camera, shapes) = builder()
         self.light = light

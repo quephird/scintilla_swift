@@ -31,6 +31,8 @@
 		878120A428CA7025004EBEF8 /* MathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878120A328CA7025004EBEF8 /* MathTests.swift */; };
 		878120A628CAAC45004EBEF8 /* TorusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878120A528CAAC45004EBEF8 /* TorusTests.swift */; };
 		8781EB7628D449E7009230AE /* WorldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781EB7528D449E7009230AE /* WorldBuilder.swift */; };
+		8781EB7D28D8717A009230AE /* ShapeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781209A28C58572004EBEF8 /* ShapeBuilder.swift */; };
+		8781EB7E28D8723B009230AE /* WorldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8781EB7528D449E7009230AE /* WorldBuilder.swift */; };
 		878C690C274F373300EB945E /* ColorStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690B274F373300EB945E /* ColorStrategy.swift */; };
 		878C690D274F380400EB945E /* ColorStrategy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690B274F373300EB945E /* ColorStrategy.swift */; };
 		878C690F274F3D5700EB945E /* Pattern.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C690E274F3D5700EB945E /* Pattern.swift */; };
@@ -38,7 +40,6 @@
 		878C6912274F5B7200EB945E /* PatternTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878C6911274F5B7200EB945E /* PatternTests.swift */; };
 		87A21FBE274B373B0047AE41 /* MatrixTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE383E788BD47B15D60716 /* MatrixTests.swift */; };
 		87A21FBF274B375B0047AE41 /* Matrix.swift in Sources */ = {isa = PBXBuildFile; fileRef = 60DE3537E1C9EC4C417010E9 /* Matrix.swift */; };
-		87A21FC3274B7C8F0047AE41 /* TransformTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FC2274B7C8F0047AE41 /* TransformTests.swift */; };
 		87A21FC6274C2D8A0047AE41 /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FC5274C2D8A0047AE41 /* Ray.swift */; };
 		87A21FC8274C2EB30047AE41 /* RayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FC7274C2EB30047AE41 /* RayTests.swift */; };
 		87A21FC9274C2F3A0047AE41 /* Ray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A21FC5274C2D8A0047AE41 /* Ray.swift */; };
@@ -127,7 +128,6 @@
 		878C690B274F373300EB945E /* ColorStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStrategy.swift; sourceTree = "<group>"; };
 		878C690E274F3D5700EB945E /* Pattern.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pattern.swift; sourceTree = "<group>"; };
 		878C6911274F5B7200EB945E /* PatternTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PatternTests.swift; sourceTree = "<group>"; };
-		87A21FC2274B7C8F0047AE41 /* TransformTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransformTests.swift; sourceTree = "<group>"; };
 		87A21FC5274C2D8A0047AE41 /* Ray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ray.swift; sourceTree = "<group>"; };
 		87A21FC7274C2EB30047AE41 /* RayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RayTests.swift; sourceTree = "<group>"; };
 		87A21FCA274C30190047AE41 /* Sphere.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sphere.swift; sourceTree = "<group>"; };
@@ -257,7 +257,6 @@
 				87EA18952757278300267E6E /* ShapeTests.swift */,
 				87A21FD1274C57930047AE41 /* SphereTests.swift */,
 				878120A528CAAC45004EBEF8 /* TorusTests.swift */,
-				87A21FC2274B7C8F0047AE41 /* TransformTests.swift */,
 				875B398C2748B97200666443 /* TupleTests.swift */,
 				87A21FE4274DD8CB0047AE41 /* WorldTests.swift */,
 				875B398E2748B97200666443 /* Info.plist */,
@@ -413,10 +412,10 @@
 				87A21FC8274C2EB30047AE41 /* RayTests.swift in Sources */,
 				87A21FDF274CAC160047AE41 /* Material.swift in Sources */,
 				87A21FD7274C5C5B0047AE41 /* Intersection.swift in Sources */,
+				8781EB7D28D8717A009230AE /* ShapeBuilder.swift in Sources */,
 				87A21FCE274C32630047AE41 /* Shape.swift in Sources */,
 				87EA188F27549CCE00267E6E /* Cone.swift in Sources */,
 				87A21FBF274B375B0047AE41 /* Matrix.swift in Sources */,
-				87A21FC3274B7C8F0047AE41 /* TransformTests.swift in Sources */,
 				87EA18942757171900267E6E /* Group.swift in Sources */,
 				87EA18A22759AB4100267E6E /* Operation.swift in Sources */,
 				870DF2392748D80500787095 /* Color.swift in Sources */,
@@ -426,6 +425,7 @@
 				87A21FF1274E29B50047AE41 /* Examples.swift in Sources */,
 				878C6910274F3DF700EB945E /* Pattern.swift in Sources */,
 				87A21FE6274DD8F00047AE41 /* World.swift in Sources */,
+				8781EB7E28D8723B009230AE /* WorldBuilder.swift in Sources */,
 				87A21FD2274C57930047AE41 /* SphereTests.swift in Sources */,
 				87A21FF5274F05A80047AE41 /* PlaneTests.swift in Sources */,
 				87A21FDC274CAB6C0047AE41 /* Light.swift in Sources */,
