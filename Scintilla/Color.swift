@@ -12,6 +12,9 @@ struct Color {
     var g: Double
     var b: Double
 
+    static let white = Color(1.0, 1.0, 1.0)
+    static let black = Color(0.0, 0.0, 0.0)
+
     init(_ r: Double, _ g: Double, _ b: Double) {
         self.r = r
         self.g = g
@@ -39,7 +42,22 @@ struct Color {
             self.g.isAlmostEqual(to.g) &&
             self.b.isAlmostEqual(to.b)
     }
-}
 
-let WHITE = Color(1.0, 1.0, 1.0)
-let BLACK = Color(0.0, 0.0, 0.0)
+    func clampAndScale(_ component: Double) -> Int {
+        var c: Int
+        if component < 0.0 {
+            c = 0
+        } else if component > 1.0 {
+            c = 255
+        } else {
+            var cTemp = component*255
+            cTemp.round()
+            c = Int(cTemp)
+        }
+        return c
+    }
+
+    func toPpm() -> (Int, Int, Int) {
+        (clampAndScale(self.r), clampAndScale(self.g), clampAndScale(self.b))
+    }
+}

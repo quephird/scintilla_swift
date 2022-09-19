@@ -12,7 +12,7 @@
 		<key>ScintillaTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
-			<true/>
+			<true />
 			<key>orderHint</key>
 			<integer>2</integer>
 		</dict>
@@ -27,7 +27,7 @@
 		<key>875B39892748B97200666443</key>
 		<dict>
 			<key>primary</key>
-			<true/>
+			<true />
 		</dict>
 	</dict>
 </dict>

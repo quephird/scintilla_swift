@@ -4,14 +4,6 @@
 
 import Foundation
 
-let IDENTITY4 = Matrix4(
-    1, 0, 0, 0,
-    0, 1, 0, 0,
-    0, 0, 1, 0,
-    0, 0, 0, 1
-)
-
-
 struct Matrix2 {
     var data: (
         Double, Double,
@@ -175,6 +167,13 @@ struct Matrix4 {
         Double, Double, Double, Double
         )
 
+    static let identity = Matrix4(
+        1, 0, 0, 0,
+        0, 1, 0, 0,
+        0, 0, 1, 0,
+        0, 0, 0, 1
+    )
+
     init(
         _ x0: Double, _ y0: Double, _ z0: Double, _ w0: Double,
         _ x1: Double, _ y1: Double, _ z1: Double, _ w1: Double,
@@ -186,6 +185,75 @@ struct Matrix4 {
             x2, y2, z2, w2,
             x3, y3, z3, w3
         )
+    }
+
+    static func translation(_ x: Double, _ y: Double, _ z: Double) -> Self {
+        return Matrix4(
+            1, 0, 0, x,
+            0, 1, 0, y,
+            0, 0, 1, z,
+            0, 0, 0, 1
+        )
+    }
+
+    static func scaling(_ x: Double, _ y: Double, _ z: Double) -> Self {
+        return Matrix4(
+            x, 0, 0, 0,
+            0, y, 0, 0,
+            0, 0, z, 0,
+            0, 0, 0, 1
+        )
+    }
+
+    static func rotationX(_ t: Double) -> Self {
+        return Matrix4(
+            1, 0,      0,       0,
+            0, cos(t), -sin(t), 0,
+            0, sin(t), cos(t),  0,
+            0, 0,      0,       1
+        )
+    }
+
+    static func rotationY(_ t: Double) -> Self {
+        return Matrix4(
+            cos(t),  0, sin(t), 0,
+            0,       1, 0,      0,
+            -sin(t), 0, cos(t), 0,
+            0, 0,      0,       1
+        )
+    }
+
+    static func rotationZ(_ t: Double) -> Self {
+        return Matrix4(
+            cos(t), -sin(t), 0, 0,
+            sin(t), cos(t),  0, 0,
+            0,      0,       1, 0,
+            0,      0,       0, 1
+        )
+    }
+
+    static func shearing(_ xy: Double, _ xz: Double, _ yx: Double, _ yz: Double, _ zx: Double, _ zy: Double) -> Self {
+        return Matrix4(
+            1,  xy, xz, 0,
+            yx, 1,  yz, 0,
+            zx, zy, 1,  0,
+            0,  0,  0,  1
+        )
+    }
+
+    static func view(_ from: Tuple4, _ to: Tuple4, _ up: Tuple4) -> Matrix4 {
+        let forward = to.subtract(from).normalize()
+        let upNormalized = up.normalize()
+        let left = forward.cross(upNormalized)
+        let upTrue = left.cross(forward)
+        let orientation = Matrix4(
+            left[0],     left[1],     left[2],     0,
+            upTrue[0],   upTrue[1],   upTrue[2],   0,
+            -forward[0], -forward[1], -forward[2], 0,
+            0,           0,           0,           1
+        )
+        let transform = translation(-from[0], -from[1], -from[2])
+        return orientation.multiplyMatrix(transform)
     }
 
     subscript(_ i: Int, _ j: Int) -> Double {

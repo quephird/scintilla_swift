@@ -21,13 +21,67 @@ class Shape {
     var inverseTransposeTransform: Matrix4
     var parent: Container?
 
-    init(_ transform: Matrix4, _ material: Material) {
+    init(_ material: Material) {
         self.id = Self.latestId
-        self.transform = transform
+        self.transform = .identity
         self.material = material
         self.inverseTransform = transform.inverse()
         self.inverseTransposeTransform = transform.inverse().transpose()
         Self.latestId += 1
+    }
+
+    func union(@ShapeBuilder _ otherShapesBuilder: () -> [Shape]) -> Shape {
+        return CSG.makeCSG(.union, self, otherShapesBuilder)
+    }
+
+    func difference(@ShapeBuilder _ otherShapesBuilder: () -> [Shape]) -> Shape {
+        return CSG.makeCSG(.difference, self, otherShapesBuilder)
+    }
+
+    func intersection(@ShapeBuilder _ otherShapesBuilder: () -> [Shape]) -> Shape {
+        return CSG.makeCSG(.intersection, self, otherShapesBuilder)
+    }
+
+    func translate(_ x: Double, _ y: Double, _ z: Double) -> Self {
+        self.transform = .translation(x, y, z)
+            .multiplyMatrix(self.transform)
+
+        return self
+    }
+
+    func scale(_ x: Double, _ y: Double, _ z: Double) -> Self {
+        self.transform = .scaling(x, y, z)
+            .multiplyMatrix(self.transform)
+
+        return self
+    }
+
+    func rotateX(_ t: Double) -> Self {
+        self.transform = .rotationX(t)
+            .multiplyMatrix(self.transform)
+
+        return self
+    }
+
+    func rotateY(_ t: Double) -> Self {
+        self.transform = .rotationY(t)
+            .multiplyMatrix(self.transform)
+
+        return self
+    }
+
+    func rotateZ(_ t: Double) -> Self {
+        self.transform = .rotationZ(t)
+            .multiplyMatrix(self.transform)
+
+        return self
+    }
+
+    func shear(_ xy: Double, _ xz: Double, _ yx: Double, _ yz: Double, _ zx: Double, _ zy: Double) -> Self {
+        self.transform = .shearing(xy, xz, yx, yz, zx, zy)
+            .multiplyMatrix(self.transform)
+
+        return self
     }
 
     func intersect(_ worldRay: Ray) -> [Intersection] {

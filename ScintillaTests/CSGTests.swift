@@ -9,8 +9,8 @@ import XCTest
 
 class CSGTests: XCTestCase {
     func testFilterIntersections() throws {
-        let s1 = Sphere(IDENTITY4, DEFAULT_MATERIAL)
-        let s2 = Cube(IDENTITY4, DEFAULT_MATERIAL)
+        let s1 = Sphere(.basicMaterial())
+        let s2 = Cube(.basicMaterial())
         let allIntersections = [
             Intersection(1, s1),
             Intersection(2, s2),
@@ -33,8 +33,8 @@ class CSGTests: XCTestCase {
     }
 
     func testLocalIntersectWithRayThatMisses() throws {
-        let s1 = Sphere(IDENTITY4, DEFAULT_MATERIAL)
-        let s2 = Cube(IDENTITY4, DEFAULT_MATERIAL)
+        let s1 = Sphere(.basicMaterial())
+        let s2 = Cube(.basicMaterial())
         let csg = CSG(.union, s1, s2)
         let ray = Ray(point(0, 2, -5), vector(0, 0, 1))
         let allIntersections = csg.localIntersect(ray)
@@ -42,8 +42,9 @@ class CSGTests: XCTestCase {
     }
 
     func testLocalIntersectWithRayThatHits() throws {
-        let s1 = Sphere(IDENTITY4, DEFAULT_MATERIAL)
-        let s2 = Sphere(translation(0, 0, 0.5), DEFAULT_MATERIAL)
+        let s1 = Sphere(.basicMaterial())
+        let s2 = Sphere(.basicMaterial())
+            .translate(0, 0, 0.5)
         let csg = CSG(.union, s1, s2)
         let ray = Ray(point(0, 0, -5), vector(0, 0, 1))
         let allIntersections = csg.localIntersect(ray)

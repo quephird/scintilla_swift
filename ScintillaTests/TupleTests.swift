@@ -89,7 +89,7 @@ class Tuple4Tests: XCTestCase {
     }
 
     func testReflectSlantedSurface() throws {
-        let v = vector(1, -1, 0)
+        let v = vector(0, -1, 0)
         let n = vector(sqrt(2)/2, sqrt(2)/2, 0)
         let actualValue = v.reflect(n)
         let expectedValue = vector(1, 0, 0)

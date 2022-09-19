@@ -11,10 +11,25 @@ let MAX_RECURSIVE_CALLS = 5
 
 struct World {
     var light: Light
+    var camera: Camera
     var objects: [Shape]
 
-    init(_ light: Light, _ objects: [Shape]) {
+    init(@WorldBuilder builder: () -> (Light, Camera, [Shape])) {
+        let (light, camera, shapes) = builder()
         self.light = light
+        self.camera = camera
+        self.objects = shapes
+    }
+
+    init(_ light: Light, _ camera: Camera, @ShapeBuilder builder: () -> [Shape]) {
+        self.light = light
+        self.camera = camera
+        self.objects = builder()
+    }
+
+    init(_ light: Light, _ camera: Camera, _ objects: [Shape]) {
+        self.light = light
+        self.camera = camera
         self.objects = objects
     }
 
@@ -82,9 +97,9 @@ struct World {
 
     func reflectedColorAt(_ computations: Computations, _ remainingCalls: Int) -> Color {
         if remainingCalls == 0 {
-            return BLACK
+            return .black
         } else if computations.object.material.reflective == 0 {
-            return BLACK
+            return .black
         } else {
             let reflected = Ray(computations.overPoint, computations.reflected)
             return self.colorAt(reflected, remainingCalls-1).multiplyScalar(computations.object.material.reflective)
@@ -93,9 +108,9 @@ struct World {
 
     func refractedColorAt(_ computations: Computations, _ remainingCalls: Int) -> Color {
         if remainingCalls == 0 {
-            return BLACK
+            return .black
         } else if computations.object.material.transparency == 0 {
-            return BLACK
+            return .black
         } else {
             // Find the ratio of first index of refraction to the second.
             // (Yup, this is inverted from the definition of Snell's Law.)
@@ -108,7 +123,7 @@ struct World {
             let sin2ThetaT = ratio*ratio * (1 - cosThetaI*cosThetaI)
 
             if sin2ThetaT > 1 {
-                return BLACK
+                return .black
             } else {
                 // Find cos(theta_t) via trigonometric identity
                 let cosThetaT = sqrt(1.0 - sin2ThetaT)
@@ -134,7 +149,7 @@ struct World {
         let hit = hit(&allIntersections)
         switch hit {
         case .none:
-            return BLACK
+            return .black
         case .some(let intersection):
             let computations = intersection.prepareComputations(ray, allIntersections)
             return self.shadeHit(computations, remainingCalls)
@@ -155,18 +170,37 @@ struct World {
             return false
         }
     }
+
+    func rayForPixel(_ pixelX: Int, _ pixelY: Int) -> Ray {
+        // The offset from the edge of the canvas to the pixel's center
+        let offsetX = (Double(pixelX) + 0.5) * self.camera.pixelSize
+        let offsetY = (Double(pixelY) + 0.5) * self.camera.pixelSize
+
+        // The untransformed coordinates of the pixel in world space.
+        // (Remember that the camera looks toward -z, so +x is to the *left*.)
+        let worldX = self.camera.halfWidth - offsetX
+        let worldY = self.camera.halfHeight - offsetY
+
+        // Using the camera matrix, transform the canvas point and the origin,
+        // and then compute the ray's direction vector.
+        // (Remember that the canvas is at z=-1)
+        let pixel = self.camera.inverseViewTransform.multiplyTuple(point(worldX, worldY, -1))
+        let origin = self.camera.inverseViewTransform.multiplyTuple(point(0, 0, 0))
+        let direction = pixel.subtract(origin).normalize()
+
+        return Ray(origin, direction)
+    }
+
+    func render() -> Canvas {
+        var canvas = Canvas(self.camera.horizontalSize, self.camera.verticalSize)
+        for y in 0...self.camera.verticalSize-1 {
+            for x in 0...self.camera.horizontalSize-1 {
+                let ray = self.rayForPixel(x, y)
+                let color = self.colorAt(ray, MAX_RECURSIVE_CALLS)
+                canvas.setPixel(x, y, color)
+            }
+        }
+        return canvas
+    }
 }
 
-let DEFAULT_WORLD = World(
-    Light(point(-10, 10, -10), Color(1, 1, 1)),
-    [
-        Sphere(
-            IDENTITY4,
-            Material(ColorStrategy.solidColor(Color(0.8, 1.0, 0.6)), 0.1, 0.7, 0.2, 200.0, 0.0, 0.0, 0.0)
-        ),
-        Sphere(
-            scaling(0.5, 0.5, 0.5),
-            DEFAULT_MATERIAL
-        )
-    ]
-)

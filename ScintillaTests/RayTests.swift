@@ -18,7 +18,7 @@ class RayTests: XCTestCase {
 
     func testTransformTranslation() throws {
         let r = Ray(point(1, 2, 3), vector(0, 1, 0))
-        let m = translation(3, 4, 5)
+        let m = Matrix4.translation(3, 4, 5)
         let transformedR = r.transform(m)
         XCTAssert(transformedR.origin.isAlmostEqual(point(4, 6, 8)))
         XCTAssert(transformedR.direction.isAlmostEqual(vector(0, 1, 0)))
@@ -26,7 +26,7 @@ class RayTests: XCTestCase {
 
     func testTransformScaling() throws {
         let r = Ray(point(1, 2, 3), vector(0, 1, 0))
-        let m = scaling(2, 3, 4)
+        let m = Matrix4.scaling(2, 3, 4)
         let transformedR = r.transform(m)
         XCTAssert(transformedR.origin.isAlmostEqual(point(2, 6, 12)))
         XCTAssert(transformedR.direction.isAlmostEqual(vector(0, 3, 0)))

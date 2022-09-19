@@ -24,7 +24,7 @@ extension Canvas {
                 line.append(temp)
                 characterCount += temp.count
             } else {
-                var temp = "\(r) \(g)"
+                temp = "\(r) \(g)"
                 if characterCount + temp.count <= MAX_PPM_LINE_WIDTH {
                     line.append(temp)
                     line.append("\n")
@@ -63,9 +63,6 @@ extension Canvas {
         var body = ""
         for y in 0...self.height-1 {
             body.append(self.line(y))
-            if y != self.height-1 {
-                body.append("\n")
-            }
         }
 
         return body
@@ -76,27 +73,15 @@ extension Canvas {
         ppm.append(self.ppmHeader())
         ppm.append("\n")
         ppm.append(self.body())
-        ppm.append("\n")
         return ppm
     }
-}
 
-extension Color {
-    func clampAndScale(_ component: Double) -> Int {
-        var c: Int
-        if component < 0.0 {
-            c = 0
-        } else if component > 1.0 {
-            c = 255
-        } else {
-            var cTemp = component*255
-            cTemp.round()
-            c = Int(cTemp)
+    func save(to fileName: String) {
+        let filePath = FileManager.default.urls(for: .desktopDirectory, in: .userDomainMask).first!.appendingPathComponent(fileName)
+        do {
+            try self.toPPM().write(to: filePath, atomically: true, encoding: .utf8)
+        } catch {
+            print("Could not save to file")
         }
-        return c
-    }
-
-    func toPpm() -> (Int, Int, Int) {
-        (clampAndScale(self.r), clampAndScale(self.g), clampAndScale(self.b))
     }
 }

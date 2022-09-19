@@ -16,9 +16,17 @@ class CSG: Shape {
         self.operation = operation
         self.left = left
         self.right = right
-        super.init(IDENTITY4, DEFAULT_MATERIAL)
+        super.init(.basicMaterial())
         left.parent = .csg(self)
         right.parent = .csg(self)
+    }
+
+    static func makeCSG(_ operation: Operation, _ baseShape: Shape, @ShapeBuilder _ otherShapesBuilder: () -> [Shape]) -> Shape {
+        let rightShapes = otherShapesBuilder()
+
+        return rightShapes.reduce(baseShape) { partialResult, rightShape in
+            CSG(operation, partialResult, rightShape)
+        }
     }
 
     func isIntersectionAllowed(_ leftHit: Bool, _ insideLeft: Bool, _ insideRight: Bool) -> Bool {
