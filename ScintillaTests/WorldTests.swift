@@ -18,19 +18,6 @@ let testWorld = World(Light(point(-10, 10, -10))) {
         .scale(0.5, 0.5, 0.5)
 }
 
-//let testWorld = World(Light(point(-10, 10, -10), Color(1, 1, 1)),
-//    [
-//        Sphere(
-//            IDENTITY4,
-//            Material(ColorStrategy.solidColor(Color(0.8, 1.0, 0.6)), 0.1, 0.7, 0.2, 200.0, 0.0, 0.0, 0.0)
-//        ),
-//        Sphere(
-//            scaling(0.5, 0.5, 0.5),
-//            DEFAULT_MATERIAL
-//        )
-//    ]
-//)
-
 class WorldTests: XCTestCase {
     func testIntersect() throws {
         let world = testWorld
